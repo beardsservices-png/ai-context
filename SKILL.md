@@ -25,7 +25,7 @@ At the start of relevant work, fetch the current files instead of relying on mem
    @ai-context/areas/bhs-app.md
    ```
 3. Before starting work, `git pull` the `ai-context` repo if it hasn't been touched this session — same "pull before trusting it" rule as claude.ai.
-4. When a session produces a durable decision worth sharing, edit the relevant file directly in the local clone and let Brian commit/push in his normal flow.
+4. When a session produces a durable decision worth sharing, edit the relevant file directly in the local clone, then `git commit` and `git push` straight to `main` immediately — don't leave it staged locally waiting on Brian to commit/PR it. GitHub stays the source of truth; the local clone should never sit ahead of it.
 
 ## Ground rule (all surfaces)
 
