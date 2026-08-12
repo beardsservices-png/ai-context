@@ -112,13 +112,50 @@ how do we know if I'm making money?"*
 - 44 jobs from 2023 have billed labor and zero hours (pre-BusyBusy) — unrecoverable, exclude
   from $/hr math.
 
+## SMS — one receiver, and machine traffic
+
+`BHSmobileapp` is the **only** SMS receiver. `SMS-Extractor_BHS` was a complete duplicate that
+received nothing but Railway health checks; archived and stopped 2026-08-11. Do not merge its
+`claude/callback-form-estimate-flow-elhdaw` branch — that logic is already in the app.
+
+Brian cannot filter marketing/OTP at the handset (the forwarder has no idea what a business
+text looks like), so the app decides. Short codes (3–6 digits), alphanumeric sender IDs and
+OTP/marketing patterns get `status='spam'` with a reason, visible under the **Spam** tab with a
+"Not spam" button. A known customer always beats the heuristic. Nothing is dropped — a
+wrongly-filtered customer must stay findable.
+
+Watch out: `POST /sms` previously had **two** handlers registered. Flask matched the earlier
+rule, so the entire threading/ntfy block was unreachable and `sms_leads` was never written to.
+Fixed; the dead handler now lives at `/sms/legacy-thread`.
+
+## Bill's live knowledge
+
+`GET /api/customer-brief?phone=` on the BHS app returns current state as structured fields plus
+a **speakable prose block** (Retell injects dynamic variables as text). ~220ms live.
+
+- `bhs-memory-server` `/inbound` calls it at call start, budgeted 2.5s with an AbortController;
+  any failure degrades to the old thin context rather than costing the greeting. It also now
+  handles a caller the memory server has never seen but the business has — a customer who has
+  only ever texted gets greeted by name.
+- `POST /lookup` on the memory server is the mid-call version. **Requires a custom function
+  pointing at it to be added in the Retell dashboard** — not configurable from code. Everything
+  else works without it.
+
+**Financial boundary, deliberate and structural.** Bill gets the invoice *including the agreed
+amount* — it exists the moment the customer approves the work, so it is the record of the job
+and its terms, and the customer already knows that number. Bill never gets payment history or
+balances: the endpoint **never queries the `payments` table**, so there is no balance to leak
+because none is computed. Nothing financial is written into the memory server's `callers`
+record either. Brian's rule: *"the other homeowners won't like an AI knowing financial
+records."*
+
 ## Stack
 
 - Python / SQLite, hosted on Railway, source in GitHub org `beardsservices-png`.
 - Automation/hosting is Railway — deliberately not n8n.
 - **Estimates/invoices:** generated with ReportLab, matching an "Order Summary" style layout. Base script `bhs_estimate_generator.py`, numbering scheme `BHS-YYMM-##`, all line items non-taxable, footer notes owner-operator / no upfront payment.
 - **SMS pipeline** (`SMS-Extractor_BHS`): Railway IPv4 fix applied, Pydantic timestamp fields corrected. Body-template tokens on the phone proved unreliable, so the webhook also accepts `from`/`message`/`contact`/timestamps as URL query params and ignores any field that arrives as an unresolved `{{token}}`.
-- **SMS outgoing messages — BUILT, NOT DEPLOYED (as of 2026-08-11).** Direction handling, `OWNER_PHONE` matching and counterparty resolution exist only on `SMS-Extractor_BHS@claude/callback-form-estimate-flow-elhdaw`. That branch was never merged, never deployed, and `OWNER_PHONE` was never set. Brian's phone forwards to **BHSmobileapp**, not the extractor, so merging that branch alone would change nothing. The logic is being ported into the app's own `/sms` webhook instead.
+- **SMS outgoing messages — LIVE (2026-08-11).** Brian's sent texts forward to the BHS app's `/sms` with `&direction=sent`, and thread alongside incoming ones so a customer's short answer sits under the question that prompted it. Direction resolves from the URL param first, `OWNER_PHONE` as fallback. Outbound is stored but never extracted and never notified. Threads key on the normalized 10-digit number.
 - **Location/timeline feature:** Google Maps Timeline data integrated with the SQLite DB via Haversine matching (~16 months of location data).
 - Includes an invoice/time-tracking database and a task management board built into the app.
 - History: built an "OPS CENTER" HTML dashboard as the operational front end.
