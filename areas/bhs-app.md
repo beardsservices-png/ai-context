@@ -154,11 +154,83 @@ because none is computed. Nothing financial is written into the memory server's 
 record either. Brian's rule: *"the other homeowners won't like an AI knowing financial
 records."*
 
+## Document numbering
+
+- An estimate is `EST` + the date: **`EST20260816`**.
+- When it becomes an invoice **the number does not change** — only the prefix
+  does, `EST20260816` → **`BHS20260816`**. Same job, same number, start to finish.
+- Two on the same day take a suffix: `EST20260816-2` → `BHS20260816-2`.
+- Once converted **the estimate goes away** — archived or hidden, never left
+  live alongside the invoice. A customer must never hold an estimate that
+  contradicts their invoice.
+- The prefix is not stored. `api/app.py` derives it from status at display time
+  (`prefix = 'EST' if status == 'estimate' else 'BHS'`), so the underlying
+  record keeps one identity for its whole life. Status carries the meaning; the
+  number is only identity. Do not encode state into the number.
+- Jazzy's own pay invoices are a separate series, `JBHS-YYYYMM-##`.
+
+## Estimate outcomes — why one closed
+
+`jobs.close_reason` records *why* an estimate left the live set; `jobs.closed_at`
+when; `jobs.superseded_by` points at the estimate that replaced it. Before this
+the trash endpoint appended `[Rejected] <text>` onto `notes`, so the reason was
+unqueryable and no win/loss number existed.
+
+- Vocabulary lives in **`api/job_status.py`** — the one definition of statuses
+  and reasons. Add reasons there, not as literals in `app.py`.
+- Reasons: `accepted`, `declined_price`, `lost_competitor`, `no_response`,
+  `declined_timing`, `withdrawn`, `superseded`, `duplicate`.
+- **`superseded` and `duplicate` count as neither win nor loss.** A re-quote
+  would otherwise read as a lost job and revising an estimate would drag the
+  win rate down every time.
+- `GET /api/reports/win-loss` returns rate, dollars, and loss reasons ranked by
+  **dollars rather than count** — the costliest reason is rarely the commonest.
+- `GET /api/estimates/close-reasons` feeds the picker.
+- Unrecognised free-text reasons are kept verbatim under `unspecified` rather
+  than rejected, so older screens keep working.
+
+Status sets are defined once in `job_status.py` and rendered into queries. The
+exclusion `NOT IN ('estimate', 'rejected')` used to be hand-written at six call
+sites; a missed one produced a wrong number rather than an error.
+
+## Voice assistant
+
+A floating mic on every screen. With an invoice open, speech edits it directly:
+"make the install line nineteen hundred". Lives in **`api/assistant.py`**.
+
+- `POST /api/assistant/command` takes a transcript plus which record is on
+  screen. **The client sends only the record's identity** — the record is read
+  from the database, so a stale screen cannot cause a wrong write.
+- Five tools: `update_line_item`, `add_line_item`, `remove_line_item`,
+  `update_customer_field`, `set_invoice_status`. **The model proposes, the
+  backend decides.** Negative prices, unknown fields, bad statuses and line
+  items belonging to another invoice are refused whatever was proposed. No raw
+  SQL is ever exposed.
+- **Destructive calls come back for a one-tap confirm** and are re-validated on
+  confirm, with `invoice_id` re-pinned from the request so a tampered payload
+  cannot retarget another invoice.
+- Totals recompute after every line change by the same rule as a normal save
+  (`amount * quantity`, `reimbursed` excluded from both buckets).
+- `assistant_audit` records transcript, tool, arguments and before/after for
+  every attempt — this path skips the normal screens, so it is the only trace.
+  Read it at `GET /api/assistant/audit`.
+- Speech is the browser's own `SpeechRecognition` — no third-party
+  transcription. Browsers without it fall back to typing. Chrome on Android has
+  it; iOS Safari does not.
+- Invoices only so far. Other record types return `available: false`.
+- Frontend: `components/VoiceAssistant.jsx` plus `context/ScreenRecord.jsx`,
+  where a page publishes the record it has open via `usePublishRecord`. Only
+  FilingCabinet publishes today — that is what makes the assistant available on
+  a screen.
+- Needs `ANTHROPIC_API_KEY`, which is set on Railway and not locally, so **this
+  cannot be tested end to end on a dev machine.** Stub `assistant._call_claude`
+  to exercise everything downstream of the model.
+
 ## Stack
 
 - Python / SQLite, hosted on Railway, source in GitHub org `beardsservices-png`.
 - Automation/hosting is Railway — deliberately not n8n.
-- **Estimates/invoices:** generated with ReportLab, matching an "Order Summary" style layout. Base script `bhs_estimate_generator.py`, numbering scheme `BHS-YYMM-##`, all line items non-taxable, footer notes owner-operator / no upfront payment.
+- **Estimates/invoices:** generated with ReportLab, matching an "Order Summary" style layout. Base script `bhs_estimate_generator.py`, all line items non-taxable, footer notes owner-operator / no upfront payment. For numbering see *Document numbering* below — the old `BHS-YYMM-##` note here was wrong.
 - **SMS pipeline** (`SMS-Extractor_BHS`): Railway IPv4 fix applied, Pydantic timestamp fields corrected. Body-template tokens on the phone proved unreliable, so the webhook also accepts `from`/`message`/`contact`/timestamps as URL query params and ignores any field that arrives as an unresolved `{{token}}`.
 - **SMS outgoing messages — LIVE (2026-08-11).** Brian's sent texts forward to the BHS app's `/sms` with `&direction=sent`, and thread alongside incoming ones so a customer's short answer sits under the question that prompted it. Direction resolves from the URL param first, `OWNER_PHONE` as fallback. Outbound is stored but never extracted and never notified. Threads key on the normalized 10-digit number.
 - **Location/timeline feature:** Google Maps Timeline data integrated with the SQLite DB via Haversine matching (~16 months of location data).
