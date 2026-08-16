@@ -193,6 +193,39 @@ Status sets are defined once in `job_status.py` and rendered into queries. The
 exclusion `NOT IN ('estimate', 'rejected')` used to be hand-written at six call
 sites; a missed one produced a wrong number rather than an error.
 
+## Voice assistant
+
+A floating mic on every screen. With an invoice open, speech edits it directly:
+"make the install line nineteen hundred". Lives in **`api/assistant.py`**.
+
+- `POST /api/assistant/command` takes a transcript plus which record is on
+  screen. **The client sends only the record's identity** — the record is read
+  from the database, so a stale screen cannot cause a wrong write.
+- Five tools: `update_line_item`, `add_line_item`, `remove_line_item`,
+  `update_customer_field`, `set_invoice_status`. **The model proposes, the
+  backend decides.** Negative prices, unknown fields, bad statuses and line
+  items belonging to another invoice are refused whatever was proposed. No raw
+  SQL is ever exposed.
+- **Destructive calls come back for a one-tap confirm** and are re-validated on
+  confirm, with `invoice_id` re-pinned from the request so a tampered payload
+  cannot retarget another invoice.
+- Totals recompute after every line change by the same rule as a normal save
+  (`amount * quantity`, `reimbursed` excluded from both buckets).
+- `assistant_audit` records transcript, tool, arguments and before/after for
+  every attempt — this path skips the normal screens, so it is the only trace.
+  Read it at `GET /api/assistant/audit`.
+- Speech is the browser's own `SpeechRecognition` — no third-party
+  transcription. Browsers without it fall back to typing. Chrome on Android has
+  it; iOS Safari does not.
+- Invoices only so far. Other record types return `available: false`.
+- Frontend: `components/VoiceAssistant.jsx` plus `context/ScreenRecord.jsx`,
+  where a page publishes the record it has open via `usePublishRecord`. Only
+  FilingCabinet publishes today — that is what makes the assistant available on
+  a screen.
+- Needs `ANTHROPIC_API_KEY`, which is set on Railway and not locally, so **this
+  cannot be tested end to end on a dev machine.** Stub `assistant._call_claude`
+  to exercise everything downstream of the model.
+
 ## Stack
 
 - Python / SQLite, hosted on Railway, source in GitHub org `beardsservices-png`.
