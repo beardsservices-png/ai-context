@@ -9,7 +9,7 @@ Brian Beard — owner-operator of Beard's Home Services (BHS), a solo home servi
 ## Digital stack (source of truth)
 
 - **BHS app:** Python / SQLite, hosted on Railway. See `areas/bhs-app.md`.
-- **Website:** beardsservices.com, hosted on Cloudflare Pages. See `areas/website.md`.
+- **Website:** beardshomeservices.com (migrated from beardsservices.com), hosted on Cloudflare Pages. Installable PWA + mobile nav. See `areas/website.md`.
 - **Source control:** GitHub, org `beardsservices-png`.
 - **AI phone receptionist:** "Bill" — Retell AI + ElevenLabs. See `areas/retell-bill.md`.
 - **Dev tools:** Claude / Claude Code as primary dev tooling, across claude.ai (web/mobile), Claude Code (terminal), and Claude Code in VS Code.
