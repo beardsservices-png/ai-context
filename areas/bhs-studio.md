@@ -22,9 +22,28 @@ Built on top of **Rhythm Shop** (`Rhythm-Maker`) rather than from scratch, absor
 
 Steps 1 and 2 depend only on step 0, not on each other. **Step 0 → 2 is ~3 days to a playable 808** and is the fastest route to something enjoyable.
 
+## Shipped (2026-08-22)
+
+Merged to `main` and deployed. Order: the Rhythm Shop hardening branch first
+(Round Robin save/load, `/health` + `healthcheckPath`, favicon, disabled-play
+guard), then BHS Studio on top.
+
+- **Playable 808** at `/studio.html` — three-octave keyboard, mouse/QWERTY,
+  slide, seven voice knobs.
+- **Transport clock** — bars/beats, play/pause/stop, loop, `timeAtNextBar()`
+  (the thing the looper is blocked on), and a visual clock separated from the
+  audio scheduler.
+- **Bassline sequencer** — 16-step mono piano roll driven by the transport,
+  with per-step slide.
+
+Volume confirmed mounted at `/data` with `DATA_DIR=/data` set.
+
 ## Open threads
 
-- **Is a Railway volume actually mounted?** Without one, `DATA_DIR` falls back to container-local disk that wipes on redeploy. Save a pattern, redeploy, check it survives.
+- **Crash fix worth remembering:** `new URL(req.url, ...)` threw on a request
+  target like `//`, and an uncaught throw in the request handler kills the Node
+  process. Now answers 400. Any future route handling needs the same care —
+  there is no framework catching these.
 - **No auth on `/api/*`.** Unauthenticated read/write/delete on saved patterns, and an unauthenticated LLM proxy that spends the account's budget. Needs a gate before the app is meaningfully public.
 - **Latency compensation for the looper** is unsolved and is the project's main technical risk.
 - **Web MIDI is Chrome/Edge only** (no Safari) — the virtual on-screen keyboard is the one to build first.
