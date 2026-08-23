@@ -113,9 +113,95 @@ how do we know if I'm making money?"*
   (top 5 = 86% of hours). Date alone cannot resolve them — every block has 2–4 candidates
   within days. `timeline_visits` (GPS, customer already resolved, `job_id` empty) is the
   strongest tiebreaker. Calibrated on 358 known-good links, median lag work→invoice is
-  **−3 days**: the invoice usually *precedes* the work.
+  **−3 days**: the invoice usually *precedes* the work. The matcher now surfaces on the Data
+  Gaps screen with one-tap linking (see *Orphan hours, location history, and trips* above) —
+  but nothing can be matched until the location history is built on the live volume, which
+  has not been run.
 - 44 jobs from 2023 have billed labor and zero hours (pre-BusyBusy) — unrecoverable, exclude
   from $/hr math.
+
+## Orphan hours, location history, and trips (2026-08-23)
+
+Three things the app knew and kept behind a button. All on branch
+`claude/orphan-matching-endpoint-0i7v4a` in `BHSmobileapp`, **not yet merged to `main`**
+(merging deploys).
+
+### The orphan matcher reaches the screen
+
+The matching engine existed but only printed to a terminal, so the 62 unlinked entries kept
+being a dropdown of ~109 jobs on Filing Cabinet -> Data Gaps. It now lives in
+`api/orphan_matching.py` (the backfill script imports it, so there is one implementation) and
+is exposed as `GET /api/data-gaps/orphan-suggestions` and
+`POST /api/data-gaps/orphan-suggestions/apply`.
+
+- The browser posts **entry ids only**. Which job each belongs to is re-derived server-side at
+  the moment of writing, so a stale screen cannot file hours against the wrong job.
+- Linking is an **UPDATE of a row that already exists, never an INSERT**, and carries
+  `AND job_id IS NULL`, so re-running links nothing twice.
+- Only unambiguous matches apply. `clear_winner` needs both a **25-point margin over the best
+  candidate belonging to a different job** and a **score floor of 100** in its own right. The
+  floor was added after testing: where only one job site was near that week there is no rival
+  to beat, so a stop two days off with hours that disagreed was being called certain.
+- Uncertain rows keep the manual dropdown and say why they are uncertain.
+
+Two bugs found in that screen while working on it: the dropdown was built from `/api/jobs`
+(which returns `id` / `invoice_id`) but read `job_id` / `invoice_number`, so every option had an
+empty value and the Link button could never enable — it had been unusable, which is part of why
+the backlog never moved. And a stray separator rendered where a null customer name would be.
+
+Entries older than a year with **no** match fold away behind a "show them" line that names the
+count and the hours; anything with a match stays visible however old it is. The clutter is the
+part nothing can act on, not the age.
+
+### Building the location history
+
+`api/location_history.py` + `GET/POST /api/admin/build-location-history`, with a button on the
+Data Gaps screen. Converts what is already recorded into something usable, in four idempotent
+stages: geocode customer addresses and measure road miles from home; materialise
+`timeline_visits` as `location_points`; create a job-site fence per past job; run `evaluate()`.
+
+- **It never writes a time entry** — `write_time_entries=False` is hardcoded. The engine's write
+  path *inserts* hours derived from visits, which is right for a day not yet recorded and wrong
+  across months that already hold their hours.
+- Runs on a background thread (a hundred address lookups at one per second is minutes, not a web
+  request) and publishes progress to `app_settings`, so **either Gunicorn worker can report it**.
+  A run whose heartbeat is 20 minutes stale is treated as dead and can be restarted; a second
+  POST while one is live returns 409.
+- The phone only started reporting 2026-08-19, so everything before that comes from Google
+  Timeline. Backfilled drives still carry no trustworthy mileage — Timeline recorded stops, not
+  the trail between them.
+
+### Trips are logged, not suggested
+
+`api/trip_logging.py` writes the drive when the hours are written — `POST /api/time-entries`,
+Day Wrap-Up, and when an orphan entry finds its job — under the conditions the old suggestion
+used: job on the entry, address with a measured distance, `trip_skip != 1`, no trip already on
+that job+date, and exactly one entry for that job that day. `POST /api/suggested-trips/log-all`
+clears the backlog in one action.
+
+- **Miles are the round trip.** `mileage_from_home` is one way and he drove home again, so every
+  job-site trip had been logging half of what was deductible.
+- Day Wrap-Up skips the automatic trip when he entered his own miles on the same form — his
+  number wins, and two trips for one job on one day is a double deduction.
+- `customer_lat/lon` and `mileage_from_home` are now worked out automatically when a customer is
+  saved with an address (in the background, so the save does not wait on two web services) and
+  cleared when the address changes. `POST /api/customers/<id>/calculate-mileage` still exists and
+  now goes through `geo.py`'s cached, rate-limited path instead of its own uncached copy of
+  Nominatim — the duplication `geo.py` was written to end had grown back.
+- `geo.road_miles()` is the OSRM call, returning `None` rather than a straight-line guess: a
+  missing mileage is visibly missing, a Haversine standing in for a route is wrong in a way
+  nothing downstream can detect.
+
+### Worth knowing before the next session
+
+- Verification against live data is not possible from a container: `data/beard_business.db` is
+  absent by design, Nominatim and OSRM are blocked by the sandbox proxy. The pattern that works
+  is `cp data/schema_seed.db /tmp/x.db`, `DB_PATH=/tmp/x.db python3 -c "import app"` from `api/`
+  to run migrations, seed a fixture, then drive the Flask test client. Flask is not installed in
+  a fresh container (`pip install --ignore-installed blinker flask flask-cors`), and Chromium is
+  at `/opt/pw-browsers/chromium-1194/chrome-linux/chrome` for a real browser pass.
+- Do not name a scratch file `click.py` next to a test that imports Flask. It shadows Flask's
+  own `click` dependency and the traceback makes no sense.
 
 ## SMS — one receiver, and machine traffic
 
@@ -292,6 +378,9 @@ A floating mic on every screen. With an invoice open, speech edits it directly:
 - The phone's SMS Forwarder template still emits unresolved `{Placeholder}` tokens on at least
   one rule. Rejected safely in code; the rule itself wants fixing on the handset.
 - Seeded catalog prices are starting figures (`price_verified = 0`), not Brian's real numbers.
-- 62 orphan time entries / 209.8 hours across 15 blocks still unreconciled.
+- 62 orphan time entries / 209.8 hours across 15 blocks still unreconciled. The screen to
+  clear them is built and pushed but unmerged, and the location history it reads has not been
+  built on the live volume yet — until that runs, the suggestion box is empty by design and
+  says so.
 - A full QC audit prompt is at `C:\Users\bbria\bhs-qc-audit-prompt.md` for an independent
   review of the whole ecosystem.
