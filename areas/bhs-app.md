@@ -115,16 +115,15 @@ how do we know if I'm making money?"*
   strongest tiebreaker. Calibrated on 358 known-good links, median lag work→invoice is
   **−3 days**: the invoice usually *precedes* the work. The matcher now surfaces on the Data
   Gaps screen with one-tap linking (see *Orphan hours, location history, and trips* above) —
-  but nothing can be matched until the location history is built on the live volume, which
-  has not been run.
+  but nothing can be matched until the location history is built on the live volume, which is
+  a button on that screen and has not been pressed yet.
 - 44 jobs from 2023 have billed labor and zero hours (pre-BusyBusy) — unrecoverable, exclude
   from $/hr math.
 
 ## Orphan hours, location history, and trips (2026-08-23)
 
-Three things the app knew and kept behind a button. All on branch
-`claude/orphan-matching-endpoint-0i7v4a` in `BHSmobileapp`, **not yet merged to `main`**
-(merging deploys).
+Three things the app knew and kept behind a button. **Merged to `main` and deployed
+2026-08-23** (`8ee77bb`).
 
 ### The orphan matcher reaches the screen
 
@@ -179,8 +178,12 @@ used: job on the entry, address with a measured distance, `trip_skip != 1`, no t
 that job+date, and exactly one entry for that job that day. `POST /api/suggested-trips/log-all`
 clears the backlog in one action.
 
-- **Miles are the round trip.** `mileage_from_home` is one way and he drove home again, so every
-  job-site trip had been logging half of what was deductible.
+- **Miles are one way, and that is deliberate.** Brian's rule: the drive out is to the job, the
+  drive back usually takes in the lumber yard, the gas station and the school run, and he will
+  not charge a customer for a leg spent on his own errands — the same way you are paid for the
+  ride to a site and not the ride home. A round trip was tried and reverted at his instruction.
+  Do not "fix" the missing `* 2`; if the return leg is ever counted, that is his call with his
+  accountant.
 - Day Wrap-Up skips the automatic trip when he entered his own miles on the same form — his
   number wins, and two trips for one job on one day is a double deduction.
 - `customer_lat/lon` and `mileage_from_home` are now worked out automatically when a customer is
@@ -379,8 +382,8 @@ A floating mic on every screen. With an invoice open, speech edits it directly:
   one rule. Rejected safely in code; the rule itself wants fixing on the handset.
 - Seeded catalog prices are starting figures (`price_verified = 0`), not Brian's real numbers.
 - 62 orphan time entries / 209.8 hours across 15 blocks still unreconciled. The screen to
-  clear them is built and pushed but unmerged, and the location history it reads has not been
-  built on the live volume yet — until that runs, the suggestion box is empty by design and
-  says so.
+  clear them is live as of 2026-08-23, but the location history it reads has not been built on
+  the live volume yet — until Brian presses *Match up my location history* on Data Gaps, the
+  suggestion box is empty by design and says so.
 - A full QC audit prompt is at `C:\Users\bbria\bhs-qc-audit-prompt.md` for an independent
   review of the whole ecosystem.
