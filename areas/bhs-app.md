@@ -178,10 +178,13 @@ used: job on the entry, address with a measured distance, `trip_skip != 1`, no t
 that job+date, and exactly one entry for that job that day. `POST /api/suggested-trips/log-all`
 clears the backlog in one action.
 
-- **The second job of a day is measured from the first, not from home.** Every arrival used to
-  be priced from his house, so a two-job day booked two runs from home when he had actually
-  driven to the first, across town to the second, and home once. Falls back to the distance
-  from home when coordinates or the router are unavailable.
+- **Every leg starts wherever he actually was.** Home is not a special case — it is one of the
+  places he can be leaving from. He leaves a job, stops at ACE, carries on to the next job:
+  that drive starts at ACE. Origin comes from the last stop in the location record before the
+  arrival, routed by road; falls back to the previous job-site trip of that day when there is
+  no location record, then to the distance from home. A leg that did begin at home uses the
+  stored `mileage_from_home` so a hand-corrected figure is never re-routed over. Nothing older
+  than 18 hours counts as the previous place.
 - **A typed distance wins.** `customers.mileage_verified = 1` marks a figure Brian entered
   himself and nothing recomputes over it — a rural address geocodes to the nearest road
   centroid, up to a couple of miles off the driveway, and re-measuring reproduces the same
