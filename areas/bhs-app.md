@@ -185,6 +185,16 @@ clears the backlog in one action.
   no location record, then to the distance from home. A leg that did begin at home uses the
   stored `mileage_from_home` so a hand-corrected figure is never re-routed over. Nothing older
   than 18 hours counts as the previous place.
+- **A hole in the record is not a route.** A stop only counts as the origin if he left it
+  within 3 hours of arriving (`MAX_ORIGIN_GAP_HOURS`). A dead battery from 10:30 to 16:30
+  leaves a stop that is technically most recent and says nothing about the drive. Past the gap
+  the trip is still logged, at the distance from home, with a note saying the record has a
+  hole — amber on the Trips page with a *Re-measure this day* action. A day with no tracking at
+  all is the normal historical case and is not flagged. Nothing ever blocks or asks him where
+  he was.
+- `POST /api/trips/recalculate-day` re-measures one day's automatic trips under current rules,
+  for after a distance is corrected or the location history is built. Only touches trips whose
+  notes begin `Auto-logged from time entry`; never runs on its own.
 - **A typed distance wins.** `customers.mileage_verified = 1` marks a figure Brian entered
   himself and nothing recomputes over it — a rural address geocodes to the nearest road
   centroid, up to a couple of miles off the driveway, and re-measuring reproduces the same
