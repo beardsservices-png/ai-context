@@ -217,6 +217,22 @@ clears the backlog in one action.
   missing mileage is visibly missing, a Haversine standing in for a route is wrong in a way
   nothing downstream can detect.
 
+### The evening recap
+
+`api/day_digest.py` pushes one notification a day (default 8pm `BHS_TIMEZONE`) listing the
+hours and miles recorded, through the same ntfy topic the SMS lead alerts use — nothing new to
+set up on the handset. Toggle, hour and a *send today's now* button are on Settings.
+
+- **A prompt, not an approval gate.** Trips are logged as they happen and count whether or not
+  he reads it. Gating on approval would mean a missed evening is a missing mileage record.
+- **A quiet day sends nothing.** A "you did nothing today" buzz teaches a person to swipe
+  notifications away unread, and then the ones that matter go the same way.
+- **Doubt leads.** Trips measured across a hole in the location record are listed first — those
+  are the ones only he can correct.
+- Scheduling is a thread per Gunicorn worker polling every 5 minutes; the send is claimed by a
+  conditional UPDATE on `app_settings.day_digest_last_sent`, so two workers waking at eight
+  produce one notification rather than two.
+
 ### Worth knowing before the next session
 
 - Verification against live data is not possible from a container: `data/beard_business.db` is
