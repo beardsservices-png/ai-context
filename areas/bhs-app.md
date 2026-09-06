@@ -393,6 +393,57 @@ Covered by `scripts/tests/test_partial_saves.py`: all four endpoints, the delibe
 and the refusals. **When adding an edit endpoint, use `partial_update` — do not write a
 column list from `data.get()`.**
 
+### Bill greets by name, then asks for the name (2026-09-06)
+
+Two independent causes, both found by reading the live Retell API rather than any local file.
+
+**1. `caller_name_on_file` was blank on every returning call.** The memory server's `/inbound`
+read the name only from its **own** `callers` record, whose name field is written by the
+post-call webhook and is usually empty — while the BHS app knew exactly who was ringing. The
+name reached Bill only as a sentence inside `caller_context`. Enough to greet with, not solid
+enough to satisfy the prompt's "you already have their name" test.
+
+Fixed in `bhs-memory-server` (`ed76ba2`): the name falls back to `brief.customer_name`, the
+`caller_context` line is built from the same value so prose and variable cannot disagree, and
+**`callback_number_on_file` defaults to `from_number`** — they are calling from it, so it never
+needed a lookup. `test-inbound.mjs` seeds the exact failing shape (a nameless caller record for
+a number the business knows) and checks all of it.
+
+**2. The bigger one: live calls run agent version 15.** Not the newest, not the newest
+published.
+
+| | |
+|---|---|
+| Serving every recent call | **agent v15**, llm v15, prompt **4,966 chars** |
+| Newest published | agent v20 / llm v20 |
+| Newest of all | agent v21 / llm v21, prompt 9,508 chars — **unpublished** |
+
+v15 predates the returning-caller work entirely — no Flow A/B split, just
+`- "Can I get your name?"` unconditionally. v21 is the careful one that says *"Nowhere in this
+flow do you ask for either one"* three separate ways. **The greeting comes from the memory
+server's `agent_override.begin_message`, which works regardless of prompt version** — which is
+exactly why Bill greets by name and then asks for it.
+
+This is the second time a corrected prompt sat in a file and never reached the running agent:
+`VoiceAgent/william-preprompt-updated.txt` (March) had the same fix and was never pasted in.
+**A prompt is not live until the agent version serving the phone number uses it.**
+
+`+18707063071` shows `inbound_agent_id: None` in Retell — calls arrive over Twilio
+(`twilio-callsid`, `diversion` headers present), forwarded from `+18703211072` on no-answer, so
+the agent version is pinned somewhere in that routing, not on the Retell number record.
+
+llm v21's prompt was updated to decide the flow on `{{caller_name_on_file}}` rather than by
+reading a name out of `{{caller_context}}` prose. **Zero live impact until v21 is published and
+the routing points at it.** Backup of the untouched v21 prompt:
+`~/Backups/retell-llm-v21-backup-2026-09-06.json`.
+
+> `NTFY_TOPIC` is **hardcoded** at `server.js:8` in the memory server
+> (`beards-bhs-calls-8703`). That is why Bill's call notifications always worked while the BHS
+> app's lead alerts never did — the app read an env var nobody had set.
+
+The stale local clone at `VoiceAgent/bhs-memory-server` was 12 commits behind and has been
+deleted; work from a fresh clone of `beardsservices-png/bhs-memory-server`.
+
 ### Deploy approval is not a setting you can turn off
 
 Railway puts a deployment in **NEEDS_APPROVAL** when the pushing GitHub account is not linked
