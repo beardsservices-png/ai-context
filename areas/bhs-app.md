@@ -375,6 +375,46 @@ quoted; it must never look like a success when it was dropped.
 style some versions use). The working inbound rule is `POST` with body
 `{"from":"{in-number}","message":"{msg}"}`.
 
+### What the sent rule actually sends (2026-09-06, from a live test)
+
+Fixing the method was not enough. A live test put the real payload in the logs and it matched
+nothing the webhook looked for:
+
+```json
+{"time":"09/06, 12:35 AM",
+ "key":"Outgoing : 
++18707245506
+09/06, 12:35 AM
+Test reply from my phone
+"}
+```
+
+Three separate mismatches in one payload, all now handled (`94bf471`):
+
+- The message is under **`key`**, not `message`/`text`/`body`. Accepted, but **last in the
+  alias list** — a name that generic must never outrank a real `message` field.
+- **There is no recipient field.** The other number is a line *inside* the blob. The number
+  parsed out of the payload now stands in as the recipient when no explicit field carries one,
+  which is right for this rule because it reports the other party's number in both directions.
+- **There is no `?direction=`.** The only thing saying which way it went is the literal words
+  **`Outgoing :`** at the front. That label now sets the direction.
+
+Direction is resolved in trust order: explicit `?direction=` in the URL (a literal that always
+resolves) → the `Outgoing :` / `Incoming :` label the phone wrote → sender matching
+`OWNER_PHONE`. `OWNER_PHONE` is last because it needs the rule to put a number in a field, and
+this rule puts no number in any field.
+
+The label only counts when what follows is a forwarder payload with a real timestamp header,
+so a customer opening with *"Sent: the photos you asked for"* keeps their first word.
+
+Verified live: the exact payload above returns
+`{"ok":true,"direction":"outbound","threaded_to":"8707245506"}` and both halves of the
+conversation now sit on one lead, role-tagged `customer` and `brian`.
+
+Also seen and worth watching: a rule was issuing an **empty GET every 1–3 minutes** — token
+only, no body, no params — answered `400 Missing from or message`. It stopped after the sent
+rule was reconfigured. If it returns, it is a rule firing on a timer rather than on a message.
+
 ## Bill's live knowledge
 
 `GET /api/customer-brief?phone=` on the BHS app returns current state as structured fields plus
