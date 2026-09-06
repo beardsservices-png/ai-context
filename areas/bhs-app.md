@@ -432,10 +432,39 @@ This is the second time a corrected prompt sat in a file and never reached the r
 (`twilio-callsid`, `diversion` headers present), forwarded from `+18703211072` on no-answer, so
 the agent version is pinned somewhere in that routing, not on the Retell number record.
 
-llm v21's prompt was updated to decide the flow on `{{caller_name_on_file}}` rather than by
-reading a name out of `{{caller_context}}` prose. **Zero live impact until v21 is published and
-the routing points at it.** Backup of the untouched v21 prompt:
-`~/Backups/retell-llm-v21-backup-2026-09-06.json`.
+**3. The phone number was pinned to a version.** This is the one that mattered most:
+
+```
++18707063071  inbound_agents = [{agent_version: 15, ...}]
+              last modified   = May 2026
+```
+
+Retell lets a number pin an exact agent version, and this one had. **Publishing does nothing
+when the number names a version** — so every prompt improvement from v16 to v21 had been
+invisible since May. Editing a prompt in the dashboard and never seeing a behaviour change is
+the symptom of exactly this.
+
+> **When a prompt change seems to have no effect, check the phone number's `inbound_agents`
+> pin before touching the prompt again.** Three separate corrected prompts had piled up unused
+> behind this: the March file, the unpublished v21 draft, and everything in between.
+
+### Now live (2026-09-06)
+
+- Agent **v21 published** and `+18707063071` repointed to it, inbound and outbound.
+- Renamed **Bill -> Betty**, voice changed to **`11labs-Grace`** (ElevenLabs, American,
+  middle-aged female) at `voice_speed 1.0`. The old voice was `custom_voice_4e5a...`.
+  Renaming was forced by the voice change: the prompt had her say "this is Bill" in three
+  places.
+- Flow now decided by `{{caller_name_on_file}}`, not by reading a name out of prose.
+- Latency/quality: `begin_message_delay_ms` **800 -> 400**, `enable_backchannel` **on**,
+  `max_call_duration_ms` **211s -> 480s** (3.5 minutes could cut off a caller mid-description).
+  `stt_mode` was already `fast`; `responsiveness` 0.64 and `interruption_sensitivity` 0.3 left
+  alone deliberately — changing several conversational dials at once makes a regression
+  impossible to attribute.
+- Verified live: `/inbound` returns `caller_name_on_file: 'Heath Johnson'`,
+  `callback_number_on_file: '+18703730703'`, greeting *"Hey Heath..."*.
+
+Backup of the pre-change prompt: `~/Backups/retell-llm-v21-backup-2026-09-06.json`.
 
 > `NTFY_TOPIC` is **hardcoded** at `server.js:8` in the memory server
 > (`beards-bhs-calls-8703`). That is why Bill's call notifications always worked while the BHS
