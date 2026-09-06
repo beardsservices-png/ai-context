@@ -326,6 +326,49 @@ service never did**, so `push_configured` was `false` and the app's SMS lead ale
 BHS app too, pointing at the same topic, which is what was always intended. Don't read "Bill's
 notifications work" as "notifications work" — they are separate services with separate config.
 
+### A text during a live job is not a callback (2026-09-06)
+
+Jesse and Doree Giles have had **job 111 in progress since 27 June**. Four messages about
+that job sat in *Needs me* as a stranger's first enquiry. Being in the queue beat the
+vanishing act it replaced, but a customer Brian has been on site for since June is not
+someone he failed to ring back — it is the same fault pointing the other way.
+
+Three things kept the app from knowing (`f68fe33`):
+
+- **They text from (904) 465-6879; their record says (904) 465-6882.** The number matched
+  nothing. The **contact name is now a fallback** — it comes out of Brian's own phone book,
+  so an exact match is his filing, not a guess. Exact only, single match only, and only after
+  the number has failed; a fuzzy match here would staple a stranger's text to a real
+  customer's job. The number is then written to **`contact_directory.customer_id`**, so the
+  next text is a plain lookup and it is never inferred twice.
+- **Nothing consulted the jobs table.** A matched customer with a job at `IN_PROGRESS` gets
+  the lead filed onto that job and marked `converted`, so it reads under **Working**.
+- **The boundary is deliberately narrow — `IN_PROGRESS` only.** A customer sitting on an
+  estimate is *chasing a quote*, and that is precisely the message class that went missing to
+  begin with. Under-filing leaves a text visible; over-filing hides one. Verified in both
+  directions in the test: the job in progress leaves the queue, Heath Johnson chasing his
+  quote stays in it.
+
+Live result: `{'phones_cleaned': 1, 'phones_blanked': 2, 'linked_by_name': 5,
+'filed_onto_jobs': 1, 'numbers_remembered': 3}`. Exactly one lead moved.
+
+### Junk in the customers table, from converting an unparsed lead
+
+Three customer records held a **name, or a whole undelivered-MMS notification, in the phone
+column** — left behind by converting a lead whose message was still an unparsed forwarder
+blob, using that blob as the customer name. `api/lead_job_links.py` recovers a number where
+one is buried in the text and empties the field where there is none, so it reads as missing
+rather than as data.
+
+One junk record survives and wants deleting by hand: **customer 102, name *"Message from
+Heath Johnson not downloaded"***, no jobs, no time entries, notes `Created from SMS lead: …`.
+The real Heath Johnson is customer 103.
+
+> **`PUT /api/customers/<id>` overwrites every column from the payload.** A partial body —
+> `{"phone": "..."}` — blanks name, email, address, notes and cya_notes. It happened to fail
+> with a 500 rather than destroy the record, but do not count on that: **read the customer,
+> merge your change, PUT the whole object.**
+
 ### Deploy approval is not a setting you can turn off
 
 Railway puts a deployment in **NEEDS_APPROVAL** when the pushing GitHub account is not linked
