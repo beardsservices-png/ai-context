@@ -364,10 +364,34 @@ One junk record survives and wants deleting by hand: **customer 102, name *"Mess
 Heath Johnson not downloaded"***, no jobs, no time entries, notes `Created from SMS lead: …`.
 The real Heath Johnson is customer 103.
 
-> **`PUT /api/customers/<id>` overwrites every column from the payload.** A partial body —
-> `{"phone": "..."}` — blanks name, email, address, notes and cya_notes. It happened to fail
-> with a 500 rather than destroy the record, but do not count on that: **read the customer,
-> merge your change, PUT the whole object.**
+The junk lead (83) and customer (102) were deleted 2026-09-06 after confirming nothing else
+pointed at them.
+
+### Saves used to blank every field they did not carry — fixed
+
+`PUT /api/customers`, `/api/expenses`, `/api/trips` and `/api/categories` each wrote their
+**whole column list out of `data.get()`**. A save carrying only the field that changed erased
+every other one and returned **200**. Correcting a phone number took the address, the notes
+and the cya_notes with it. An expense edit set `cost` to **zero** — the coercion was
+`float(data.get('cost', 0))` — and turned `is_overhead` off, because a missing key is falsey.
+
+**`partial_update()` in `api/app.py` is now the one place a row is edited.** Absent means
+unchanged; **present-but-empty still means clear it**, because a wrong address has to stay
+deletable. Numeric fields go through a converter that raises rather than storing a zero, so a
+cost of `"a lot"` is a 400 and the old cost stands.
+
+Two bugs fell out of centralising it:
+
+- An address only counts as **moved** when the save actually contained one. Before, *every*
+  save without an address looked like a move, threw away the cached coordinates, and cleared
+  any mileage Brian had confirmed by hand (`mileage_verified`) — the figure the trip logging
+  is explicitly built to never recompute over.
+- Saving a customer with no name, or one that does not exist, now fails cleanly rather than
+  writing a nameless row or silently doing nothing.
+
+Covered by `scripts/tests/test_partial_saves.py`: all four endpoints, the deliberate clear,
+and the refusals. **When adding an edit endpoint, use `partial_update` — do not write a
+column list from `data.get()`.**
 
 ### Deploy approval is not a setting you can turn off
 
