@@ -344,9 +344,36 @@ in the dashboard as "The value is set in /railway.json". GitHub `beardsservices-
 an attached volume, which is correct — the digest scheduler and location-history threads assume
 few workers). `DB_PATH=/data/beard_business.db` on volume `beard-business-data`.
 
-Still open on the handset: the forwarder does not forward **sent** messages. In weeks of logs
-there is not one `direction=sent` that Brian's phone produced. Texting someone first therefore
-leaves no trace until they reply — the server side works and is tested, the rule is missing.
+### The sent-message rule (2026-09-06)
+
+The rule existed all along. It was issuing a **GET**, both webhook routes were registered
+`methods=['POST']`, and so every sent text was answered **405 before a line of the handler
+ran**. The outbound handling was written, deployed and correct the whole time and nothing
+could reach it. Routes now accept GET as well as POST (`26b43d0`).
+
+That was not the only fault in the rule. It also sends **no body and no query parameters** —
+only `?token=` — so there is nothing to file even once the method is right; it answers
+`400 Missing from or message`. The rule needs, at minimum, the other party's number and the
+message text, plus **`&direction=sent`** in the URL. `direction` is a literal string in the
+URL and always resolves, which is why it beats matching against `OWNER_PHONE`.
+
+Both shapes are verified live: a GET carrying `&direction=sent&to=…&message=…`, and a POST
+reusing the inbound JSON body with `&direction=sent` appended. Field values are read from the
+query string as well as the body, so a rule built entirely out of URL parameters works.
+
+The recipient is looked for under `to`, `recipient`, `destination`, `address`, `number`,
+`in-number`/`in_number`, `out-number`/`out_number`, `contact_number`, `msisdn`, `sim` and
+finally `from` — whichever the handset's sent-rule template offers. Brian's own number and
+unexpanded macros like `{out-number}` are skipped rather than treated as a value.
+
+A sent message whose rule reported no recipient used to return a silent `200` and be stored
+nowhere. It now returns **422 naming which fields arrived and which are missing**, so a broken
+rule is visible in the forwarder app instead of green. A text Brian sent can carry a price he
+quoted; it must never look like a success when it was dropped.
+
+**The forwarder's macro syntax is `{in-number}` / `{msg}`** (curly braces, not the `%from%`
+style some versions use). The working inbound rule is `POST` with body
+`{"from":"{in-number}","message":"{msg}"}`.
 
 ## Bill's live knowledge
 
