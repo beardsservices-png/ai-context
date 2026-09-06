@@ -260,6 +260,94 @@ Watch out: `POST /sms` previously had **two** handlers registered. Flask matched
 rule, so the entire threading/ntfy block was unreachable and `sms_leads` was never written to.
 Fixed; the dead handler now lives at `/sms/legacy-thread`.
 
+## Leads intake — the five-day blackout (2026-08-31 → 2026-09-06)
+
+Fixed and deployed 2026-09-06 (`361f2b7`). Worth knowing because four separate faults
+stacked into one symptom: *"I have texted a new person and not a single piece of data
+shows in the app."*
+
+**Every lead created after 31 Aug was invisible.** `3e430c7` gave leads a `lead_type` and
+rebuilt the screen around four tabs derived from it — but all four intake paths inserted
+without one. `tab_where('needs_me')` requires `lead_type = 'customer'`, so every new row was
+typed NULL, matched no tab's WHERE clause, and appeared nowhere. The rows were in the
+database and returned by `/api/leads` the whole time; only the screen could not see them.
+"Needs me" read **0** for five days while real enquiries arrived.
+
+- Lead creation now goes through one **`_lead_insert`** that stamps `lead_type` *and*
+  `phone_norm`, so neither can be dropped again by a new caller.
+- `needs_me` and `working` count a NULL type as a customer. **A row on no tab is worse than
+  a row on the wrong tab** — that is the whole failure in one line, and the guard is there so
+  the screen cannot go blank again if some future path forgets.
+
+**A text from an existing customer only became a note.** The webhook appended it to
+`customers.notes` and returned — no lead, no notification, nothing on any screen. Heath
+Johnson's *"did you happen to get those quotes together?"* was filed perfectly into a field
+nobody opens while waiting on a callback. Being on the books is a reason to answer faster,
+not to go quiet. The note is still written; a lead is now raised alongside it.
+
+**Threading was a scan of the twenty newest rows**, normalising numbers in Python. A busy
+evening of family texts pushed a real lead out of the window and split her conversation into
+two leads — and personal/junk traffic inserted a *fresh row per message*, 60 from one number.
+Leads now carry **`phone_norm`** (indexed); every sender threads onto one lead, family
+included.
+
+**The handset flattens the notification.** The SMS Forwarder rule sends the whole thing as
+the message body instead of filling the `%ct%` / `%mb%` macros, so every lead opened with the
+sender's own name and number, carried a blank `contact_name`, and was stamped with the moment
+the webhook fired rather than when the text was sent:
+
+```
+Amanda Shirley
++18704050923
+09/03, 4:41 PM
+<what she actually wrote>
+```
+
+`api/sms_parsing.py` takes that header back apart. **It only strips when it finds a real
+timestamp line**, so a genuine message that merely opens with a name is left exactly as
+written. Fixing the rule on the phone is still worth doing, but the app no longer depends on
+a phone setting being right to know who texted.
+
+`api/leads_hygiene.py` (`leads_hygiene_v1`) repaired the stored rows — on live: **4 typed,
+213 numbers normalised, 227 headers unpacked, 145 duplicate rows folded into 12 threads**,
+229 leads → 84 with no content lost. Converted and dismissed leads, and any lead a job or a
+callback draft points at, are left exactly where they are.
+
+Regression test: `scripts/tests/test_leads_intake.py` — seeds a fixture in the broken shape,
+runs the migration, then drives all four intake paths through the Flask test client and
+asserts **no lead exists that no tab can show**.
+
+### ntfy: two services, one topic
+
+The topic is **`beards-bhs-calls-8703`** and Brian is subscribed to it. Bill's call-back
+alerts were arriving from `bhs-memory-server`, which had it configured — **the BHS app
+service never did**, so `push_configured` was `false` and the app's SMS lead alerts and the
+8pm day-digest silently sent nothing for their whole life. `NTFY_TOPIC` is now set on the
+BHS app too, pointing at the same topic, which is what was always intended. Don't read "Bill's
+notifications work" as "notifications work" — they are separate services with separate config.
+
+### Deploy approval is not a setting you can turn off
+
+Railway puts a deployment in **NEEDS_APPROVAL** when the pushing GitHub account is not linked
+to a Railway account with access to the workspace. Railway have stated this **cannot be
+disabled** — it is their boundary between repo access and infrastructure access. So a push to
+`main` builds but waits for someone to click Approve in the dashboard. Either approve each
+one, or link the pushing GitHub account to Brian's Railway account. Do not go hunting for a
+toggle, and do not "fix" it by reconnecting the service source — that is what reset the
+builder to Railpack in August.
+
+### Verified correct on Railway (2026-09-06)
+
+Builder **DOCKERFILE** and healthcheck `/api/health`, both pinned in `railway.json` and shown
+in the dashboard as "The value is set in /railway.json". GitHub `beardsservices-png/BHSmobileapp`
+→ branch `main`, auto-deploy on. Port 8080, US West, 1 replica (replicas are unavailable with
+an attached volume, which is correct — the digest scheduler and location-history threads assume
+few workers). `DB_PATH=/data/beard_business.db` on volume `beard-business-data`.
+
+Still open on the handset: the forwarder does not forward **sent** messages. In weeks of logs
+there is not one `direction=sent` that Brian's phone produced. Texting someone first therefore
+leaves no trace until they reply — the server side works and is tested, the rule is missing.
+
 ## Bill's live knowledge
 
 `GET /api/customer-brief?phone=` on the BHS app returns current state as structured fields plus
