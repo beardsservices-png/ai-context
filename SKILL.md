@@ -1,6 +1,6 @@
 ---
 name: sync-context
-description: Pulls Brian's shared ai-context repo (beardsservices-png/ai-context) before BHS/technical project work, so claude.ai, Claude Code terminal, and Claude Code VS Code sessions all start from the same picture. Trigger whenever work touches the BHS app, beardsservices.com, Rhythm Shop, the ComfyUI video stack, Bill (AI receptionist), or any other item tracked in that repo — or when Brian references "the context repo" / "ai-context" / "what's shared."
+description: Pulls Brian's shared ai-context repo (beardsservices-png/ai-context) before BHS/technical project work, so claude.ai, Claude Code terminal, and Claude Code VS Code sessions all start from the same picture. Trigger whenever work touches the BHS app, beardsservices.com, Rhythm Shop, the ComfyUI video stack, Bill (AI receptionist), the CAD / Draft Studio app, or any other item tracked in that repo — or when Brian references "the context repo" / "ai-context" / "what's shared."
 ---
 
 # sync-context
