@@ -29,4 +29,4 @@ At the start of relevant work, fetch the current files instead of relying on mem
 
 ## Ground rule (all surfaces)
 
-This repo is PUBLIC — never write customer names/PII, family details, financials, or anything from Brian's non-technical/personal projects into it. Technical/project context only. If unsure whether something belongs, ask Brian rather than writing it.
+This repo is PUBLIC — customer names are fine, but never write customer addresses, phone numbers, emails or other contact details, family details, financials, or anything from Brian's non-technical/personal projects into it. Technical/project context only. If unsure whether something belongs, ask Brian rather than writing it.

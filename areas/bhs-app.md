@@ -335,7 +335,7 @@ someone he failed to ring back — it is the same fault pointing the other way.
 
 Three things kept the app from knowing (`f68fe33`):
 
-- **They text from (904) 465-6879; their record says (904) 465-6882.** The number matched
+- **They text from a number one digit off the one on their record.** The number matched
   nothing. The **contact name is now a fallback** — it comes out of Brian's own phone book,
   so an exact match is his filing, not a guess. Exact only, single match only, and only after
   the number has failed; a fuzzy match here would staple a stranger's text to a real

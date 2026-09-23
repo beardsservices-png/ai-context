@@ -11,5 +11,6 @@ Paste into the root CLAUDE.md of any repo where shared context is relevant
 @../ai-context/areas/cad-app.md
 
 Pull the ai-context repo before trusting these if it's been more than a day
-since the last pull. Ground rule: this repo is public — never write customer
-names, family details, or financials into it.
+since the last pull. Ground rule: this repo is public — customer names are fine;
+never write customer addresses, phone numbers, emails, family details, or
+financials into it.

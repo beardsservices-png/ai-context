@@ -3,8 +3,8 @@
 Browser drafting tool for drawing jobs to real-world scale — plan, elevation and a
 3D preview from one model. Brian uses it to lay out real jobs before building them.
 
-- **Repo:** `beardsservices-png/CAD-` (**public** — no customer names or addresses in
-  drawings committed there; use a generic job name)
+- **Repo:** `beardsservices-png/CAD-` (**public** — customer names are fine in drawings
+  committed there, never addresses or phone numbers)
 - **Live:** `cad-production-1828.up.railway.app` (Railway, auto-deploys on push to `main`)
 - **Stack:** plain ES modules, no build step. `server.js` is a zero-dependency Node
   server that serves the app plus a small JSON storage API. Saved drawings ("Cloud
@@ -37,12 +37,13 @@ drawing = add the JSON + one entry in `EXAMPLES`.
 
 Current examples:
 - `covered-patio-plan` — 24 ft covered patio, 2/12 shed roof, full takeoff (worked tutorial).
-- `l-shaped-porch-windows` — plan of an L-shaped porch enclosure on a 37" stone wall:
+- `l-shaped-porch-windows` — **Giles porch (Jesse & Doree Giles, job 111, Phase 3 — Porch
+  Enclosure).** Plan of an L-shaped porch enclosure on a 37" stone wall:
   open 58" × 91" walkway at a wall corner, one front window between 3½" cedar posts,
   two windows on the 90" long side split by a double 2×4 mullion, every opening framed
   in 2×4 (flat on the cap, flat under the beam, jack each side). Windows ½" under the
   framed opening.
-- `l-shaped-porch-long-side` — elevation of that long side, including the triangle
+- `l-shaped-porch-long-side` — Giles porch, elevation of that long side, including the triangle
   between the beam and the rafter framed in 2×4 and glazed in two fixed-glass pieces,
   its mullion aligned with the window mullion below.
 
@@ -71,8 +72,10 @@ with Chromium, landscape letter. Embed the Google Fonts as base64 — headless C
 did not load them from the CDN. Keep framing and glass-cut sizes off the customer copy;
 those belong in Brian's own notes.
 
-Customer-specific details for a job (names, address, which phase, delivered files)
-go in that customer's Google Drive folder, never in this repo.
+Customer contact details (address, phone) and job paperwork go in Brian's Google Drive,
+never in this repo. The Giles porch has a running notes doc there:
+`Giles_Phase3_Porch_Enclosure_Design_Notes` — measurements, decisions, window and glass
+sizes, open items. Add to it as the job moves.
 
 ## Open threads
 
@@ -80,3 +83,8 @@ go in that customer's Google Drive folder, never in this repo.
   based import (drawings committed to a private repo and pulled by the app) would fix it.
 - The cedar trim (ripped/beveled sill, casing, stops) on the porch example is noted,
   not drawn piece by piece.
+- **BHS app link-up.** A BHS app job (`jobs` table) holds only a free-text `notes`
+  field and one `photos_album_url` link — nothing for drawings, plan PDFs or design
+  notes. The natural fix is a "Plans & documents" list on the job (links to the CAD
+  drawing, the Drive notes doc, the PDF sent to the customer). Not built yet. Until then
+  the Giles job (111) points nowhere; its design record is the Drive doc above.

@@ -4,7 +4,8 @@ Shared technical/project context for Brian Beard's Claude "trinity" — claude.a
 
 **This repo is PUBLIC. Keep it that way on purpose:**
 - ✅ Technical architecture, stack decisions, project status, tool/skill definitions
-- ❌ Customer names/PII, family details, financial specifics, anything from the civic-project investigation
+- ✅ Customer names (e.g. "Jesse & Doree Giles") where they help tie work to a job
+- ❌ Customer addresses, phone numbers, emails or other contact details; family details; financial specifics; anything from the civic-project investigation
 
 If it wouldn't be fine on a public GitHub profile, it doesn't go in this repo.
 
