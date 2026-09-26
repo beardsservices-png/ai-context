@@ -597,6 +597,40 @@ records."*
   record keeps one identity for its whole life. Status carries the meaning; the
   number is only identity. Do not encode state into the number.
 - Jazzy's own pay invoices are a separate series, `JBHS-YYYYMM-##`.
+- **A multi-phase job keeps one number and adds a letter per phase document**:
+  Giles is `20260627`, with `20260627C` = Phase 2 and `20260627D` = Phase 3. A
+  phase billed in parts stays on its own number and says **"Draw 1 of 2"** on the
+  sheet, with a *what is billed now / what is still to come* table at the top, so
+  the customer can see the phase total never moved.
+
+## Job records — one per job, and it wins (2026-09-26)
+
+The Giles paperwork had spread across three AI tools and Drive: a ChatGPT redo of
+Phase 3 that put back a door the customer had already dropped, a Gemini draft
+that got the split right but still said "Door Rough Opening", five copies of a
+July materials list, and design notes nobody else linked to. Nothing said which
+one was true.
+
+The fix is a rule, not a file: **every multi-document job gets one Drive folder
+with a `<Customer> — Job Record (START HERE)` doc in it.** That doc lists the
+phases, what has been billed, the scope decisions that override older paperwork,
+and which file is current. Anything replaced moves to a `Superseded — do not
+send` subfolder, renamed `SUPERSEDED — …`, never deleted. The app, this repo and
+the CAD drawings point *at* the record; none of them restate its numbers (this
+repo is public anyway, so amounts stay out of it).
+
+- **Giles** — Drive folder `Giles — BHS20260627 (Jesse & Doree Giles)`. Phase 3 is
+  now billed in two draws; the current sheet is `BHS20260627D_Giles_Phase3_Draw1.pdf`.
+  Scope settled: **no exterior door, no sidelite** (the walkway stays open), three
+  double-hung windows, the triangle above the long side glazed rather than sided.
+- **The app is not caught up.** Job 111 still carries whatever was keyed in June
+  and invoice `BHS20260627` still reads `paid` (see *Receivable $0* in
+  `docs/2026-09_tier1-live-findings.md`). Cloud sessions cannot reach Railway, so
+  the job record lists the target state; the next session with app access applies
+  it. Careful with `PUT /api/filing-cabinet/<id>`: it **replaces** services and
+  **deletes any time entry not in the payload**, so read the job first and send
+  everything back.
+
 
 ## Estimate outcomes — why one closed
 

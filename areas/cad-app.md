@@ -73,9 +73,12 @@ did not load them from the CDN. Keep framing and glass-cut sizes off the custome
 those belong in Brian's own notes.
 
 Customer contact details (address, phone) and job paperwork go in Brian's Google Drive,
-never in this repo. The Giles porch has a running notes doc there:
-`Giles_Phase3_Porch_Enclosure_Design_Notes` — measurements, decisions, window and glass
-sizes, open items. Add to it as the job moves.
+never in this repo. Giles lives in the Drive folder `Giles — BHS20260627 (Jesse & Doree
+Giles)`: **`Giles — Job Record (START HERE)`** is the source of truth (phases, billing,
+which file is current), and `Giles_Phase3_Porch_Enclosure_Design_Notes` beside it holds
+measurements, window and glass sizes and open items. If a drawing disagrees with the job
+record, the drawing is wrong. The 58" opening is a **walkway, no door** — the labels say
+so because a stale estimate once brought the door back.
 
 ## Open threads
 
@@ -87,4 +90,4 @@ sizes, open items. Add to it as the job moves.
   field and one `photos_album_url` link — nothing for drawings, plan PDFs or design
   notes. The natural fix is a "Plans & documents" list on the job (links to the CAD
   drawing, the Drive notes doc, the PDF sent to the customer). Not built yet. Until then
-  the Giles job (111) points nowhere; its design record is the Drive doc above.
+  the Giles job (111) points nowhere in the app; its record is the Drive job record above.
