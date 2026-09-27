@@ -56,10 +56,10 @@ Into **`My Drive\Where We Stand\`**:
 
 ## Moving stale files
 
-- Create **`My Drive\Delete\`**. Move — never delete — anything clearly superseded, a
-  duplicate, or junk (build folders like `.venv` / `node_modules`, `-1`/`-2` copies of the
+- Use **`My Drive\Delete\`** (already created). Move — never delete — anything clearly
+  superseded, a duplicate, or junk (build folders like `.venv` / `node_modules`, `-1`/`-2` copies of the
   same file, stray docs whose title is a half-sentence of a prompt).
-- Log every move in **`My Drive\Delete\_Why each file is here.md`**: old path, reason,
+- Log every move in **`My Drive\Delete\_Why each file is here`**: old path, reason,
   what replaces it. Brian reviews that list and empties the folder himself.
 - **When unsure, leave it** and list it under *Unsure* in that log.
 - Never move anything under `Where We Stand`, a `START HERE` doc, a customer's current
