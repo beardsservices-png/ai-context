@@ -19,8 +19,11 @@ superseded, and exactly how to continue** — and everything stale moved out of 
    the newest activity wins.
 2. **`Claude Sessions\Verification Report.md`** (also made by the .bat) — every file edit
    and commit from every session, checked against GitHub. **Resolve every LAPTOP ONLY,
-   BRANCH ONLY and NOT FOUND line**: push it, merge it, or recover the text from the
-   transcript — or, if it was deliberately dropped, say so on the area page. This is how
+   BRANCH ONLY, NOT FOUND and REMOVED FROM MAIN … CHECK line**: push it, merge it, or
+   recover the text from the transcript — or, if it was deliberately dropped, say so on the
+   area page. A **REMOVED FROM MAIN** line means it landed and a later change took it out;
+   open the linked commit, and if that change was an overwrite rather than a decision
+   (a bulk rewrite, a session working from a stale copy), put the work back. This is how
    nothing overlooked gets lost. Edits made through shell commands are not in the report;
    the commit checks cover those.
 3. **Local git clones** on this laptop. Find them (`BHSmobileapp`, `bhs-memory-server`,

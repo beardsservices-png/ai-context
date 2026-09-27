@@ -11,8 +11,10 @@ Google Drive and then piece it together.
    Drive for Desktop; without Drive it saves to the Desktop.
    The same double-click then runs **`verify_sessions.py`**: every edit and commit from
    every session is checked against GitHub and written to `Verification Report.md` —
-   ON MAIN, BRANCH ONLY (never merged), LAPTOP ONLY (never pushed), REPLACED LATER, or
-   NOT FOUND (lost; the transcript still has the text). Needs Git, which VS Code uses.
+   ON MAIN, BRANCH ONLY (never merged), LAPTOP ONLY (never pushed), REMOVED FROM MAIN
+   (landed, then a later change took it out — names that change and flags likely accidental
+   overwrites), REPLACED LATER (revised before it ever landed), or NOT FOUND (lost; the
+   transcript still has the text). Needs Git, which VS Code uses.
    It downloads its own copies of the repos into `%LOCALAPPDATA%` and never touches yours.
 2. **`RECONCILE.md`** — open `My Drive\Claude Sessions` in VS Code and tell Claude
    *"follow RECONCILE.md"*. It writes `My Drive\Where We Stand\` (START HERE + one page per

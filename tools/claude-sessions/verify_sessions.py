@@ -12,10 +12,13 @@ Answers, per item:
   ON MAIN          - landed, nothing to do
   BRANCH ONLY      - pushed to a branch that was never merged (named)
   LAPTOP ONLY      - found in a folder on this computer but never pushed
-  NOT FOUND        - on no branch and not on this computer. If a later session
-                     changed the same file it was probably replaced on purpose;
-                     otherwise it is lost work
-  CAN'T CHECK      - the repo could not be downloaded
+  REMOVED FROM MAIN- it DID land on main, and a later change took it out again. Names
+                     the change that removed it, when, which session made it, and
+                     whether that looks deliberate or like an accidental overwrite
+  REPLACED LATER   - never landed as written; the file was revised before or after
+  NOT FOUND        - on no branch and not on this computer: lost work (the transcript
+                     still has the text). A commit that is NOT FOUND was usually wiped
+                     out by a force-push
 
 Writes <My Drive>\\Claude Sessions\\Verification Report.md. Read-only towards every repo:
 it downloads its own copies into a cache folder and never changes yours.
@@ -48,7 +51,8 @@ def git(repo, *args):
 
 def distinctive_line(text):
     """The longest meaningful line of an edit - specific enough to find again."""
-    lines = [l.strip() for l in (text or "").splitlines()]
+    # Drop list numbers and bullets: "6. foo" renumbered to "7. foo" is not lost work.
+    lines = [re.sub(r"^(?:[-*+>]|\d+[.)])\s+", "", l.strip()) for l in (text or "").splitlines()]
     lines = [l for l in lines if len(l) >= 20 and not l.startswith(("#", "//", "import ", "from "))] or \
             [l for l in lines if len(l) >= 12]
     return max(lines, key=len)[:200] if lines else None
@@ -176,10 +180,40 @@ def check_commit(repo, local, sha):
             return "ON MAIN", ""
         _, out = git(repo, "branch", "-r", "--contains", sha)
         names = [b.strip().replace("origin/", "") for b in out.splitlines() if "HEAD" not in b]
-        return ("BRANCH ONLY", ", ".join(names[:3])) if names else ("NOT FOUND", "")
+        return ("BRANCH ONLY", ", ".join(names[:3])) if names else \
+               ("NOT FOUND", "commit is on no branch any more - likely overwritten by a force-push")
     if local is not None and git(local, "cat-file", "-e", f"{sha}^{{commit}}")[0] == 0:
         return "LAPTOP ONLY", str(local)
-    return "NOT FOUND", ""
+    return "NOT FOUND", "commit is not on GitHub - never pushed from a machine that's gone, or force-pushed over"
+
+
+DELIBERATE = re.compile(r"\b(revert|remove|drop|delete|replace|rewrite|rename|refactor|"
+                        r"supersede|deprecate|move|undo|simplif|clean)", re.I)
+
+
+def removed_from_main(repo, rel, probe, session_by_sha):
+    """If this text was on main once and is gone now, who took it out and how."""
+    _, out = git(repo, "log", "--format=%H%x09%ct%x09%s", "-S", probe, main_ref(repo), "--", rel)
+    hits = [l.split("\t", 2) for l in out.splitlines() if l.count("\t") == 2]
+    if not hits:
+        return None
+    sha, ct, subject = hits[0]                     # newest change to this text = its removal
+    when = datetime.fromtimestamp(int(ct)).strftime("%Y-%m-%d")
+    _, stat = git(repo, "show", "--numstat", "--format=", sha, "--", rel)
+    try:
+        added, deleted = (int(x) for x in stat.split()[:2])
+    except ValueError:
+        added = deleted = 0
+    if DELIBERATE.search(subject):
+        verdict = "looks deliberate"
+    elif deleted >= 40 and deleted >= added * 0.6:
+        verdict = f"CHECK - bulk rewrite of the file (-{deleted}/+{added}), the usual way work gets overwritten"
+    else:
+        verdict = "CHECK - the change that removed it doesn't say why"
+    who = session_by_sha.get(sha[:7])
+    by = f" in session \"{who}\"" if who else ""
+    return (f"removed {when} by {sha[:7]} \"{subject[:70]}\"{by} - {verdict} - "
+            f"https://github.com/{OWNER}/{repo.name}/commit/{sha[:12]}")
 
 
 def epoch(ts):
@@ -221,6 +255,7 @@ def main():
                 known[key] = local[key].name if key in local else name
 
     rows, tally, touched_later = [], {}, {}
+    session_by_sha = {c["sha"][:7]: s["title"] for s in sessions for c in s["commits"]}
     ordered = sorted(sessions, key=lambda s: s["last"] or "")
     for s in ordered:                      # oldest first, so "later" is known
         for e in s["edits"]:
@@ -243,10 +278,13 @@ def main():
             status, where = check_edit(repos[e["repo"]], local.get(e["repo"]), e["rel"], e["probe"])
             if status == "NOT FOUND":
                 repo = repos[e["repo"]]
+                gone = removed_from_main(repo, e["rel"], e["probe"], session_by_sha)
                 _, was = git(repo, "log", "--all", "-1", "--format=%h", "-S", e["probe"], "--", e["rel"])
                 _, changed = git(repo, "log", "-1", "--format=%ct", main_ref(repo), "--", e["rel"])
-                if was:
-                    status, where = "REPLACED LATER", f"was committed ({was}), since changed"
+                if gone:
+                    status, where = "REMOVED FROM MAIN", gone
+                elif was:
+                    status, where = "REPLACED LATER", f"committed on a branch ({was}), revised before it reached main"
                 elif touched_later.get((s["id"], e["file"], e["probe"])):
                     status, where = "REPLACED LATER", "a later edit changed this file"
                 elif changed and e["ts"] and int(changed) > epoch(e["ts"]):
@@ -258,7 +296,7 @@ def main():
             if not key:
                 continue
             status, where = check_commit(repos[key], local.get(key), c["sha"])
-            items.append((status, f"{known[key]} commit {c['sha'][:7]}", where or c["branch"], c["msg"]))
+            items.append((status, f"{known[key]} commit {c['sha'][:7]}", where or f"branch {c['branch']}", c["msg"]))
         seen, uniq = set(), []
         for it in items:
             if (it[0], it[1], it[3]) not in seen:
@@ -269,18 +307,21 @@ def main():
         if uniq:
             rows.append((s, uniq))
 
-    order = ["LAPTOP ONLY", "NOT FOUND", "BRANCH ONLY", "REPLACED LATER", "ON MAIN"]
+    order = ["LAPTOP ONLY", "NOT FOUND", "REMOVED FROM MAIN", "BRANCH ONLY", "REPLACED LATER", "ON MAIN"]
     out = ["# Verification Report", "",
            f"Checked {datetime.now():%Y-%m-%d %H:%M} against GitHub. "
            + ", ".join(f"**{k}** {tally.get(k, 0)}" for k in order), "",
            "- **LAPTOP ONLY** - exists only on this computer. Push it or it can be lost.",
            "- **NOT FOUND** - on no branch and not on this computer. Likely lost; the session transcript has the text.",
+           "- **REMOVED FROM MAIN** - it landed, then a later change took it out. Each line names that change "
+           "and says whether it looks deliberate; **CHECK** means it may have been overwritten by accident.",
            "- **BRANCH ONLY** - pushed, never merged to main.",
-           "- **REPLACED LATER** - a later session rewrote the same file; usually fine, glance at it.",
+           "- **REPLACED LATER** - never landed as written; revised in the same or a later session. Usually fine.",
            "- **ON MAIN** - landed.", "",
            "## Needs a look", ""]
     for s, items in rows:
-        bad = [it for it in items if it[0] in ("LAPTOP ONLY", "NOT FOUND", "BRANCH ONLY")]
+        bad = [it for it in items if it[0] in ("LAPTOP ONLY", "NOT FOUND", "BRANCH ONLY")
+               or (it[0] == "REMOVED FROM MAIN" and "CHECK" in it[2])]
         if bad:
             out.append(f"### {s['title']}  <sub>{(s['last'] or '')[:10]} - {s['id'][:8]}</sub>")
             for status, what, where, probe in sorted(bad, key=lambda x: order.index(x[0])):
