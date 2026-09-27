@@ -24,7 +24,7 @@ If it wouldn't be fine on a public GitHub profile, it doesn't go in this repo.
 ```
 (import whichever area files are relevant to the repo you're in). Since both terminal and VS Code sessions read `CLAUDE.md` off disk, this covers every local session automatically once the repo is cloned/pulled — no separate setup per surface.
 
-**claude.ai (web/mobile):** covered by the `sync-context` skill in this repo (see `SKILL.md`). At the start of relevant work, Claude fetches the current files via the public raw GitHub URLs (no auth needed since this repo is public) and reads them before proceeding. After a session produces a durable decision worth sharing across surfaces, Claude proposes an update to the relevant file — Brian approves, Claude writes it, Brian commits/pushes.
+**claude.ai (web/mobile):** covered by the `sync-context` skill in this repo (see `SKILL.md`). At the start of relevant work, Claude fetches the current files via the public raw GitHub URLs (no auth needed since this repo is public) and reads them before proceeding. After a session produces a durable decision worth sharing across surfaces, Claude proposes an update to the relevant file — Brian approves, Claude writes it and merges it to `main` itself.
 
 ## Sync convention (manual, not automatic)
 
