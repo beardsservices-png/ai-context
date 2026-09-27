@@ -65,8 +65,9 @@ Into **`My Drive\Where We Stand\`**:
 - Use **`My Drive\Delete\`** (already created). Move — never delete — anything clearly
   superseded, a duplicate, or junk (build folders like `.venv` / `node_modules`, `-1`/`-2` copies of the
   same file, stray docs whose title is a half-sentence of a prompt).
-- Log every move in **`My Drive\Delete\_Why each file is here`**: old path, reason,
-  what replaces it. Brian reviews that list and empties the folder himself.
+- Log every move in **`My Drive\Delete\_Why each file is here - VS Code.md`** (the
+  existing `_Why each file is here` is a Google Doc and can't be edited from the laptop):
+  old path, reason, what replaces it. Brian reviews that list and empties the folder himself.
 - **When unsure, leave it** and list it under *Unsure* in that log.
 - Never move anything under `Where We Stand`, a `START HERE` doc, a customer's current
   paperwork, tax/receipt records, or personal/family material without Brian saying so.
@@ -75,8 +76,10 @@ Into **`My Drive\Where We Stand\`**:
 
 - **`ai-context` is a PUBLIC repo.** Status pages, customer contact details, money and
   anything personal go in Drive, never there. Only technical pointers go in `ai-context`.
-- Do not push to `main` of `BHSmobileapp` or `bhs-memory-server` — that deploys. Stranded
-  work goes on a branch, and the status page says so.
+- **Push it or ask with a click-box — never leave work on a branch quietly.** `main` of
+  `BHSmobileapp` and `bhs-memory-server` deploys, so recovered work there is merged once it
+  is tested; if it is genuinely risky, ask Brian with the multiple-choice question box
+  ("Merge to main now?") rather than a sentence he might not see.
 - Never discard uncommitted work to tidy up. Commit it to a branch or copy it aside first.
 - When done, add a one-line pointer to `Where We Stand\START HERE.md` in
   `ai-context/README.md` (path only, no contents) and push that to `ai-context`.
