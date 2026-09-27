@@ -1,7 +1,13 @@
 @echo off
-REM Double-click to copy every Claude Code / VS Code conversation into Google Drive.
-REM Safe to run any time: only new or changed sessions are rewritten, nothing is deleted.
+REM Double-click to copy every Claude Code / VS Code conversation into Google Drive,
+REM then check every change those sessions made against GitHub.
+REM Safe to run any time: nothing is deleted, no repo is changed.
 cd /d "%~dp0"
-where python >nul 2>nul && (python export_claude_sessions.py) || (py export_claude_sessions.py)
+set PY=python
+where python >nul 2>nul || set PY=py
+%PY% export_claude_sessions.py
+echo.
+echo Checking every session's changes against GitHub...
+%PY% verify_sessions.py
 echo.
 pause

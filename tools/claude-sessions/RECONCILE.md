@@ -17,16 +17,22 @@ superseded, and exactly how to continue** — and everything stale moved out of 
    `Export Claude Sessions.bat`). Run the .bat first if the index is older than today.
    Rows marked *same conversation* are one thread resumed or forked — read them as one;
    the newest activity wins.
-2. **Local git clones** on this laptop. Find them (`BHSmobileapp`, `bhs-memory-server`,
+2. **`Claude Sessions\Verification Report.md`** (also made by the .bat) — every file edit
+   and commit from every session, checked against GitHub. **Resolve every LAPTOP ONLY,
+   BRANCH ONLY and NOT FOUND line**: push it, merge it, or recover the text from the
+   transcript — or, if it was deliberately dropped, say so on the area page. This is how
+   nothing overlooked gets lost. Edits made through shell commands are not in the report;
+   the commit checks cover those.
+3. **Local git clones** on this laptop. Find them (`BHSmobileapp`, `bhs-memory-server`,
    `ai-context`, `CAD-`, and any other folder with a `.git`). For each: `git fetch`, then
    `git status`, `git stash list`, and `git branch -vv`. **Uncommitted changes, stashes and
    unpushed commits are the work most at risk — list every one.**
-3. **GitHub**: `main` and `claude/*` branches on each repo. Use the `branch-hygiene` skill's
+4. **GitHub**: `main` and `claude/*` branches on each repo. Use the `branch-hygiene` skill's
    `branch_audit.py` in BHSmobileapp for stranded branches.
-4. **`ai-context`** (`areas/*.md`) — the shared record every surface reads.
-5. **Google Drive** — this folder sits inside it (Drive for Desktop), so `My Drive` is on
+5. **`ai-context`** (`areas/*.md`) — the shared record every surface reads.
+6. **Google Drive** — this folder sits inside it (Drive for Desktop), so `My Drive` is on
    disk. Job paperwork, exports, estimates.
-6. **claude.ai chat export**, if Brian has dropped the zip in `Claude Sessions\claude.ai export\`.
+7. **claude.ai chat export**, if Brian has dropped the zip in `Claude Sessions\claude.ai export\`.
    Cloud Claude Code sessions are listed at claude.ai/code; their work shows up as commits.
 
 ## Areas (one status page each)
