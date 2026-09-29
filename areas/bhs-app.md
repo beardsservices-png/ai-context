@@ -693,7 +693,7 @@ A floating mic on every screen. With an invoice open, speech edits it directly:
 
 - Python / SQLite, hosted on Railway, source in GitHub org `beardsservices-png`.
 - Automation/hosting is Railway — deliberately not n8n.
-- **Estimates/invoices:** generated with ReportLab, matching an "Order Summary" style layout. Base script `bhs_estimate_generator.py`, all line items non-taxable, footer notes owner-operator / no upfront payment. For numbering see *Document numbering* below — the old `BHS-YYMM-##` note here was wrong.
+- **Estimates/invoices:** generated with ReportLab, matching an "Order Summary" style layout. Base script `bhs_estimate_generator.py`, all line items non-taxable, footer notes owner-operator only. **No payment language on any customer-facing document** — the "no upfront payment required" line older generated documents carry is not wanted; strip it wherever it survives. See `topics/estimating-rules.md`. For numbering see *Document numbering* below — the old `BHS-YYMM-##` note here was wrong.
 - **SMS pipeline** (`SMS-Extractor_BHS`): Railway IPv4 fix applied, Pydantic timestamp fields corrected. Body-template tokens on the phone proved unreliable, so the webhook also accepts `from`/`message`/`contact`/timestamps as URL query params and ignores any field that arrives as an unresolved `{{token}}`.
 - **SMS outgoing messages — LIVE (2026-08-11).** Brian's sent texts forward to the BHS app's `/sms` with `&direction=sent`, and thread alongside incoming ones so a customer's short answer sits under the question that prompted it. Direction resolves from the URL param first, `OWNER_PHONE` as fallback. Outbound is stored but never extracted and never notified. Threads key on the normalized 10-digit number.
 - **Location/timeline feature:** Google Maps Timeline data integrated with the SQLite DB via Haversine matching (~16 months of location data).
@@ -761,3 +761,91 @@ A floating mic on every screen. With an invoice open, speech edits it directly:
   suggestion box is empty by design and says so.
 - A full QC audit prompt is at `C:\Users\bbria\bhs-qc-audit-prompt.md` for an independent
   review of the whole ecosystem.
+
+## The week the numbers were wrong (2026-09-27 → 29)
+
+Several figures the app reported were wrong, in ways that all looked like separate
+problems and turned out to share causes. Full write-up in the app repo at
+`docs/2026-09_timeline-crossref.md`; plain-language version in Drive under
+`Where We Stand`.
+
+### The home fence was 1.6 miles from home
+
+`BRIAN_HOME_LAT/LON` is hardcoded at `app.py:54-55`, `geofence_engine.py:290-291`
+and `location_history.py:104-105`, and `_init_home_coords()` geocodes
+`'360 County Road 35, Clarkridge, AR'` at import. **The address is right; the
+geocode is not** — it resolves 2,542 m from where Brian actually parks. The seeded
+`kind='home'` fence had therefore never matched a point in five weeks, and a
+hand-dropped fence named "Saved place" (`kind='other'`, 75 m) was catching them all.
+
+Consequence chain, and it is worth following because the fix is not where it looks:
+`classify_drive()` only fires its commute branch on `from_kind == 'home'`. With home
+typed `other`, that branch was unreachable, execution fell through to
+`'Mixed trip - one end is personal, so not billable'`, and **`business_miles` read 0
+every single day**. Setting `commute_policy` would have changed nothing — the policy
+was never consulted.
+
+Fixed by moving fence 1 to `36.4795240, -92.3387018`, widening it to **500 m** (the
+driveway and the school-bus run spread 300–500 m; nearest other named place is
+4,249 m, so nothing is swallowed) and deactivating the duplicate.
+`location_history.home_coords()` prefers the `kind='home'` fence over the constant,
+so that one change propagated to mileage without a deploy. The constants are still
+wrong and would seed a fresh database wrong.
+
+### Trips were never derived — they were imported
+
+Every trip on file carried a `timeline-import:` note. **Not one was ever produced
+automatically.** They stop on 2026-09-04 because that is where the last manual
+Google Timeline import stopped, not because anything broke. September went
+**8.2 mi → 186.6** and **17.62 h → 48.54** once the gap was backfilled.
+
+### The 0.42 h entries were real work, badly measured
+
+Four Giles visits logged exactly 25 minutes — `MIN_BILLABLE_JOB_SITE_MIN`, the floor
+showing through. **The Giles site has no cell signal**; OwnTracks only posts when it
+catches their guest wifi, so the point trail covers a fraction of each visit and
+`duration_min` (last point inside − arrival) is honest about a trail that is not.
+Days of 2+ hours logged as 25 minutes. Google's own Timeline is unaffected — 96% of
+Giles time lands inside the 120 m fence, because it backfills after the fact.
+
+Do not widen the Giles fence to compensate: David Isham, Allison and two other sites
+sit within 3.2 km and would have their hours stolen.
+
+### A gap in the trail was being sold as a drive
+
+`_rebuild_drives()` derives a drive from each pair of consecutive visits **with no
+bound on how far apart they are**. Days with no ingest were stitched into single
+drives and every point between them summed as distance — a 137-mile "drive" spanning
+71 hours, a 402-mile one spanning 41. Harmless as `unclassified`; the moment
+`commute_policy` was set to `business`, **362.5 miles of fabricated business
+mileage went live**. `MAX_DRIVE_MIN` (8 h) and `MAX_DRIVE_MPH` (100) now reject them
+with a reason naming the bound broken.
+
+### Tolerance alarms
+
+Brian: *"any driving over 25 miles gets flagged. not to approve, but to at least be
+made aware."* `ALERT_LONG_DRIVE_MI` 25, `ALERT_LONG_DAY_HOURS` 8,
+`ALERT_SHORT_JOB_SITE_MIN` 30 — deliberately separate from the hard limits that
+decide what gets *written*, because a figure can be writable and still worth a look.
+Plus an arrival push naming the job, the service and the one-way mileage. All go out
+through the same ntfy topic, injected via `set_notifier()` the way `day_digest`
+takes one.
+
+### `database is locked`
+
+`fill_customer_coordinates()` held a write transaction open across every Nominatim
+and OSRM call and committed once at the end. A throttled run of 31 recalculations
+left a background thread holding the lock and **every write in the app returned 500
+while reads looked perfectly healthy**. It now commits before each outbound call,
+and `get_db()` sets `busy_timeout` so a blocked writer waits instead of failing.
+
+### Still open
+
+- The hardcoded home coordinates in all three files.
+- `app.py` does not read `BRIAN_HOME_LAT/LON` from the environment at all.
+- Re-evaluation **adds** visits rather than replacing them when a fence changes
+  (`_find_existing_visit` keys on `geofence_id`), so the review queue inflates.
+- **No MMS capture anywhere.** The lead model has no media field and SMS Forwarder
+  reads notifications rather than the SMS database, so every photo a customer has
+  ever texted has been dropped. Also why some messages arrive as
+  "Sensitive notification content hidden" (12 of 787 archived).
