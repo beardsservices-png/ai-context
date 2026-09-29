@@ -34,3 +34,7 @@ There's no real-time sync — GitHub isn't a live channel. The convention is:
 3. Next session on any surface pulls the latest before relying on it.
 
 "Knowable, not real-time" — which is the actual goal.
+
+## Where things stand right now
+
+Plain-language status pages, one per area, live in Drive at `My Drive\Where We Stand\START HERE.md` (path only - contents stay out of this public repo). Rebuilt by following `tools/claude-sessions/RECONCILE.md`.
