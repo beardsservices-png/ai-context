@@ -44,7 +44,8 @@ Current examples:
   in 2×4 (flat on the cap, flat under the beam, jack each side). Windows ½" under the
   framed opening.
 - `l-shaped-porch-long-side` — Giles porch, elevation of that long side, including the triangle
-  between the beam and the rafter framed in 2×4 and glazed in two fixed-glass pieces,
+  between the beam and the rafter framed in 2×4 and glazed with **two layers of ¼" clear
+  plexiglass with an air space** (not tempered glass — settled 09/28) in two pieces,
   its mullion aligned with the window mullion below.
 
 ## Drawing-file format notes (learned the hard way)
@@ -79,6 +80,15 @@ which file is current), and `Giles_Phase3_Porch_Enclosure_Design_Notes` beside i
 measurements, window and glass sizes and open items. If a drawing disagrees with the job
 record, the drawing is wrong. The 58" opening is a **walkway, no door** — the labels say
 so because a stale estimate once brought the door back.
+
+## Customer "what to get" sheet
+
+When the homeowner buys the materials, a one-page sheet works better than a plan set: the
+elevation with each item lettered (A, B, C), and beside it what to buy, in store terms
+(unit size, rough opening if asked, sheet size). Built with `plansheet.py` like the plan
+set; no prices, no cut sizes — buy plexiglass as a full sheet and cut on site. Giles got one
+on 2026-10-04 (3 double-hung windows, one 4×8 sheet of ¼" acrylic). Send the PNG by text —
+they read everything by text.
 
 ## Open threads
 
