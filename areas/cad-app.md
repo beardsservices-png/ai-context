@@ -39,7 +39,8 @@ Current examples:
 - `covered-patio-plan` — 24 ft covered patio, 2/12 shed roof, full takeoff (worked tutorial).
 - `l-shaped-porch-windows` — **Giles porch (Jesse & Doree Giles, job 111, Phase 3 — Porch
   Enclosure).** Plan of an L-shaped porch enclosure on a 37" stone wall:
-  open 58" × 91" walkway at a wall corner, one front window between 3½" cedar posts,
+  open 58" × 91" walkway at a wall corner, **two** front windows (29" × 53½") split by a
+  double 2×4 mullion between 3½" cedar posts (changed from one wide window 2026-10-04),
   two windows on the 90" long side split by a double 2×4 mullion, every opening framed
   in 2×4 (flat on the cap, flat under the beam, jack each side). Windows ½" under the
   framed opening.
@@ -87,7 +88,7 @@ When the homeowner buys the materials, a one-page sheet works better than a plan
 elevation with each item lettered (A, B, C), and beside it what to buy, in store terms
 (unit size, rough opening if asked, sheet size). Built with `plansheet.py` like the plan
 set; no prices, no cut sizes — buy plexiglass as a full sheet and cut on site. Giles got one
-on 2026-10-04 (3 double-hung windows, one 4×8 sheet of ¼" acrylic). Send the PNG by text —
+on 2026-10-04 (4 double-hung windows, one 4×8 sheet of ¼" acrylic). Send the PNG by text —
 they read everything by text.
 
 ## Open threads
