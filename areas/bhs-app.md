@@ -101,6 +101,8 @@ had to be retyped.
 
 ### Draft estimates from leads (2026-10)
 
+**Status: built and tested, NOT live.** It sits on the BHSmobileapp branch `ccr-0edc5691-6oiw4z`; Brian chose not to merge it to `main` yet (a merge deploys). Update this line when it ships.
+
 The Leads screen has a *Draft estimates from these leads* button. It walks the Needs-me
 leads one request per lead (`POST /api/leads/<id>/draft-estimate`) and prices what each
 lead already says — Bill's call notes, or the task list and measurements intake already
