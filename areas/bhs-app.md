@@ -99,26 +99,32 @@ had to be retyped.
   single missing link is why a lead could reach a customer but never the job it became, and
   why texts during a job had nowhere to land. It also claims the SMS thread onto the job.
 
-### Draft estimates from leads (2026-10)
+### Leads keep a draft estimate current (2026-10)
 
-**Status: built and tested, NOT live.** It sits on the BHSmobileapp branch `ccr-0edc5691-6oiw4z`; Brian chose not to merge it to `main` yet (a merge deploys). Update this line when it ships.
+**Status: live.** Merged to `main` 5 Oct (`3c0d1da`); Railway reported the build successful at 11:38 UTC.
 
-The Leads screen has a *Draft estimates from these leads* button. It walks the Needs-me
-leads one request per lead (`POST /api/leads/<id>/draft-estimate`) and prices what each
-lead already says — Bill's call notes, or the task list and measurements intake already
-pulled out of the text thread — through the same catalog lookup as `from-scope`. The
-Callback screen then opens with the scope and priced lines already in, and the Leads list
-shows a *Draft estimate* chip (plus *check quantities* when a quantity was assumed).
+Every customer lead carries a draft estimate that **re-figures itself from the whole lead record
+whenever something lands on it**: a customer text, Bill's call summary, a reply Brian sends, or a
+note from Brian (typed, dictated, or relayed by any Claude session). The draft is derived from the
+record each time, never patched, so a customer changing the job is just one more line in the record
+and the latest word wins. It starts by itself once the lead has a name, an address and a request, and
+until then the lead says what it is waiting on. Each refresh records what changed and why.
 
 Decisions worth keeping:
 
-- **Drafts live in `lead_drafts`, not `lead_callbacks`.** A `lead_callbacks` row is what the
-  customer brief reads as "callback in progress", and Bill tells the caller so. A draft the
-  app wrote itself must not change what the receptionist says.
-- **No job, invoice or customer is created** until Brian taps Create Estimate. Lines he
-  already has are never overwritten, and a scope he typed is the one that gets priced.
-- **Labor only** — materials lines are dropped and reported, per `topics/estimating-rules.md`.
-- What the catalog could not price stays visible on the callback screen.
+- **One way in and out for any session:** `GET /api/leads/<id>/file` and `POST /api/leads/<id>/notes`.
+- **Drafts live in `lead_drafts` / `lead_notes`, never in `lead_callbacks`.** A `lead_callbacks` row is
+  what the customer brief reads as "callback in progress", and Bill tells the caller so. A draft the app
+  wrote itself must not change what the receptionist says.
+- **His hand edits are never overwritten.** If he edited the lines, new information is held as a
+  proposal (*Use the new estimate* / *Keep mine*). An untouched copy follows the draft.
+- **It stops at the lead.** A lead that became a job is not touched: the document there may be in the
+  customer's hands. Changes to a job underway should be one-tap-apply, not automatic. Not built yet.
+- **It cannot break intake.** It runs after the lead is committed, on its own thread, debounced per
+  lead, and swallows and logs every failure. Off switch: `POST /api/leads/auto-draft`.
+- **Labor only**: materials lines are dropped and reported, per `topics/estimating-rules.md`.
+  What the catalog could not price stays visible.
+- The pricing prompt that reads a whole conversation was tested with a stub, not the live model.
 - Open: the rules file says flat rate / Qty 1 / round to $5; the app prices unit x quantity.
   Drafts follow the app.
 

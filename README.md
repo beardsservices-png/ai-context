@@ -14,6 +14,7 @@ If it wouldn't be fine on a public GitHub profile, it doesn't go in this repo.
 - `profile.md` — durable facts about the business/stack (mirrors what Claude Code's CLAUDE.md should already know)
 - `areas/*.md` — one file per active project (BHS app, website, Rhythm Shop, etc.) — status, stack, decisions, open threads
 - `topics/*.md` — cross-cutting technical topics (deployment conventions, coding preferences, etc.)
+- `WHATS-CURRENT.md` — one page: what is live, what is built but not live, what Brian asked for, what each customer was last sent. Update it whenever any of those change.
 
 ## How each surface uses this
 
