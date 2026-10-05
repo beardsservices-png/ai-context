@@ -128,6 +128,29 @@ Decisions worth keeping:
 - Open: the rules file says flat rate / Qty 1 / round to $5; the app prices unit x quantity.
   Drafts follow the app.
 
+### Login and people (2026-10)
+
+**Status: live but dormant.** Merged 5 Oct (`fdaad3c`, `c68c481`). Nothing changes until `APP_PASSWORD` is set on the server.
+
+- **Why:** the app had no login at all. Anyone who found the address could read and change every customer, job and
+  figure, `/print/<id>` handed the whole job file to anyone who counted job numbers, and the admin backup route matched
+  an empty key when `ADMIN_KEY` was unset (it returned the whole database).
+- **One owner password** (`APP_PASSWORD`), a signed HttpOnly SameSite=Lax cookie for 60 days, and a Bearer token
+  (`APP_API_TOKEN`) for Claude sessions and scripts. Guessing is rate limited.
+- **Machines keep their own tokens and are an explicit allowlist**, never put behind the password: health check,
+  location ingest, SMS Forwarder and Retell webhooks, the memory server's customer brief, the admin routes. A test walks
+  every route and fails if one outside the allowlist is left open. Putting a login in front of those would silently stop
+  texts and tracking, which already cost five days of leads.
+- **Print links carry a code** (`?k=`): it opens that one job, and a dedicated endpoint returns only what the printed
+  document shows. Links copied before the login is switched on stop working.
+- **Other people can sign in with limited access** (Settings -> People): eight sections (time, customers, leads,
+  estimates, jobs, money, trips, location). Enforced on the server: every route belongs to a section or to the owner
+  alone, and an unclassified route is the owner's. A person with no price-bearing section is never *sent* prices or
+  payments; Brian's private notes on difficult customers are sent to no one else. Settings, the voice assistant,
+  backups, price-book edits and deleting a customer, job or payment are owner only. Access ends on the next tap.
+- **People cannot be added while the login is off**, because a stranger could plant an account that would be waiting
+  the day the login is switched on.
+
 ## Profitability — the open thread
 
 The point of tying hours to services: *"if we don't assign time to service being performed,

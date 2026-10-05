@@ -1,6 +1,6 @@
 # What's current
 
-**Last updated 5 October 2026.** One page: what is live, what is built but not live, what Brian asked for, and what each customer was last sent.
+**Last updated 5 October 2026 (evening).** One page: what is live, what is built but not live, what Brian asked for, and what each customer was last sent.
 
 This repo is public, so there are no addresses, phone numbers, emails or money in here. The plain-language version with those details lives in Brian's Drive under *Where We Stand*.
 
@@ -11,6 +11,8 @@ This repo is public, so there are no addresses, phone numbers, emails or money i
 
 ## 1. Live in the app (`BHSmobileapp` `main`)
 
+- **5 Oct, `c68c481`: other people can sign in, limited to the sections Brian picks** (Settings -> People). **Live, but the login itself is OFF**, so nothing has changed for anyone yet. Details in `areas/bhs-app.md`.
+- **5 Oct, `fdaad3c`: the login, safer print links, and a database-download hole closed.** **Live, login OFF.** The admin routes used to accept an empty key when `ADMIN_KEY` was unset; they now refuse everything in that case.
 - **5 Oct, `3c0d1da`: leads keep a draft estimate current.** See `areas/bhs-app.md`. Railway reported the build **successful** at 11:38 UTC on 5 Oct, so it is live.
 - **5 Oct, `f6b77de`:** clock double-billing fix, and the screen that counted silence as driving.
 - **4 Oct:** two text-forwarding fixes (the webhook accepts its secret from wherever the forwarder puts it; forwarded texts are stamped with a timezone so the Leads screen stops showing wrong times).
@@ -52,6 +54,8 @@ As of the dates shown. Texts are not visible to Claude.
 - **What was sent to whom.** The app records none of it: it sends nothing, and Brian shares PDFs from Drive on his phone. This page is the only list.
 
 ## 6. Do these first
+
+0. **Decide when to switch the login on.** It is built, tested and deployed but dormant. Switching it on means setting `APP_PASSWORD` (and `APP_SECRET`, `APP_API_TOKEN`) in Railway. Effects: Brian signs in once per phone; print links copied before then stop working (copy new ones); the text forwarder, location tracker and Betty keep working on their own tokens (tested). Remove `APP_PASSWORD` to switch it off again. Staff accounts can only be added once it is on.
 
 1. Confirm a text reaches the Leads screen.
 2. Call Jane Shuberidge and the Horseshoe Bend slab caller, if not already done.
