@@ -99,6 +99,27 @@ had to be retyped.
   single missing link is why a lead could reach a customer but never the job it became, and
   why texts during a job had nowhere to land. It also claims the SMS thread onto the job.
 
+### Draft estimates from leads (2026-10)
+
+The Leads screen has a *Draft estimates from these leads* button. It walks the Needs-me
+leads one request per lead (`POST /api/leads/<id>/draft-estimate`) and prices what each
+lead already says — Bill's call notes, or the task list and measurements intake already
+pulled out of the text thread — through the same catalog lookup as `from-scope`. The
+Callback screen then opens with the scope and priced lines already in, and the Leads list
+shows a *Draft estimate* chip (plus *check quantities* when a quantity was assumed).
+
+Decisions worth keeping:
+
+- **Drafts live in `lead_drafts`, not `lead_callbacks`.** A `lead_callbacks` row is what the
+  customer brief reads as "callback in progress", and Bill tells the caller so. A draft the
+  app wrote itself must not change what the receptionist says.
+- **No job, invoice or customer is created** until Brian taps Create Estimate. Lines he
+  already has are never overwritten, and a scope he typed is the one that gets priced.
+- **Labor only** — materials lines are dropped and reported, per `topics/estimating-rules.md`.
+- What the catalog could not price stays visible on the callback screen.
+- Open: the rules file says flat rate / Qty 1 / round to $5; the app prices unit x quantity.
+  Drafts follow the app.
+
 ## Profitability — the open thread
 
 The point of tying hours to services: *"if we don't assign time to service being performed,
