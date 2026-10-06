@@ -142,7 +142,7 @@ Decisions worth keeping:
 
 ### Login and people (2026-10)
 
-**Status: live but dormant.** Merged 5 Oct (`fdaad3c`, `c68c481`). Nothing changes until `APP_PASSWORD` is set on the server.
+**Status: live, and on as of 6 Oct** (merged 5 Oct as `fdaad3c`, `c68c481`; `APP_PASSWORD` was set on the server by someone else on 6 Oct, evidenced in Railway's request log). It is dormant whenever `APP_PASSWORD` is empty or unset.
 
 - **Why:** the app had no login at all. Anyone who found the address could read and change every customer, job and
   figure, `/print/<id>` handed the whole job file to anyone who counted job numbers, and the admin backup route matched

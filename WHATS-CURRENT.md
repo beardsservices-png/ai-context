@@ -1,6 +1,6 @@
 # What's current
 
-**Last updated 5 October 2026 (evening).** One page: what is live, what is built but not live, what Brian asked for, and what each customer was last sent.
+**Last updated 6 October 2026.** One page: what is live, what is built but not live, what Brian asked for, and what each customer was last sent.
 
 This repo is public, so there are no addresses, phone numbers, emails or money in here. The plain-language version with those details lives in Brian's Drive under *Where We Stand*.
 
@@ -12,8 +12,10 @@ This repo is public, so there are no addresses, phone numbers, emails or money i
 ## 1. Live in the app (`BHSmobileapp` `main`)
 
 - **6 Oct, `b76e20b`: the mic assistant knows the whole business and can edit nearly anything, but only after reading the exact edit back.** Railway reported the build **successful**. It answers any question from the live data, talks freely with the last few turns as context, and proposes edits to customers, jobs, invoice lines, payments, hours, expenses and trips. Nothing is changed until Brian says "yes" (or taps); customers, jobs and invoices cannot be deleted by voice. **Untested against the live model** (tests stub it), so watch the first real conversations in `GET /api/assistant/audit`. **The login is still OFF**, which means anyone who finds the app's address could use this too: turning the login on (`APP_PASSWORD`) matters more now. Details in `areas/bhs-app.md`.
-- **5 Oct, `c68c481`: other people can sign in, limited to the sections Brian picks** (Settings -> People). **Live, but the login itself is OFF**, so nothing has changed for anyone yet. Details in `areas/bhs-app.md`.
-- **5 Oct, `fdaad3c`: the login, safer print links, and a database-download hole closed.** **Live, login OFF.** The admin routes used to accept an empty key when `ADMIN_KEY` was unset; they now refuse everything in that case.
+- **6 Oct: the login appears to be ON.** Railway has `APP_PASSWORD` and `APP_SECRET` set (not set by this session), sign-ins show in the request log, and the phone app, location tracker and text forwarder all get normal answers. Confirm by opening the app in a private window: it should ask for a password. Verified from Railway's request metrics only; the cloud sessions cannot reach the live app.
+- **6 Oct, merged by another session (PRs #3-#5):** the voice assistant reads everything and edits nearly anything only after an exact read-back; helper switches (full-access helpers who can add but not change or delete until the owner turns it on); Chime alerts become expenses by themselves and fuel/supply stops ask what was bought; unrecognised stops are asked about; Working leads show one card per customer. All 16 test files pass on `main`.
+- **5 Oct, `c68c481`: other people can sign in, limited to the sections Brian picks** (Settings -> People). Details in `areas/bhs-app.md`.
+- **5 Oct, `fdaad3c`: the login, safer print links, and a database-download hole closed.** The admin routes used to accept an empty key when `ADMIN_KEY` was unset; they now refuse everything in that case.
 - **5 Oct, `3c0d1da`: leads keep a draft estimate current.** See `areas/bhs-app.md`. Railway reported the build **successful** at 11:38 UTC on 5 Oct, so it is live.
 - **5 Oct, `f6b77de`:** clock double-billing fix, and the screen that counted silence as driving.
 - **4 Oct:** two text-forwarding fixes (the webhook accepts its secret from wherever the forwarder puts it; forwarded texts are stamped with a timezone so the Leads screen stops showing wrong times).
@@ -56,9 +58,8 @@ As of the dates shown. Texts are not visible to Claude.
 
 ## 6. Do these first
 
-0. **Decide when to switch the login on.** It is built, tested and deployed but dormant. Switching it on means setting `APP_PASSWORD` (and `APP_SECRET`, `APP_API_TOKEN`) in Railway. Effects: Brian signs in once per phone; print links copied before then stop working (copy new ones); the text forwarder, location tracker and Betty keep working on their own tokens (tested). Remove `APP_PASSWORD` to switch it off again. Staff accounts can only be added once it is on.
-
-1. Confirm a text reaches the Leads screen.
+0. **Make sure Brian knows his password.** The login looks to be on already. The password is the `APP_PASSWORD` variable on the Railway service `BHSmobileapp` (Brian can read or change it there). Print links copied before the login went on stop working: copy new ones. Staff accounts can now be added in Settings -> People. To switch the login off, set `APP_PASSWORD` to empty.
+1. Texts are reaching the app again (the forwarder posted successfully on 6 Oct). Keep an eye on it.
 2. Call Jane Shuberidge and the Horseshoe Bend slab caller, if not already done.
 3. Resend the 5 Sep estimate, if not already done.
 4. Watch the first real lead drafts; the pricing prompt has not met the live model.
