@@ -11,6 +11,7 @@ This repo is public, so there are no addresses, phone numbers, emails or money i
 
 ## 1. Live in the app (`BHSmobileapp` `main`)
 
+- **6 Oct, `b76e20b`: the mic assistant knows the whole business and can edit nearly anything, but only after reading the exact edit back.** Railway reported the build **successful**. It answers any question from the live data, talks freely with the last few turns as context, and proposes edits to customers, jobs, invoice lines, payments, hours, expenses and trips. Nothing is changed until Brian says "yes" (or taps); customers, jobs and invoices cannot be deleted by voice. **Untested against the live model** (tests stub it), so watch the first real conversations in `GET /api/assistant/audit`. **The login is still OFF**, which means anyone who finds the app's address could use this too: turning the login on (`APP_PASSWORD`) matters more now. Details in `areas/bhs-app.md`.
 - **5 Oct, `c68c481`: other people can sign in, limited to the sections Brian picks** (Settings -> People). **Live, but the login itself is OFF**, so nothing has changed for anyone yet. Details in `areas/bhs-app.md`.
 - **5 Oct, `fdaad3c`: the login, safer print links, and a database-download hole closed.** **Live, login OFF.** The admin routes used to accept an empty key when `ADMIN_KEY` was unset; they now refuse everything in that case.
 - **5 Oct, `3c0d1da`: leads keep a draft estimate current.** See `areas/bhs-app.md`. Railway reported the build **successful** at 11:38 UTC on 5 Oct, so it is live.
