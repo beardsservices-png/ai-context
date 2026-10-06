@@ -128,6 +128,18 @@ Decisions worth keeping:
 - Open: the rules file says flat rate / Qty 1 / round to $5; the app prices unit x quantity.
   Drafts follow the app.
 
+### The mic assistant: the whole business, edits only after a read-back (2026-10)
+
+**Status: live.** Merged 6 Oct (`b76e20b`). Brian's brief: *not scoped to an open invoice, the full brain, and able to edit anything as long as it repeats back exactly what the edit will be.*
+
+- **Reads everything.** The old six canned lookups stay; on top of them it can run one read-only SELECT over the live database. The read-only rule is enforced by SQLite's own authorizer, not a text filter, and the tables for logins, settings and its own queue cannot be read at all.
+- **Edits through one tool that writes nothing.** The model proposes; the server validates the change, dry-runs it inside a transaction that is rolled back, and **builds the read-back itself from the rows** (names, before and after, and what it does to the job's total, paid and balance). The model's own words never decide what Brian is shown.
+- **A yes applies it, once.** Tap or say "yes". The proposal expires in 20 minutes and is re-checked against the data as it is *now*; if it would read back differently, nothing is applied and he is shown the new read-back. All or nothing, and every proposal and applied change is logged.
+- **Guard rails.** Customers, jobs and invoices cannot be deleted by voice (they take records with them). The price book, logins and creating a brand-new estimate stay in the app. Hours written by the GPS clock cannot be deleted from here.
+- **Side effects match the screens.** Changing a line recalculates the invoice; payments move a job to and from paid; removing a payment no longer drops an in-progress job back to pending (the old payment screen did that).
+- **Untested against the live model.** The tests stub it. Watch the first real conversations.
+- **Exposure while the login is off:** the assistant is owner-only once the login is on. Until `APP_PASSWORD` is set, the whole app is open, and that now includes this.
+
 ### Login and people (2026-10)
 
 **Status: live but dormant.** Merged 5 Oct (`fdaad3c`, `c68c481`). Nothing changes until `APP_PASSWORD` is set on the server.
