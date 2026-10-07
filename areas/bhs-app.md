@@ -913,3 +913,14 @@ and `get_db()` sets `busy_timeout` so a blocked writer waits instead of failing.
   reads notifications rather than the SMS database, so every photo a customer has
   ever texted has been dropped. Also why some messages arrive as
   "Sensitive notification content hidden" (12 of 787 archived).
+
+## Decisions, Oct 2026 (BHSmobileapp)
+
+- **Helpers** are set up like the owner (the *Full helper* preset opens all sections). Four switches say what they may do: change existing records, change prices/settings, delete, use the mic assistant. Adding is always allowed. Passwords have no minimum length and no lockout, by Brian's instruction; password boxes have an eye.
+- **Estimate screen**: one screen, three steps (who, what you saw, what it comes to). Walk the Job was folded into it. One shared line list (`LineList`) is used by the estimate, Callback and Filing Cabinet screens.
+- **Filing Cabinet = customer files**: top is *Needs you* (what is waiting and for how many days), then *What your work really pays* vs his hourly target, then each customer. Emphasis is actions and not dropping the ball, not owed/paid. Each open job has a one-line next step.
+- **App opens on Leads**, each card showing when it arrived and the next action.
+- **Drive settings are two toggles**: the drive TO the job counts as business (default on); the drive BACK is separate (default off).
+- **Pushes**: a notice when he leaves a job site with the hours logged (tap to fix times); prompts to name unrecognised stops (supplier, fuel) so expenses can be verified.
+- **Automatic estimates**: once a lead has name, address and request, the customer, job and priced estimate are created automatically and kept current from new texts until he taps *Looks good*. His own line edits are never overwritten (he gets a next step instead). Setting: *Build estimates for me*. After review the estimate is the customer's document and is not changed automatically.
+- Not built yet: one-tap apply of text-driven changes on jobs already underway.
