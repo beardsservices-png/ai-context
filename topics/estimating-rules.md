@@ -27,6 +27,11 @@ the code is wrong.
   rate is a diagnostic Brian looks at after the fact, not an input.
 - **Homewyse is the benchmark** for the Mountain Home market — take the low/high
   range and quote from the midpoint. Same model the `service_catalog` table uses.
+  **Use the LABOR row only, at zip 72653.** The catalog was repriced this way on
+  2026-10-08 (93 items; homewyse's labor description replaces ours, "Basic" dropped).
+  Items with no homewyse page (hourly rates, admin, a few odd services) kept their
+  old figures. New services go in the same way: homewyse page → zip 72653 → labor
+  low/high → midpoint.
 - **Prices run lean.** Low overhead, solo operator, high efficiency. Deliberately
   below market. Do not "correct" a price upward toward a national average.
 - **Collection rate is not a pricing input.** 99%+ collection is a fact about the
