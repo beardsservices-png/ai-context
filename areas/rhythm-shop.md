@@ -3,6 +3,9 @@
 Static site + zero-framework Node server, on Railway with a mounted data volume
 ($DATA_DIR). Repo: https://github.com/beardsservices-png/Rhythm-Maker.git
 
+Installable as a phone/desktop app (PWA: manifest + network-first service worker,
+pages open offline; iPhone = Safari → Share → Add to Home Screen).
+
 Two surfaces:
 - **Practice Mode** — learn a real instrument. Each note of a beginner song
   lights up with its fingering / key, you play it into the mic, it turns green
