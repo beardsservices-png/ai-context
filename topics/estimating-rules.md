@@ -10,15 +10,17 @@ the code is wrong.
 - **Labor only.** Materials are never bundled into a line item. All materials are
   purchased by the homeowner directly from the supplier. An estimate that quotes a
   material price is wrong even if the number is right.
-- **Flat rate, Qty always 1.** Every line item is `Qty 1` with a flat amount. Hourly
-  rates and hour counts never appear on a customer-facing document. The app computes
-  hours internally (`est_hours_per_unit`) for profitability — that stays internal.
+- **Quantity carries the catalog unit** (Brian, 2026-10-08). A fence is `84 lin.ft.` at
+  a per-foot price; a one-off item is `1` at a flat amount. Hourly rates and hour counts
+  never appear on a customer-facing document; `est_hours_per_unit` stays internal.
+- **The page is the lines and the total, nothing else.** No Additional Information, no
+  notes, no owner line, no thank-you, no materials, no shopping list.
 - **No payment language, anywhere.** Deposit terms, payment timing, "no upfront
   payment required", "due on completion" — none of it appears on any estimate,
   invoice, footer, or cover letter. Brian handles every payment conversation
   directly, in person or by phone. This has been corrected on generated documents
   more than once; check the footer before sending.
-- **Round to the nearest $5.**
+- **Round lump-sum lines to the nearest $5.** Per-unit prices may carry cents.
 
 ## Pricing philosophy
 
