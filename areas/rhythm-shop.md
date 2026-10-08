@@ -32,6 +32,10 @@ Two surfaces:
   "Write notes" records keyboard playing into the pattern. Export runs through the
   mixer + effects. "Ask Claude" (`/api/studio-assist`, needs ANTHROPIC_API_KEY,
   Opus 5.5 with server-side fallback) edits tracks, sections, kits and knobs.
+  Also: start screen (continue / templates Trap, Boom Bap, Lo-Fi, House, R&B,
+  Blank / saved tracks), undo-redo, browser autosave incl. audio, drum accents +
+  ghost notes + hi-hat rolls, swing, metronome with 1-bar count-in, key + chord
+  helper in the piano roll, per-track sidechain pump.
   Old saved projects convert on open. Notes + research: `docs/studio-redesign.md`
   in the repo; browser tests: `tests/studio.test.js`.
 
@@ -40,6 +44,5 @@ and the old Studio page (scenes, 4-slot looper, sample timeline). `audio-engine.
 is gone.
 
 Next: verify/adjust flute fingerings against a real method book. A flute posture
-helper (webcam) was scoped but not built. Studio ideas not built yet: a start
-screen with templates (like Groovebox), time-stretching recorded loops on tempo
-change, swing and per-step drum velocity.
+helper (webcam) was scoped but not built. Studio ideas not built yet:
+time-stretching recorded loops on tempo change, a per-track filter sweep.
