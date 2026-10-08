@@ -15,13 +15,31 @@ Two surfaces:
   ANTHROPIC_API_KEY). Flute fingering chart is unverified against a method book
   (mic scores the sound, not the picture) — flagged in-repo, wants matching to a
   real method book.
-- **BHS Studio** — a small DAW: playable 808 bass, drum lanes, mic loop
-  recording, section arrangement, mixer with shared reverb/delay, auto-master,
-  offline WAV export. "Ask Claude" edits the song via tool use
-  (`/api/studio-assist`, needs ANTHROPIC_API_KEY).
+- **BHS Studio** — a one-screen groovebox/DAW (redesigned Oct 2026, modelled on the
+  Groovebox / Korg Gadget / FL "one pattern per instrument" workflow). Every
+  instrument is a track with four patterns A–D; every drum sound is its own track.
+  The **song grid** has sections across and tracks down: per section each track
+  picks its letter (or silent), can mute individual bars, and can be soloed for
+  that section only. Top bar = transport + Loop parts / Play song. Lower pane =
+  drum machine / piano roll / waveform editor, mixer, reverb & delay. A **dock**
+  pinned at the bottom holds the keyboard (or drum pads) plus the current sound's
+  knobs — so drums and 808 knobs are always on screen together (Brian's main
+  complaint about the old page). Instruments: 808, piano, e-piano, organ, bell,
+  strings, brass, flute, pad, lead, pluck, synth bass (all synthesised). Kits:
+  Trap 808, Boom Bap, House 909, Lo-Fi, Live, Classic. ● Rec records "my playing"
+  (keys/pads only), the whole mix (bounce), or the mic — each take becomes an audio
+  track with a waveform; uploads too, and they're now saved with the project.
+  "Write notes" records keyboard playing into the pattern. Export runs through the
+  mixer + effects. "Ask Claude" (`/api/studio-assist`, needs ANTHROPIC_API_KEY,
+  Opus 5.5 with server-side fallback) edits tracks, sections, kits and knobs.
+  Old saved projects convert on open. Notes + research: `docs/studio-redesign.md`
+  in the repo; browser tests: `tests/studio.test.js`.
 
-Retired: **Freeplay** and **Round Robin** (the original 32-step pattern games) —
-removed when Practice Mode landed. `audio-engine.js` stays because Studio uses it.
+Retired: **Freeplay** and **Round Robin** (the original 32-step pattern games),
+and the old Studio page (scenes, 4-slot looper, sample timeline). `audio-engine.js`
+is gone.
 
 Next: verify/adjust flute fingerings against a real method book. A flute posture
-helper (webcam) was scoped but not built.
+helper (webcam) was scoped but not built. Studio ideas not built yet: a start
+screen with templates (like Groovebox), time-stretching recorded loops on tempo
+change, swing and per-step drum velocity.
