@@ -324,6 +324,20 @@ Watch out: `POST /sms` previously had **two** handlers registered. Flask matched
 rule, so the entire threading/ntfy block was unreachable and `sms_leads` was never written to.
 Fixed; the dead handler now lives at `/sms/legacy-thread`.
 
+**Picture messages do not forward (found 2026-10-08).** The handset forwarder sends plain SMS
+only. A text with a PDF or photo attached (MMS/RCS) never reaches `/sms` — Charlotte Collins'
+estimate PDF and her original fence request are both missing from Railway logs, while plain
+texts that day forwarded fine. Until the forwarder handles MMS, record a document send by hand:
+`POST /api/leads/<id>/notes` (and the job's next step).
+
+**Texts land on the customer's open lead** (status new/read/converted, matched by phone), and the
+customer file shows them via `leads.customer_id`. Set `leads.job_id` (`PUT /api/leads/<id>`) to
+tie that thread to the job — done for Collins (lead 330 → job 114, EST20261007).
+
+**Cloud sessions can reach the live app** (2026-10-08): `bhsmobileapp-production.up.railway.app`
+answers from here; send `Authorization: Bearer $APP_API_TOKEN`. The old note that the egress
+proxy blocks Railway is out of date.
+
 ## Leads intake — the five-day blackout (2026-08-31 → 2026-09-06)
 
 Fixed and deployed 2026-09-06 (`361f2b7`). Worth knowing because four separate faults
