@@ -21,9 +21,12 @@ Two surfaces:
 - **BHS Studio** — a one-screen groovebox/DAW (redesigned Oct 2026, modelled on the
   Groovebox / Korg Gadget / FL "one pattern per instrument" workflow). Every
   instrument is a track with four patterns A–D; every drum sound is its own track.
-  The **song grid** has sections across and tracks down: per section each track
-  picks its letter (or silent), can mute individual bars, and can be soloed for
-  that section only. Top bar = transport + Loop parts / Play song. Lower pane =
+  The **song timeline** (round 4) scrolls sideways like a video editor: a row of
+  blocks per instrument, a block's letter = which pattern plays; move / Alt-copy /
+  stretch / draw / copy-paste / duplicate / delete, solo a block in its section.
+  Clicking a block opens exactly that pattern. Row LEDs, drum names and pads flash
+  when they sound (Brian couldn't tell what was making the kick). Layout rule: no
+  panel scrolls up/down inside itself — the page scrolls, the dock stays pinned. Top bar = transport + Loop parts / Play song. Lower pane =
   drum machine / piano roll / waveform editor, mixer, reverb & delay. A **dock**
   pinned at the bottom holds the keyboard (or drum pads) plus the current sound's
   knobs — so drums and 808 knobs are always on screen together (Brian's main
@@ -33,7 +36,9 @@ Two surfaces:
   (keys/pads only), the whole mix (bounce), or the mic — each take becomes an audio
   track with a waveform; uploads too, and they're now saved with the project.
   "Write notes" records keyboard playing into the pattern. Export runs through the
-  mixer + effects. "Ask Claude" (`/api/studio-assist`, needs ANTHROPIC_API_KEY,
+  mixer + effects + auto-mastering (Deep & warm default / Loud / Clean / off, with
+  a "Hear it first" preview). **User manual** at `/manual.html` with real
+  screenshots + numbered callouts (re-shoot with `tools/make-manual.js`). "Ask Claude" (`/api/studio-assist`, needs ANTHROPIC_API_KEY,
   Opus 5.5 with server-side fallback) edits tracks, sections, kits and knobs.
   Also: start screen (continue / templates Trap, Boom Bap, Lo-Fi, House, R&B,
   Blank / saved tracks), undo-redo, browser autosave incl. audio, drum accents +
