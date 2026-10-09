@@ -61,3 +61,19 @@ Standardized service titles and descriptions are **in the app**, not in this rep
 with `service_catalog_aliases` mapping the 168 legacy InvoiceBee category strings
 onto them. Edit descriptions there. Do not keep a second copy of that text anywhere
 else.
+
+## Materials reimbursements (Brian, 2026-10-09)
+
+- **Cost of business, never billed to a customer:** paint brushes, drill bits, utility
+  blades, pickets bought for his own use, ladders and other tools. Record them in the app
+  as overhead expenses (`is_overhead=1`, category *Tools & Equipment*).
+- **Job materials** on the same receipt are split out, each with its share of the
+  receipt's sales tax, and recorded as expenses on the job.
+- **The reimbursement sheet** uses the same Order Summary layout as an estimate:
+  Date | Home Depot Receipt | Amount, then the total, any materials check received, and
+  Amount Due. Only the customer's items are listed.
+- **A materials check paid in advance** is applied to the receipts first; anything left
+  over goes to labor.
+- Giles: sheet made 2026-10-09 for the Sept–Oct Home Depot receipts (app expenses on
+  jobs 111/112; overhead items recorded separately). The private figures are in the app
+  and on the sheet, not in this public repo.
