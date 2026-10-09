@@ -11,7 +11,13 @@ Canonical scheme (supersedes the older `BHS-YYMM-##` note in earlier context fil
 - An estimate is `EST` + date: **`EST20260907`**
 - On conversion to an invoice **the number does not change** — only the prefix:
   `EST20260907` → **`BHS20260907`**. Same job, same identity, start to finish.
-- Two on the same day take a suffix: `EST20260907-2` → `BHS20260907-2`
+- **If a number is already taken, the next document takes the next date's number**
+  (Brian, Oct 2026): `EST20261019` taken → `EST20261020`, then `...21`. This replaces
+  the old `-2` suffix. The date printed on the document and the job's start date stay the
+  real ones; the number is only an identity.
+- An estimate and an invoice of the same date count as **one** number (`EST` and `BHS`
+  share the digits), so accepting an estimate never collides with an invoice already
+  holding them. A number typed by hand is never changed.
 - Multi-phase estimates take a letter suffix per phase: `BHS20260627A`, `B`, `C`, `D`
 - Once converted, **the estimate is archived or hidden** — never left live alongside
   the invoice. A customer must never hold an estimate that contradicts an invoice.
@@ -19,6 +25,12 @@ Canonical scheme (supersedes the older `BHS-YYMM-##` note in earlier context fil
   (`'EST' if status == 'estimate' else 'BHS'`). Status carries the meaning; the
   number is only identity. Do not encode state into the number.
 - Jazzy's pay invoices are a separate series: `JBHS-YYYYMM-##`
+
+## What the page shows
+
+Lines and the total, nothing else. **Job notes never print** (they hold working notes,
+customers' texts and access codes): no "Additional Information" block, on an estimate,
+invoice or receipt.
 
 ## Filenames
 
@@ -67,7 +79,8 @@ Row heights are dynamic via `textwrap.wrap()`.
 > `brianb@beardsservices.com` **bounced on a live customer send** — the Giles
 > materials reimbursement on 2026-07-28, "domain not found" — because it was still
 > sitting on the estimate letterhead. Any generator, template or saved document
-> still carrying the old domain wants correcting before it is sent again.
+> still carrying the old domain wants correcting before it is sent again. (The app's
+> own print page was corrected in Oct 2026.)
 
 ## Footer
 
