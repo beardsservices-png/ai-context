@@ -397,7 +397,7 @@ asserts **no lead exists that no tab can show**.
 
 ### ntfy: two services, one topic
 
-The topic is **`beards-bhs-calls-8703`** and Brian is subscribed to it. Bill's call-back
+The topic is a single ntfy topic (its name is deliberately **not** written in this public repo: anyone who knows it can read the alerts, which carry customer names) and Brian is subscribed to it in the ntfy app. Bill's call-back
 alerts were arriving from `bhs-memory-server`, which had it configured — **the BHS app
 service never did**, so `push_configured` was `false` and the app's SMS lead alerts and the
 8pm day-digest silently sent nothing for their whole life. `NTFY_TOPIC` is now set on the
@@ -545,7 +545,7 @@ the symptom of exactly this.
 Backup of the pre-change prompt: `~/Backups/retell-llm-v21-backup-2026-09-06.json`.
 
 > `NTFY_TOPIC` is **hardcoded** at `server.js:8` in the memory server
-> (`beards-bhs-calls-8703`). That is why Bill's call notifications always worked while the BHS
+> (same topic; name not repeated here). That is why Bill's call notifications always worked while the BHS
 > app's lead alerts never did — the app read an env var nobody had set.
 
 The stale local clone at `VoiceAgent/bhs-memory-server` was 12 commits behind and has been
@@ -923,7 +923,9 @@ and `get_db()` sets `busy_timeout` so a blocked writer waits instead of failing.
 - `app.py` does not read `BRIAN_HOME_LAT/LON` from the environment at all.
 - Re-evaluation **adds** visits rather than replacing them when a fence changes
   (`_find_existing_visit` keys on `geofence_id`), so the review queue inflates.
-- **No MMS capture anywhere.** The lead model has no media field and SMS Forwarder
+- **No MMS capture anywhere** (Oct 2026: still true of the forwarder, but there is now a
+  hand-off: hold the picture in Messages, Share, BHS, and the app reads it into notes on the
+  right customer). The lead model has no media field and SMS Forwarder
   reads notifications rather than the SMS database, so every photo a customer has
   ever texted has been dropped. Also why some messages arrive as
   "Sensitive notification content hidden" (12 of 787 archived).
