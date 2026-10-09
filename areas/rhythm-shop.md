@@ -32,7 +32,15 @@ Two surfaces:
   knobs — so drums and 808 knobs are always on screen together (Brian's main
   complaint about the old page). Instruments: 808, piano, e-piano, organ, bell,
   strings, brass, flute, pad, lead, pluck, synth bass (all synthesised). Kits:
-  Trap 808, Boom Bap, House 909, Lo-Fi, Live, Classic. ● Rec records "my playing"
+  Trap 808, Boom Bap, House 909, Lo-Fi, Live, Classic. **Recorded** (round 5, Oct
+  2026): 18 real-sample instruments (grand piano, Rhodes, vibes, marimba, kalimba,
+  strings, violin, cello, harp, trumpet, trombone, horn, sax, flute, acoustic/nylon
+  guitar, electric/upright bass) and 4 recorded kits + hand percussion, built by
+  `tools/build-samples.js` from free libraries (Rhodes + upright bass samples are
+  BY-NC — fine for a free app, swap if it's ever sold). Every hit/note has its own
+  volume and left/right (lanes under drum machine and piano roll). One-knob
+  **Character** per track (Warm, Punchy, Lo-fi, Vocal …); mic takes get a vocal
+  chain + optional **Tune** (pitch correction). Guided **Tour** for a first song. ● Rec records "my playing"
   (keys/pads only), the whole mix (bounce), or the mic — each take becomes an audio
   track with a waveform; uploads too, and they're now saved with the project.
   "Write notes" records keyboard playing into the pattern. Export runs through the
@@ -51,6 +59,6 @@ Retired: **Freeplay** and **Round Robin** (the original 32-step pattern games),
 and the old Studio page (scenes, 4-slot looper, sample timeline). `audio-engine.js`
 is gone.
 
-Next: verify/adjust flute fingerings against a real method book. A flute posture
+Next: Brian to try the new sounds/tour on a real device and report. Then: verify/adjust flute fingerings against a real method book. A flute posture
 helper (webcam) was scoped but not built. Studio ideas not built yet:
 time-stretching recorded loops on tempo change, a per-track filter sweep.
