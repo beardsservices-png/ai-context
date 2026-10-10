@@ -39,10 +39,10 @@ Current examples:
 - `covered-patio-plan` — 24 ft covered patio, 2/12 shed roof, full takeoff (worked tutorial).
 - `l-shaped-porch-windows` — **Giles porch (Jesse & Doree Giles, job 111, Phase 3 — Porch
   Enclosure).** Plan of an L-shaped porch enclosure on a 37" stone wall:
-  open 58" × 91" walkway at a wall corner, **two** front windows (29" × 53½") split by a
-  double 2×4 mullion between 3½" cedar posts (changed from one wide window 2026-10-04),
-  **three** windows (26½" × 53½") on the 90" long side split by two double 2×4 mullions
-  (changed from two 2026-10-10),
+  open 58" × 91" walkway at a wall corner, **two** front windows (stock 30×54, 29½" × 53½" actual) split by a
+  single 2×4 divider between 3½" cedar posts (changed from one wide window 2026-10-04),
+  **three** stock 28×54 windows (27½" × 53½" actual) on the 90" long side split by two single 2×4
+  dividers (changed from two 2026-10-10, resized to stock sizes 2026-10-11),
   two windows on the 90" long side split by a double 2×4 mullion, every opening framed
   in 2×4 (flat on the cap, flat under the beam, jack each side). Windows ½" under the
   framed opening.
