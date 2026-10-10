@@ -41,12 +41,15 @@ Current examples:
   Enclosure).** Plan of an L-shaped porch enclosure on a 37" stone wall:
   open 58" × 91" walkway at a wall corner, **two** front windows (29" × 53½") split by a
   double 2×4 mullion between 3½" cedar posts (changed from one wide window 2026-10-04),
+  **three** windows (26½" × 53½") on the 90" long side split by two double 2×4 mullions
+  (changed from two 2026-10-10),
   two windows on the 90" long side split by a double 2×4 mullion, every opening framed
   in 2×4 (flat on the cap, flat under the beam, jack each side). Windows ½" under the
   framed opening.
 - `l-shaped-porch-long-side` — Giles porch, elevation of that long side, including the triangle
   between the beam and the rafter framed in 2×4 and glazed with **two layers of ¼" clear
-  plexiglass with an air space** (not tempered glass — settled 09/28) in two pieces,
+  plexiglass with an air space** (not tempered glass — settled 09/28) in three pieces,
+  a 2×4 mullion over each window mullion,
   its mullion aligned with the window mullion below.
 
 ## Drawing-file format notes (learned the hard way)
@@ -88,7 +91,7 @@ When the homeowner buys the materials, a one-page sheet works better than a plan
 elevation with each item lettered (A, B, C), and beside it what to buy, in store terms
 (unit size, rough opening if asked, sheet size). Built with `plansheet.py` like the plan
 set; no prices, no cut sizes — buy plexiglass as a full sheet and cut on site. Giles got one
-on 2026-10-04 (4 double-hung windows, one 4×8 sheet of ¼" acrylic). Send the PNG by text —
+on 2026-10-04 (5 double-hung windows — 2 front, 3 long side — one 4×8 sheet of ¼" acrylic). Send the PNG by text —
 they read everything by text.
 
 ## Open threads
