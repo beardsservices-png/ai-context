@@ -74,6 +74,9 @@ else.
   Amount Due. Only the customer's items are listed.
 - **A materials check paid in advance** is applied to the receipts first; anything left
   over goes to labor.
-- Giles: sheet made 2026-10-09 for the Sept–Oct Home Depot receipts (app expenses on
-  jobs 111/112; overhead items recorded separately). The private figures are in the app
-  and on the sheet, not in this public repo.
+- **Only the receipts Brian hands over go on the bill**, not every purchase found in Gmail,
+  and an older receipt he says was already paid back stays off.
+- **Brian decides where a check lands.** Giles (2026-10-10): the materials check paid off the
+  Phase 2 final inspection, the remainder went to the Phase 3 buried downspout drain line, and
+  one bill carried both services plus three receipts. Figures are in the app (jobs 111/112),
+  not in this public repo.
