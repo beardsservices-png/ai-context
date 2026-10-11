@@ -94,6 +94,15 @@ set; no prices, no cut sizes — buy plexiglass as a full sheet and cut on site.
 on 2026-10-04 (5 double-hung windows — 2 front, 3 long side — one 4×8 sheet of ¼" acrylic). Send the PNG by text —
 they read everything by text.
 
+## Giles triangle — how it is built (2026-10-11)
+
+The triangle between the beam and the rafter is framed in 2×4 laid flat (plate on the beam,
+sloped piece under the rafter, vertical at the house) with cedar stops and two ¼\" plexiglass
+sheets ~7/8\" apart on foam spacer tape. At the house end Brian **removes the soffit and ties the
+vertical into the wall studs**, then runs the cedar wrap and soffit over it so it reads as original.
+Inside sheet sealed tight, outside edge left with a weep gap; never screw through the acrylic.
+Install notes and cut list live in Brian's private pack, not here.
+
 ## Open threads
 
 - No way yet to save a drawing into Projects from a cloud session (proxy). A GitHub-
