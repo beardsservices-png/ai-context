@@ -11,8 +11,8 @@ the code is wrong.
   purchased by the homeowner directly from the supplier. An estimate that quotes a
   material price is wrong even if the number is right.
 - **Never quantity 1 for anything that can be measured** (Brian, 2026-10-12). Feet, square
-  feet, a count of items: the line carries that quantity and a per-unit price. A line of
-  "1 @ $300" for a drain line tells you nothing next time; "25 lin.ft. @ $12.00" does.
+  feet, a count of items: the line carries that quantity and a per-unit price. A drain line
+  billed as "1 @ a lump sum" tells you nothing next time; "25 lin.ft. @ a per-foot price" does.
   Quantity 1 is only for a true single thing (one inspection, one service call). When a
   job is priced as a lump sum, divide it by the measured quantity and save the per-unit
   price to the app catalog so the next quote starts from it.
@@ -63,7 +63,7 @@ the code is wrong.
 ## Where the line-item copy lives
 
 Standardized service titles and descriptions are **in the app**, not in this repo:
-`service_catalog` (140 items / 22 trades) seeded from `api/service_catalog_seed.py`,
+`service_catalog` (about 145 items / 22 trades) seeded from `api/service_catalog_seed.py`,
 with `service_catalog_aliases` mapping the 168 legacy InvoiceBee category strings
 onto them. Edit descriptions there. Do not keep a second copy of that text anywhere
 else.
@@ -78,11 +78,21 @@ else.
 - **The reimbursement sheet** uses the same Order Summary layout as an estimate:
   Date | Home Depot Receipt | Amount, then the total, any materials check received, and
   Amount Due. Only the customer's items are listed.
-- **A materials check paid in advance** is applied to the receipts first; anything left
-  over goes to labor.
+- **A materials check paid in advance** counts against labor until Brian presents the
+  receipts, and **Brian decides where each check lands** (see Giles below). Do not assume
+  it goes to receipts first.
 - **Only the receipts Brian hands over go on the bill**, not every purchase found in Gmail,
   and an older receipt he says was already paid back stays off.
 - **Brian decides where a check lands.** Giles (2026-10-10): the materials check paid off the
   Phase 2 final inspection, the remainder went to the Phase 3 buried downspout drain line, and
   one bill carried both services plus three receipts. Figures are in the app (jobs 111/112),
   not in this public repo.
+- **The customer's own check list is the record of check numbers and dates.** Giles texts a
+  photo of theirs; use its numbers and dates, and flag any date that differs from the app
+  instead of changing the app. A check that reimburses supplies is listed on the Account
+  Summary but is not a payment against an invoice (see `topics/document-standards.md`).
+  Where the customer's sheet files part of a check as labor and the bill applied it to
+  materials, the Account Summary shows the split on that check so they can see where it went.
+- **Re-quote on a changed request.** When a customer changes the layout after an estimate
+  (width, gate size, method), the old estimate is out of date: say so on the job, then
+  re-quote from the new scope. Do not leave the old number as the live one.

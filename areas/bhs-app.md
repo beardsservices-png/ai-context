@@ -940,3 +940,49 @@ and `get_db()` sets `busy_timeout` so a blocked writer waits instead of failing.
 - **Pushes**: a notice when he leaves a job site with the hours logged (tap to fix times); prompts to name unrecognised stops (supplier, fuel) so expenses can be verified.
 - **Automatic estimates**: once a lead has name, address and request, the customer, job and priced estimate are created automatically and kept current from new texts until he taps *Looks good*. His own line edits are never overwritten (he gets a next step instead). Setting: *Build estimates for me*. After review the estimate is the customer's document and is not changed automatically.
 - Not built yet: one-tap apply of text-driven changes on jobs already underway.
+
+## Session notes, 12 Oct 2026 (data and rules, no app code changed)
+
+No dollar amounts here; this repo is public. Figures are in the app and Brian's Drive.
+
+- **The live app is reachable from a cloud session** (`bhsmobileapp-production.up.railway.app`),
+  with `Authorization: Bearer $APP_API_TOKEN`. Anything done through the same routes the
+  screens use writes the same rows. This session used it to correct estimates, record payments
+  and expenses, add notes and next steps, and edit the catalog.
+- **The service catalog was repriced from homewyse**: labor row only, zip 72653, low/high
+  midpoint, homewyse's labor wording as the description (the word "Basic" dropped). 93 existing
+  items changed; items with no homewyse page (hourly rates, admin, a few odd services) kept
+  their old figures. New items added to the live database (not the seed file): *Picket Fence
+  Installation Labor*, *Remove Fencing*, *Buried Downspout Drain Line* (each per linear foot). A
+  fresh database seeded from `service_catalog_seed.py` will not have them. Rule in
+  `topics/estimating-rules.md`.
+- **Quantity carries the unit, never 1 for measurable work** (feet, square feet, counts), with a
+  per-unit price, so the price per foot is known next time. Covered in the rules file.
+- **Estimate pages carry only the lines and the total.** No notes, no owner line, no footer
+  (`topics/document-standards.md`). An **Account Summary** document (all phases, checks beside
+  each service line, unfinished work separate) now exists as a hand-made PDF; the app does not
+  generate it. Document layouts are built in claude.ai/Claude Code sessions, not by the app.
+- **Gotcha: deleting a payment can flip a job from `in_progress` to `pending`.** To move a
+  payment from one job to another, POST the new one, DELETE the old one, then
+  `POST /api/jobs/<id>/start-work` if the job was in progress. (The mic assistant deliberately
+  avoids this; the plain payment delete does it.)
+- **Gotcha: `PUT /api/filing-cabinet/<id>` is a whole-job save.** Send back everything
+  (`customer_id`, `notes`, `photos_album_url`, every line with its `id`, the time entries with
+  their `id`) with only the intended line changed. Lines and time entries you leave out are
+  **deleted**, and `notes` and the photo link are blanked. Line ids are kept for the ones you
+  send, so their hours stay attached.
+- **Known false alarm: the "said yes by text" alert.** A customer wrote that they would look at
+  a re-quote ("if it's not too much trouble to refigure it ... we can look at it") and the app
+  pushed *Said yes by text: tap Accept* and set that next step. Nothing was accepted. The alert
+  matches soft wording; treat it as a prompt to read the thread, and correct the next step by
+  hand (`POST /api/jobs/<id>/next-step`). Worth tightening the matcher before it trains Brian
+  to ignore it.
+- **Pictures and PDFs that Brian or a customer texts do not forward** (the forwarder passes
+  text only, and a photo shows up as the word "Image"). A customer's check list, an estimate
+  PDF Brian sends: none of it reaches the app. Record what was sent as a job note
+  (`POST /api/jobs/<id>/notes`) and keep the file in Drive.
+- **A customer's thread joins their job** when the customer's lead has `job_id` set
+  (`PUT /api/leads/<id>` `{job_id}`): done for Collins. Then their texts show under the job.
+- **Materials receipts**: cost-of-business items (brushes, bits, blades, pickets for his own use,
+  ladders) are overhead expenses; job materials are expenses on the job with the receipt's tax
+  share. The customer's reimbursement sheet lists only their items.

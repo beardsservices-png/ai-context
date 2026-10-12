@@ -84,7 +84,30 @@ Row heights are dynamic via `textwrap.wrap()`.
 
 ## Footer
 
-Owner-operator note only. **No payment, deposit, or timing language** — see
-`topics/estimating-rules.md`. Older generated documents carry a "no upfront payment
-required" line in the footer; that line is not wanted and should be stripped wherever
-it survives, including in `bhs_estimate_generator.py` itself.
+**Nothing.** An estimate or invoice ends at the stamp: the line items, the total and
+nothing else. No Additional Information, no notes, no "owner-operated" line, no
+thank-you, no payment, deposit, or timing language (see `topics/estimating-rules.md`).
+Older generated documents carry an owner-operator note and a "no upfront payment
+required" line; both are unwanted and should be stripped wherever they survive,
+including in `bhs_estimate_generator.py` itself.
+
+## Account Summary (all phases of one agreement together)
+
+For a multi-phase job (Giles, phases A-D) Brian wants one document that shows what was
+done, what each check paid, what is owed and what is still to come, in the same look as
+an invoice.
+
+- **Landscape letter**, Order Summary header, `Customer Agreement #` and the phases it covers.
+- **Each phase is its own invoice table**, with a **"Paid by" column to the right of every
+  service line**: check number, date and the amount that check applied to that line. A line
+  with money still owing says *Owed* in red; paid lines sit on green.
+- **Unfinished services go below, in a separate "Still to come" section** with a status
+  of *To come* and a subtotal marked *Not yet billed*. They are never mixed into the
+  completed work. The phase total shown is the original quote plus any added service.
+- **A "Checks Received" table lists every check** (number, date, amount, what it applied
+  to), including checks that reimbursed materials. Totals: checks received, less material
+  reimbursements, applied to the invoices, project total, paid, balance of the project, and
+  **Amount Due for completed work** only.
+- Quantities carry units (`25 lin.ft.`), as everywhere else.
+- Filename: `BHS[YYYYMMDD]_[LastNameFirstName]_Account_Summary_[date].pdf`. Dollar amounts
+  live in the PDF, the app and Brian's Drive, never in this public repo.

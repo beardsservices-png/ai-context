@@ -1,6 +1,6 @@
 # What's current
 
-**Last updated 6 October 2026.** One page: what is live, what is built but not live, what Brian asked for, and what each customer was last sent.
+**Last updated 12 October 2026** (sections 1, 4 and 5; the rest is as of 6 October). One page: what is live, what is built but not live, what Brian asked for, and what each customer was last sent.
 
 This repo is public, so there are no addresses, phone numbers, emails or money in here. The plain-language version with those details lives in Brian's Drive under *Where We Stand*.
 
@@ -19,6 +19,9 @@ This repo is public, so there are no addresses, phone numbers, emails or money i
 - **5 Oct, `3c0d1da`: leads keep a draft estimate current.** See `areas/bhs-app.md`. Railway reported the build **successful** at 11:38 UTC on 5 Oct, so it is live.
 - **5 Oct, `f6b77de`:** clock double-billing fix, and the screen that counted silence as driving.
 - **4 Oct:** two text-forwarding fixes (the webhook accepts its secret from wherever the forwarder puts it; forwarded texts are stamped with a timezone so the Leads screen stops showing wrong times).
+
+- **12 Oct, data and rules only (no app code):** the service catalog was repriced from homewyse (labor, zip 72653, midpoint) and three fence/drain items were added; estimates and invoices now carry only the lines and the total; quantities carry their unit (never 1 for measurable work). Rules in `topics/estimating-rules.md` and `topics/document-standards.md`; session detail and gotchas at the end of `areas/bhs-app.md`.
+- **12 Oct: cloud sessions can reach the live app and the CAD site** (they answered normally). The app needs `APP_API_TOKEN`; the CAD site's Projects list can be written to directly. The older "unreachable from here" notes were out of date.
 
 ## 2. Built, but NOT live (sitting on branches)
 
@@ -47,12 +50,14 @@ As of the dates shown. Texts are not visible to Claude.
 |---|---|---|---|
 | Jane Shuberidge (door widening) | Called Betty 24 Sep. Betty said Brian would estimate and asked for pictures and measurements. | Phone | Brian's callback. None recorded as of 29 Sep. |
 | Horseshoe Bend slab (about 1,600 sq ft) | Called Betty 24 Sep. | Phone | Brian's callback. None recorded as of 29 Sep. |
-| Giles | 25 Sep: Brian emailed a Home Depot list for the punch list and said he would rather pick the items up with a check. | Email | Phase 3 section 3.1 is complete and due. Section 3.2 was about to start on 28 Sep. The materials check of 28 Sep counts against labour until the receipt is shown. |
+| Giles | 12 Oct: an **Account Summary** for phases A-D (checks beside each service line, Phase 3 unfinished work separate) was made, **not yet sent**. Their check list (a photo they texted) was used for check numbers and dates. | Made by hand (PDF), to be shared from Brian's phone | Brian sending it. Phase 3 completed work still has a balance; the rest of Phase 3 has not started. |
+| Collins (back-yard fence) | 8 Oct: an estimate was texted. **11 Oct: she postponed, then asked to re-quote at the current width with a 4 ft gate** (after Brian offered a cheaper way to set the posts). The app pushed a false "said yes" alert; nothing was accepted. | Text (picture message, so the app never saw it) | A re-quote from Brian, then sending it. |
 | An estimate emailed 5 Sep to a Hotmail address (customer not identified here) | The customer replied the same day: no attachment arrived. | Email | A resend. None appears in the personal Sent folder since. It may have gone by text or from the business Gmail, which Claude cannot read. |
 
 ## 5. What nobody can see
 
 - **Texts Brian sends and receives.** They live on his phone. The app only sees incoming texts when SMS Forwarder is on. On 29 Sep it was not installed on the new phone (nothing since 20 Sep). The 4 Oct fixes suggest it was being worked on. Test: send a text and see whether it shows on the Leads screen.
+- **Pictures and PDFs sent or received by text.** The forwarder passes text only (a photo arrives as the word "Image"), so Collins' estimate PDF and Giles' check-list photo are not in the app. They live in Brian's messages and Drive.
 - **Anything sent from the business Gmail account.**
 - **What was sent to whom.** The app records none of it: it sends nothing, and Brian shares PDFs from Drive on his phone. This page is the only list.
 

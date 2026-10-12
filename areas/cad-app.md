@@ -13,9 +13,14 @@ Browser drafting tool for drawing jobs to real-world scale — plan, elevation a
 
 ## Checking a deploy from a cloud session
 
-Railway hosts are blocked by the cloud-session egress proxy (403), so the live site
-and its `/api/drawings` storage **cannot be reached or written from there**. Railway
-posts its build result to GitHub as a commit status, which is reachable:
+**Update 2026-10-12: the live site now answers from a cloud session**, and the storage API
+works too. `POST /api/drawings` with `{"name": ..., "doc": <the drawing JSON>}` saves a drawing
+straight into Brian's **Projects** list (done for the Collins fence, plan and back run), so a
+cloud session no longer has to leave it as an Example for him to Cloud Save. Examples are
+still the way to ship a drawing with the code. The old note here, that the proxy 403s
+Railway hosts, was wrong by this date.
+
+Railway also posts its build result to GitHub as a commit status:
 
 ```bash
 curl -sS "https://api.github.com/repos/beardsservices-png/CAD-/commits/<sha>/status"
@@ -25,10 +30,6 @@ curl -sS "https://api.github.com/repos/beardsservices-png/CAD-/commits/<sha>/sta
 running can stay `pending` forever — Railway skips it and builds the newer one, which
 already includes it. Check the latest commit, not the stuck one.
 
-Consequence: a cloud session cannot drop a drawing into Brian's **Projects** list.
-It ships drawings as **Examples** instead (below); Brian opens one and taps
-*Cloud Save* to keep his own copy.
-
 ## Examples (how drawings get delivered)
 
 `src/examples.js` lists prebuilt drawings; each is a JSON file in `examples/` in the
@@ -37,6 +38,10 @@ drawing = add the JSON + one entry in `EXAMPLES`.
 
 Current examples:
 - `covered-patio-plan` — 24 ft covered patio, 2/12 shed roof, full takeoff (worked tutorial).
+- `collins-picket-fence-plan` / `collins-picket-fence-back` — **Collins back-yard picket fence**
+  (3 ft tall). Plan and back-run elevation: 6 ft bays on 4x4 posts, four bays down each 24 ft
+  side, the back widened to 44 ft with one 8 ft gate in the middle. **Out of date as of 11 Oct:**
+  she asked to re-quote at the current width with a 4 ft gate, so redraw before using.
 - `l-shaped-porch-windows` — **Giles porch (Jesse & Doree Giles, job 111, Phase 3 — Porch
   Enclosure).** Plan of an L-shaped porch enclosure on a 37" stone wall:
   open 58" × 91" walkway at a wall corner, **two** front windows (stock 30×54, 29½" × 53½" actual) split by a
@@ -105,8 +110,7 @@ Install notes and cut list live in Brian's private pack, not here.
 
 ## Open threads
 
-- No way yet to save a drawing into Projects from a cloud session (proxy). A GitHub-
-  based import (drawings committed to a private repo and pulled by the app) would fix it.
+- (Resolved 2026-10-12: a cloud session can POST a drawing into Projects, see above.)
 - The cedar trim (ripped/beveled sill, casing, stops) on the porch example is noted,
   not drawn piece by piece.
 - **BHS app link-up.** A BHS app job (`jobs` table) holds only a free-text `notes`
