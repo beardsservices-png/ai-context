@@ -10,6 +10,12 @@ the code is wrong.
 - **Labor only.** Materials are never bundled into a line item. All materials are
   purchased by the homeowner directly from the supplier. An estimate that quotes a
   material price is wrong even if the number is right.
+- **Never quantity 1 for anything that can be measured** (Brian, 2026-10-12). Feet, square
+  feet, a count of items: the line carries that quantity and a per-unit price. A line of
+  "1 @ $300" for a drain line tells you nothing next time; "25 lin.ft. @ $12.00" does.
+  Quantity 1 is only for a true single thing (one inspection, one service call). When a
+  job is priced as a lump sum, divide it by the measured quantity and save the per-unit
+  price to the app catalog so the next quote starts from it.
 - **Quantity carries the catalog unit** (Brian, 2026-10-08). A fence is `84 lin.ft.` at
   a per-foot price; a one-off item is `1` at a flat amount. Hourly rates and hour counts
   never appear on a customer-facing document; `est_hours_per_unit` stays internal.
