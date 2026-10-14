@@ -111,8 +111,11 @@ Install notes and cut list live in Brian's private pack, not here.
 ## Couch drawings (14 Oct 2026) — a personal build, not a customer job
 
 Two drawings were saved straight into **Projects** with `POST /api/drawings` (no repo change):
-*Couch — side view (hinged back, rear prop, laptop arm)* and *Couch — plan (overhead)*. The
-build itself is in `areas/couch-build.md`.
+a side view and a plan. **Re-drawn the same day in bed orientation** (75 in head to toe) and
+saved over the same two entries with `PUT /api/drawings/<id>` {name, doc}, so the Projects
+list never gained duplicates. Names now read *Couch side view / plan view (bed-style, head to
+toe)*. The build itself is in `areas/couch-build.md`. Lesson: when a build is described by a
+sketch or a photo, confirm which dimension is head-to-toe before drawing.
 
 What the drawing work taught about the app:
 
