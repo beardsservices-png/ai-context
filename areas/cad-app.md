@@ -108,6 +108,32 @@ vertical into the wall studs**, then finishes the cut siding with J-channel and 
 Inside sheet sealed tight, outside edge left with a weep gap; never screw through the acrylic.
 Install notes and cut list live in Brian's private pack, not here.
 
+## Couch drawings (14 Oct 2026) — a personal build, not a customer job
+
+Two drawings were saved straight into **Projects** with `POST /api/drawings` (no repo change):
+*Couch — side view (hinged back, rear prop, laptop arm)* and *Couch — plan (overhead)*. The
+build itself is in `areas/couch-build.md`.
+
+What the drawing work taught about the app:
+
+- **A tilted part can be shown in 3D.** Draw its side profile as a closed polygon in
+  `viewMode: "elevation"` and set `height` to the width it spans; `elevation` shifts it
+  across the width. A back leaning at 105 degrees extrudes correctly. The old note that
+  only vertical extrusions work does not apply to elevation drawings.
+- **Draw a mechanism to scale before recommending numbers.** The first prop design looked
+  right on paper; drawn out, its tip went below the floor. A 20-line Python script that
+  computes the geometry at each angle caught what the sketch did not.
+- **Reference-only geometry** (`existing: true, locked: true`, `dash: "dashed"`) works well
+  for "other positions" of a moving part: ghosted, never counted in the takeoff.
+- **Cloud session access:** attaching this repo with *push* access was refused by the
+  session's permission classifier. The repo is public, so a read-only `git clone` plus
+  `POST /api/drawings` to the live site did the whole job. Adding a built-in Example
+  needs a push, so ask Brian to approve push access first if it is wanted.
+- **Previewing locally:** `PORT=8099 DATA_DIR=<tmp> node server.js`. In Playwright, an
+  example card is opened with the button inside it:
+  `.example-card:has(.p-name:text-is("<name>")) button` (clicking the title does nothing
+  reliable), then **Fit**, then **3D View**.
+
 ## Open threads
 
 - (Resolved 2026-10-12: a cloud session can POST a drawing into Projects, see above.)

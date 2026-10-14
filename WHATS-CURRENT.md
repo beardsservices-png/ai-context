@@ -1,6 +1,6 @@
 # What's current
 
-**Last updated 12 October 2026** (sections 1, 4 and 5; the rest is as of 6 October). One page: what is live, what is built but not live, what Brian asked for, and what each customer was last sent.
+**Last updated 14 October 2026** (section 1 couch line; sections 1, 4 and 5 as of 12 Oct; the rest is as of 6 October). One page: what is live, what is built but not live, what Brian asked for, and what each customer was last sent.
 
 This repo is public, so there are no addresses, phone numbers, emails or money in here. The plain-language version with those details lives in Brian's Drive under *Where We Stand*.
 
@@ -22,6 +22,8 @@ This repo is public, so there are no addresses, phone numbers, emails or money i
 
 - **12 Oct, data and rules only (no app code):** the service catalog was repriced from homewyse (labor, zip 72653, midpoint) and three fence/drain items were added; estimates and invoices now carry only the lines and the total; quantities carry their unit (never 1 for measurable work). Rules in `topics/estimating-rules.md` and `topics/document-standards.md`; session detail and gotchas at the end of `areas/bhs-app.md`.
 - **12 Oct: cloud sessions can reach the live app and the CAD site** (they answered normally). The app needs `APP_API_TOKEN`; the CAD site's Projects list can be written to directly. The older "unreachable from here" notes were out of date.
+
+- **14 Oct: two couch drawings (a personal build) were added to the CAD site's Projects list.** No code changed. See `areas/couch-build.md`.
 
 ## 2. Built, but NOT live (sitting on branches)
 
