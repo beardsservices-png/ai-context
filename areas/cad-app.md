@@ -48,12 +48,12 @@ Current examples:
   single 2×4 divider between 3½" cedar posts (changed from one wide window 2026-10-04),
   **three** stock 28×54 windows (27½" × 53½" actual) on the 90" long side split by two single 2×4
   dividers (changed from two 2026-10-10, resized to stock sizes 2026-10-10),
-  two windows on the 90" long side split by a double 2×4 mullion, every opening framed
+  every opening framed
   in 2×4 (flat on the cap, flat under the beam, jack each side). Windows ½" under the
   framed opening.
 - `l-shaped-porch-long-side` — Giles porch, elevation of that long side, including the triangle
-  between the beam and the rafter framed in 2×4 and glazed with **two layers of ¼" clear
-  plexiglass with an air space** (not tempered glass — settled 09/28) in three pieces,
+  between the beam and the rafter framed in 2×4 and glazed with **one layer of ¼" clear
+  plexiglass** (not tempered glass — settled 09/28; single layer from 10/15) in three pieces,
   a 2×4 mullion over each window mullion,
   its mullion aligned with the window mullion below.
 
@@ -99,14 +99,19 @@ set; no prices, no cut sizes — buy plexiglass as a full sheet and cut on site.
 on 2026-10-04 (5 double-hung windows — 2 front, 3 long side — one 4×8 sheet of ¼" acrylic). Send the PNG by text —
 they read everything by text.
 
-## Giles triangle — how it is built (2026-10-11)
+## Giles long side — how it is built (updated 2026-10-15)
 
-The triangle between the beam and the rafter is framed in 2×4 laid flat (plate on the beam,
-sloped piece under the rafter, vertical at the house) with cedar stops and two ¼\" plexiglass
-sheets ~7/8\" apart on foam spacer tape. At the house end Brian **removes the siding and ties the
-vertical into the wall studs**, then finishes the cut siding with J-channel and runs the cedar wrap to it so it reads as original.
-Inside sheet sealed tight, outside edge left with a weep gap; never screw through the acrylic.
-Install notes and cut list live in Brian's private pack, not here.
+- **Siding stays on (Brian, 10/15).** No siding is cut or removed. The house-end jack and the
+  triangle's vertical 2×4 are shimmed and screwed **through the vinyl** into the house's corner
+  framing (5" structural screws, oversized hole in the vinyl so it still slides, not crushed).
+  The exterior cedar **butts in just behind the vinyl outside corner** — no J-channel, no caulk
+  to the vinyl. (Supersedes "siding comes off at the house end" of 10/13.)
+- **Plexiglass is one layer** of ¼" clear acrylic in cedar stops (inside stop fixed, outside
+  stop nailed, glazing tape both faces, neutral-cure silicone only, setting blocks). All three
+  pieces come out of one 36×72 sheet. (Supersedes two layers with an air space.)
+- Single 2×4 between the long-side windows: trim both nail fins to 1" so they share the stud.
+- Brian's 8-sheet build set (sill/head/jamb sections, flashing order, glazing, Home Depot list
+  with SKUs and quantities) is generated per job and kept out of this repo.
 
 ## Couch drawings (14 Oct 2026) — a personal build, not a customer job
 
