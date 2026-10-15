@@ -42,7 +42,7 @@ Current examples:
   (3 ft tall). Plan and back-run elevation: 6 ft bays on 4x4 posts, four bays down each 24 ft
   side, the back widened to 44 ft with one 8 ft gate in the middle. **Out of date as of 11 Oct:**
   she asked to re-quote at the current width with a 4 ft gate, so redraw before using.
-- `l-shaped-porch-windows` — **Giles porch (Jesse & Doree Giles, job 111, Phase 3 — Porch
+- `l-shaped-porch-windows` — **Giles porch (Jesse & Doree Giles, job 112 = BHS20260627D, Phase 3; 111 is the paid Phase 2 — Porch
   Enclosure).** Plan of an L-shaped porch enclosure on a 37" stone wall:
   open 58" × 91" walkway at a wall corner, **two** front windows (stock 30×54, 29½" × 53½" actual) split by a
   single 2×4 divider between 3½" cedar posts (changed from one wide window 2026-10-04),
@@ -151,4 +151,4 @@ What the drawing work taught about the app:
   field and one `photos_album_url` link — nothing for drawings, plan PDFs or design
   notes. The natural fix is a "Plans & documents" list on the job (links to the CAD
   drawing, the Drive notes doc, the PDF sent to the customer). Not built yet. Until then
-  the Giles job (111) points nowhere in the app; its record is the Drive job record above.
+  Giles Phase 3 (job 112) points nowhere in the app; its record is the Drive job record above.
