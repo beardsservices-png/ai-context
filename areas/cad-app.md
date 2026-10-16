@@ -152,3 +152,10 @@ What the drawing work taught about the app:
   notes. The natural fix is a "Plans & documents" list on the job (links to the CAD
   drawing, the Drive notes doc, the PDF sent to the customer). Not built yet. Until then
   Giles Phase 3 (job 112) points nowhere in the app; its record is the Drive job record above.
+
+## Phone layout (16 Oct 2026)
+
+Brian draws on a phone held sideways, which is about 350 px tall. The top bar is one row that
+scrolls sideways (Materials, 3D View, Fit, Panel first); the drawing's name and Undo/Redo sit in
+the bottom bar; under 520 px tall the tools are two columns and the side panel starts closed and
+opens over the drawing. Check any layout change at 740x360, 844x390 and 915x412 as well as desktop.
