@@ -1012,8 +1012,8 @@ No dollar amounts here; this repo is public.
   multi-phase invoice (Giles phase D) shows only the finished work as the balance due. Marking
   existing lines this way is one assistant request ("the unstarted lines are still to come"), the
   line sheet's *Still to come* button, or the Filing Cabinet line select.
-- **Giles phase D data: not changed by this session.** The code is live; the live lines still need
-  the six unstarted Phase 3 items marked still to come. This session had no app token. Expected
+- **Giles phase D data: not changed by this session.** The code is live; Brian says (16 Oct) the six
+  unstarted Phase 3 items are already marked still to come, not verified by a session. This session had no app token. Expected
   result once done: billed = finished work only, paid as recorded, balance due = the 10/12
   account update's owed figure (the $50 of check 7163 applied to the drain line stays as decided).
 - Gotcha for any session: a request inside a request shares Flask's `g`, and the inner request's
