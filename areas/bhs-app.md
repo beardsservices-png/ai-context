@@ -986,3 +986,37 @@ No dollar amounts here; this repo is public. Figures are in the app and Brian's 
 - **Materials receipts**: cost-of-business items (brushes, bits, blades, pickets for his own use,
   ladders) are overhead expenses; job materials are expenses on the job with the receipt's tax
   share. The customer's reimbursement sheet lists only their items.
+
+## Session notes, 13 Oct 2026 (the assistant, and work still to come)
+
+No dollar amounts here; this repo is public.
+
+- **The mic assistant is now Claude, on every screen, with hands in the app** (`8412c06`, live). It
+  used to know only an open invoice, described its own limits from memory (and got them wrong),
+  and answered like a form. Now: the page sends its full address and the server reads whatever is
+  open (a job, a customer's file, a lead, a printed document) fresh; its list of powers is
+  *generated from the code* so it cannot misstate them; it answers anything in or out of the app
+  at the length the question needs; model `claude-sonnet-5-5` (`ASSISTANT_MODEL` overrides, falls
+  back to the old model if the API rejects the id). Details in the BHSmobileapp `CLAUDE.md`.
+- **Two write tools, both read back first and run only after a yes.** `propose_changes` edits
+  records (payments, lines, hours, expenses, trips, customer and job fields). `propose_app_actions`
+  does what the screens do by calling the app's own routes as the person asking (start, accept or
+  decline an estimate, add a customer, notes, next step, archive, price-book changes, settings,
+  stop and drive classification). Because the real route runs, a helper's switches apply.
+- **Decision: the assistant does not delete a customer, job or invoice.** It offers archive (one tap
+  undoes it) or, for an estimate, decline. Deleting stays in the app. Open it up only by deliberate
+  choice, with a count of what goes with it in the read-back.
+- **New line type: "still to come"** (`service_type = to_come`). Work quoted and not done. It stays
+  on the job, prints in its own section marked "Not yet billed", is left out of the invoice total
+  and so of every balance, and a job with any of it is never marked paid. This is how a
+  multi-phase invoice (Giles phase D) shows only the finished work as the balance due. Marking
+  existing lines this way is one assistant request ("the unstarted lines are still to come"), the
+  line sheet's *Still to come* button, or the Filing Cabinet line select.
+- **Giles phase D data: not changed by this session.** The code is live; the live lines still need
+  the six unstarted Phase 3 items marked still to come. This session had no app token. Expected
+  result once done: billed = finished work only, paid as recorded, balance due = the 10/12
+  account update's owed figure (the $50 of check 7163 applied to the drain line stays as decided).
+- Gotcha for any session: a request inside a request shares Flask's `g`, and the inner request's
+  teardown closes the outer one's database connection. Nested calls go in their own thread
+  (`assistant_app._call`).
+
