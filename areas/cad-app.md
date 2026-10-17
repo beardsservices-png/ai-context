@@ -112,6 +112,11 @@ they read everything by text.
   stop nailed, glazing tape both faces, neutral-cure silicone only, setting blocks). All three
   pieces come out of one 36×72 sheet. (Supersedes two layers with an air space.)
 - Single 2×4 between the long-side windows: trim both nail fins to 1" so they share the stud.
+- **Plexi glazing detail (10/17):** the pane stands in a ½" slot between two ¾×¾ cedar strips
+  (both screwed to the 2×4 with #8 × 1⅝" stainless trim screws, never nailed), 3/16" foam tape
+  each face, ⅛" rubber setting blocks, neutral-cure silicone only. Brian trims the outside in
+  matching pre-finished aluminum as a Z cap: flange under the outside strip, face leg over the
+  cedar, kicked out at the bottom, never touching the plexi.
 - Brian's 8-sheet build set (sill/head/jamb sections, flashing order, glazing, Home Depot list
   with SKUs and quantities) is generated per job and kept out of this repo.
 
