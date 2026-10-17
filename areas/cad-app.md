@@ -39,9 +39,11 @@ drawing = add the JSON + one entry in `EXAMPLES`.
 Current examples:
 - `covered-patio-plan` — 24 ft covered patio, 2/12 shed roof, full takeoff (worked tutorial).
 - `collins-picket-fence-plan` / `collins-picket-fence-back` — **Collins back-yard picket fence**
-  (3 ft tall). Plan and back-run elevation: 6 ft bays on 4x4 posts, four bays down each 24 ft
-  side, the back widened to 44 ft with one 8 ft gate in the middle. **Out of date as of 11 Oct:**
-  she asked to re-quote at the current width with a 4 ft gate, so redraw before using.
+  (3 ft tall), re-drawn 17 Oct to the current width: 38 ft across the back (same as the deck), 24 ft
+  down each side, one 4 ft gate in the middle of the back, hand framed on 4x4 posts on driven anchors.
+  Sides 4 bays of 72 in with 9 pickets; back 3 bays of 67 in each side of the gate with 8 pickets;
+  gate leaf 47.5 in with 7. Pickets are 6 ft pickets cut in half, 3.5-4 in gaps (127 of 3 ft = 64 six-footers, buy 68).
+  The take-off rule: pickets in a clear span L = n x 3.5 + (n+1) x gap, solved for a gap between 3.5 and 4.
 - `l-shaped-porch-windows` — **Giles porch (Jesse & Doree Giles, job 112 = BHS20260627D, Phase 3; 111 is the paid Phase 2 — Porch
   Enclosure).** Plan of an L-shaped porch enclosure on a 37" stone wall:
   open 58" × 91" walkway at a wall corner, **two** front windows (stock 30×54, 29½" × 53½" actual) split by a
