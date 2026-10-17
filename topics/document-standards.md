@@ -111,6 +111,3 @@ an invoice.
 - Quantities carry units (`25 lin.ft.`), as everywhere else.
 - Filename: `BHS[YYYYMMDD]_[LastNameFirstName]_Account_Summary_[date].pdf`. Dollar amounts
   live in the PDF, the app and Brian's Drive, never in this public repo.
-
-## Deliver only what was asked
-When Brian asks for a document, send exactly that document and nothing else: no extra files, no extra sheets, no added notes or tables. Extras overload him and waste effort. If something else might help, say so in one line and let him ask.
