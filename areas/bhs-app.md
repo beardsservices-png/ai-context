@@ -82,6 +82,20 @@ catalog, so a hallucinated price is not possible. Unstated quantities come back 
 `assumed_quantity`; scope text with no catalog fit is returned in `unmatched` rather than
 forced onto an unrelated item. Uses `claude-sonnet-5`.
 
+## Importing an estimate that already exists as a PDF (2026-10-18)
+
+The New Estimate screen opens with **Import a PDF estimate**. For an estimate written in chat (e.g. from a Messenger
+conversation) and already sent to the customer: pick the PDF and the customer, number and lines fill in; *Save estimate* files
+it as an **estimate** (not a paid invoice, which is what the old Filing Cabinet cleanup import did), keeps the printed number
+as `EST` + digits, and files the PDF itself on the job under *Files & drawings*.
+
+- The customer is matched by phone, then by the same words in the name. A near name is offered, never assumed. No match = a
+  new customer is filled in from the PDF and saved with the estimate.
+- A number already in the app for that customer is not imported twice (the screen offers Open it / File this PDF on it).
+- The printed line total decides each line's unit price, so the app shows exactly what the customer holds.
+- Code: `api/estimate_pdf.py`, `frontend/src/pages/Estimate.jsx`, test `scripts/tests/test_estimate_pdf.py`. PDF only (no photos of
+  a printout). Not yet seen on a real PDF: check the first one by eye.
+
 ## Callback form
 
 Lives **in the BHS app** at `/callback/:leadId`, reached from the Leads inbox. It replaces
