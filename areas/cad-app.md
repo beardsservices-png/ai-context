@@ -112,11 +112,15 @@ they read everything by text.
   stop nailed, glazing tape both faces, neutral-cure silicone only, setting blocks). All three
   pieces come out of one 36×72 sheet. (Supersedes two layers with an air space.)
 - Single 2×4 between the long-side windows: trim both nail fins to 1" so they share the stud.
-- **Plexi glazing detail (10/17):** the pane stands in a ½" slot between two ¾×¾ cedar strips
-  (both screwed to the 2×4 with #8 × 1⅝" stainless trim screws, never nailed), 3/16" foam tape
-  each face, ⅛" rubber setting blocks, neutral-cure silicone only. Brian trims the outside in
-  matching pre-finished aluminum as a Z cap: flange under the outside strip, face leg over the
-  cedar, kicked out at the bottom, never touching the plexi.
+- **Plexi glazing as built (10/19, replaces the 10/17 cedar-strip + metal Z version):** Brian
+  framed the triangle with PT 2×4s flat on the inside perimeter plus the uprights (mullions),
+  outside faces flush with the existing beam/rafter. The ¼" pane is centered on the 3½" face:
+  Veranda ¾×1½ white PVC strip, foam tape, pane, foam tape, PVC strip (1½+⅛+¼+⅛+1½ = 3½), strips
+  flush with both 2×4 edges, stainless trim screws 12" apart. Foam under the bottom edge; butyl tape on
+  the top of the bottom PT 2×4 first. Plastic-sheet (neutral-cure) silicone at PVC-to-plexi only;
+  Quad Max everywhere else. **No metal Z.** Outside: 1×4 cedar faces with the inside edge flush with
+  the PVC top (that edge shows: sealed, bottom one sloped), mitred corners, mullion covers ripped
+  to 3" to match the window dividers below. "Mullion" = the upright between panes.
 - Brian's 8-sheet build set (sill/head/jamb sections, flashing order, glazing, Home Depot list
   with SKUs and quantities) is generated per job and kept out of this repo.
 
