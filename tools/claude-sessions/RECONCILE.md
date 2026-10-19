@@ -41,7 +41,7 @@ superseded, and exactly how to continue** — and everything stale moved out of 
 ## Areas (one status page each)
 
 BHS app · BHS customers & jobs (Giles, Johnson, Hedden, …) · Betty / memory server ·
-CAD (Draft Studio) · beardsservices.com · Rhythm maker / Rhythm Shop · ComfyUI video ·
+CAD (Draft Studio) · beardshomeservices.com · Rhythm maker / Rhythm Shop · ComfyUI video ·
 Avinley (personal) · Health & research · anything else that turns up.
 
 **Already reconciled — use as the model, don't redo:** Giles. Drive folder
