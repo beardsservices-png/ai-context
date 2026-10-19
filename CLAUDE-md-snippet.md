@@ -2,13 +2,13 @@
 
 ## Already done on Brian's laptop — check before adding another
 
-`C:\Users\bbria\.claude\CLAUDE.md` exists and loads `profile.md` + `areas/bhs-app.md`
+`C:\Users\bbria\.claude\CLAUDE.md` exists and loads `profile.md` + `business/bhs-app.md`
 into **every** local session, terminal and VS Code alike. It was added 2026-09-29,
 after the local clone turned out to be 23 days stale and a session re-derived a
 correction Brian had already given another Claude.
 
 A user-level file loads on every session, so it deliberately imports only the two
-files that are nearly always relevant. `areas/bhs-app.md` alone is 750+ lines — a
+files that are nearly always relevant. `business/bhs-app.md` is about 300 lines (its dated history is split out) — a
 full import list belongs in a repo's own `CLAUDE.md`, not the global one.
 
 ## Per-repo snippet
@@ -18,14 +18,14 @@ Paste into the root `CLAUDE.md` of a repo where the wider context is relevant:
 ```
 ## Shared context (all Claude surfaces)
 @~/Projects/ai-context/profile.md
-@~/Projects/ai-context/areas/bhs-app.md
-@~/Projects/ai-context/areas/website.md
-@~/Projects/ai-context/areas/rhythm-shop.md
-@~/Projects/ai-context/areas/comfyui-video.md
-@~/Projects/ai-context/areas/retell-bill.md
-@~/Projects/ai-context/areas/cad-app.md
-@~/Projects/ai-context/topics/estimating-rules.md
-@~/Projects/ai-context/topics/document-standards.md
+@~/Projects/ai-context/business/bhs-app.md
+@~/Projects/ai-context/business/website.md
+@~/Projects/ai-context/personal/rhythm-shop.md
+@~/Projects/ai-context/business/comfyui-video.md
+@~/Projects/ai-context/business/betty.md
+@~/Projects/ai-context/business/draft-studio.md
+@~/Projects/ai-context/business/rules/estimating-rules.md
+@~/Projects/ai-context/business/rules/document-standards.md
 ```
 
 ### Mind the path

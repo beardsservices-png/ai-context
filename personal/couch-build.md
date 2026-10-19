@@ -2,7 +2,7 @@
 
 Brian's own build, not a customer job. Drawings are in the CAD app's Projects list
 (*Couch side view (bed-style, head to toe)* and *Couch plan view (bed-style, head to toe)*,
-see `areas/cad-app.md`). Plans and cut lists were written in claude.ai and live with Brian
+see `business/draft-studio.md`). Plans and cut lists were written in claude.ai and live with Brian
 and in Drive (*Couch build* folder), not in this repo.
 
 ## ORIENTATION (corrected 14 Oct, read first)

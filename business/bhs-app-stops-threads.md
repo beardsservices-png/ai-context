@@ -44,7 +44,7 @@ covers the total (paid, fence off). "Completed" is manual (finished, not yet set
 
 ## Numbering
 
-A taken number moves to the next date (see `topics/document-standards.md`).
+A taken number moves to the next date (see `business/rules/document-standards.md`).
 
 ## Archive (6 months)
 
@@ -61,7 +61,7 @@ job, "what was that stop?", the 8 pm recap) arrives in the **ntfy app**; tapping
 Questions are answered in the BHS app. Settings has a "Send me a test alert" button. The ntfy topic name
 is a shared secret (anyone who knows it can read the alerts): keep it out of this public repo.
 **Rotated 10 Oct 2026** after the old name had been written in a public repo. The new name lives only in the
-`NTFY_TOPIC` variable on the BHS app and on the memory server (Bill's call alerts; its code now reads the
+`NTFY_TOPIC` variable on the BHS app and on the memory server (Betty's call alerts; its code now reads the
 variable, no name in code) and in Brian's ntfy app. The old SMS-extractor service still has the variable set
 (updated, not redeployed: its last deploy failed in July).
 

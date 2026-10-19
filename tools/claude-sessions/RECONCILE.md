@@ -32,7 +32,7 @@ superseded, and exactly how to continue** — and everything stale moved out of 
    unpushed commits are the work most at risk — list every one.**
 4. **GitHub**: `main` and `claude/*` branches on each repo. Use the `branch-hygiene` skill's
    `branch_audit.py` in BHSmobileapp for stranded branches.
-5. **`ai-context`** (`areas/*.md`) — the shared record every surface reads.
+5. **`ai-context`** (`business/*.md`, `personal/*.md`) — the shared record every surface reads.
 6. **Google Drive** — this folder sits inside it (Drive for Desktop), so `My Drive` is on
    disk. Job paperwork, exports, estimates.
 7. **claude.ai chat export**, if Brian has dropped the zip in `Claude Sessions\claude.ai export\`.
@@ -40,7 +40,7 @@ superseded, and exactly how to continue** — and everything stale moved out of 
 
 ## Areas (one status page each)
 
-BHS app · BHS customers & jobs (Giles, Johnson, Hedden, …) · Bill / memory server ·
+BHS app · BHS customers & jobs (Giles, Johnson, Hedden, …) · Betty / memory server ·
 CAD (Draft Studio) · beardsservices.com · Rhythm maker / Rhythm Shop · ComfyUI video ·
 Avinley (personal) · Health & research · anything else that turns up.
 

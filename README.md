@@ -9,19 +9,62 @@ Shared technical/project context for Brian Beard's Claude "trinity" — claude.a
 
 If it wouldn't be fine on a public GitHub profile, it doesn't go in this repo.
 
-## Structure
+## Start here: what is where
 
-- `profile.md` — durable facts about the business/stack (mirrors what Claude Code's CLAUDE.md should already know)
-- `areas/*.md` — one file per active project (BHS app, website, Rhythm Shop, etc.) — status, stack, decisions, open threads
-- `topics/*.md` — cross-cutting technical topics (deployment conventions, coding preferences, etc.)
-- `WHATS-CURRENT.md` — one page: what is live, what is built but not live, what Brian asked for, what each customer was last sent. Update it whenever any of those change.
+Read this table, then only the file for the work at hand. Business work also needs
+`profile.md`, and anything that makes a customer document needs `business/rules/`.
+
+### Business (Beard's Home Services)
+
+| Project | File | Repo | Runs on | State |
+|---|---|---|---|---|
+| BHS app (jobs, estimates, leads, time clock) | `business/bhs-app.md` (+ `-history`, `-stops-threads`) | `BHSmobileapp` (private) | Railway, project *BHS APP*, deploys on push to `main` | **Live** |
+| Betty, the phone receptionist | `business/betty.md` | `bhs-memory-server` (private) + Retell agent | Railway, project *Memory Server for Retell Agent*, deploys on push to `main` | **Live** |
+| Website beardshomeservices.com | `business/website.md` | `beardsservices-site` | Cloudflare Pages | **Live** |
+| Draft Studio (CAD drawings of jobs) | `business/draft-studio.md` | `CAD-` (public) | Railway, project *Cad*, deploys on push to `main` | **Live** |
+| Marketing video (ComfyUI / RunPod) | `business/comfyui-video.md` | probably `RunpodComfy` | RunPod GPU pod, started when needed | On demand |
+| Estimating and document rules | `business/rules/estimating-rules.md`, `business/rules/document-standards.md` | -- | -- | Rules every estimate/invoice follows |
+
+### Personal
+
+| Project | File | Repo | Runs on | State |
+|---|---|---|---|---|
+| Rhythm Shop (music practice) | `personal/rhythm-shop.md` | `Rhythm-Maker` | Railway, project *Rhythm Maker* | **Live** |
+| Couch build | `personal/couch-build.md` | -- (drawings in Draft Studio) | -- | Build notes |
+
+### Other repos (no notes written yet)
+
+Business or personal is a guess from the name where marked; correct it here when known.
+
+| Repo | Railway project | Notes |
+|---|---|---|
+| `JazzyTraining` | *JazzyTraining* | Business (guess): training for Jazzy, his helper |
+| `Task-Board-Apps` | *Taskboard* | Business (guess) |
+| `Training-Business-Template` | *Business Training Template* | Business (guess) |
+| `Fashion-Design` | *Fashion Design Studio* | Personal (guess) |
+| `Mobile-Mechanic-app`, `PureMechanicsite` | *Mobile Mechanic App* | Not his trade; whose is unknown |
+| `vrlike`, `Gemini_Prototype`, `Short-story`, `virtual-board-games`, `Rubiks`, `Flipbook`, `musicinspiration` | none | Personal (guess), not deployed |
+| `claude-code-business-starter-kit` (+ the `Beardsservices-` copy) | none | Claude Code starter kit (fork) |
+| Railway project *victorious-appreciation* | -- | Unnamed; repo not identified |
+
+**Retired, do not use:** `beard-business-app` (archived, replaced by `BHSmobileapp`),
+`SMS-Extractor_BHS` (archived; the app receives texts itself; Railway project *sms* is the
+stopped copy), `medical` (archived).
+
+### Other files
+
+- `profile.md`: who Brian is, the stack, how he wants to work.
+- `WHATS-CURRENT.md`: what is live, what is built but not live, what each customer was last sent.
+- `areas/` and `topics/`: **old paths, now one-line pointers** to the files above. They stay
+  until every Claude surface reads the new paths (claude.ai preferences, the laptop's
+  `~/.claude/CLAUDE.md`, the installed sync-context skill); then delete them.
 
 ## How each surface uses this
 
 **Claude Code (terminal + VS Code extension):** add this to your root `CLAUDE.md`:
 ```
 @ai-context/profile.md
-@ai-context/areas/bhs-app.md
+@ai-context/business/bhs-app.md
 ```
 (import whichever area files are relevant to the repo you're in). Since both terminal and VS Code sessions read `CLAUDE.md` off disk, this covers every local session automatically once the repo is cloned/pulled — no separate setup per surface.
 
