@@ -25,6 +25,8 @@ This repo is public, so there are no addresses, phone numbers, emails or money i
 - **12 Oct, data and rules only (no app code):** the service catalog was repriced from homewyse (labor, zip 72653, midpoint) and three fence/drain items were added; estimates and invoices now carry only the lines and the total; quantities carry their unit (never 1 for measurable work). Rules in `business/rules/estimating-rules.md` and `business/rules/document-standards.md`; session detail and gotchas at the end of `business/bhs-app.md`.
 - **12 Oct: cloud sessions can reach the live app and the CAD site** (they answered normally). The app needs `APP_API_TOKEN`; the CAD site's Projects list can be written to directly. The older "unreachable from here" notes were out of date.
 
+- **20 Oct: Minecraft build plan of Brian's own Tacoma (personal).** No app code changed. Page is the claude.ai artifact *Lifted Tacoma Build*; source in `virtual-board-games` `main`. See `personal/minecraft-tacoma.md`.
+
 - **14 Oct: two couch drawings (a personal build) are in the CAD site's Projects list, redrawn bed-style (75 in head to toe).** No code changed. See `personal/couch-build.md`.
 
 ## 2. Built, but NOT live (sitting on branches)
