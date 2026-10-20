@@ -1,17 +1,25 @@
-# Minecraft Tacoma build (personal, 20 Oct 2026)
+# Minecraft tools (personal, 20 Oct 2026)
 
 Brian's own black double-cab Tacoma, as a layer-by-layer Minecraft build plan.
 He plays **Bedrock on PS5**, which cannot import structure files (.mcstructure)
 or add-ons, so the plan is for building by hand. The only way to paste it in
 would be via a PC/phone world uploaded to a Realm.
 
-## Where it lives
+## Where it lives (moved 20 Oct)
 
-- **Live page:** the claude.ai artifact *Lifted Tacoma Build*
-  (https://claude.ai/artifact/N4rh1NmfzCT9GgScmvENtT, private to Brian).
-- **Source:** `virtual-board-games` repo, `client/public/minecraft/tacoma.html`
-  (merged to `main` 20 Oct). That repo is not deployed, so the artifact is the
-  page to open. Edit the repo copy and republish the artifact together.
+All of Brian's Minecraft tools are together in the **`vrlike`** repo, `tools/`:
+
+- `tools/mc-track-plotter/`: MC Track Plotter (rail/coaster planner with `/setblock`
+  output), built in an earlier session. **Check here before building a new Minecraft tool.**
+- `tools/mc-builder/`: this build planner. Live copy: claude.ai artifact
+  *Lifted Tacoma Build* (https://claude.ai/artifact/N4rh1NmfzCT9GgScmvENtT).
+- `tools/mc-commands/`: Bedrock Command Guide for PS5 (syntax, copyable examples,
+  command-block recipes, command-only blocks). Live copy: claude.ai artifact
+  *Bedrock Command Guide* (https://claude.ai/artifact/Jg2ZK9nHkyVzkv5LFSoe5V).
+
+Edit the repo copy and republish the artifact together (the repo copy has its own
+`<!doctype>`/`<head>`; the artifact file does not). It used to live in
+`virtual-board-games`; that copy was removed.
 
 ## Decided
 
@@ -50,6 +58,13 @@ grows at small sizes so there are no holes. Grid: columns run front to back,
 row 1 = passenger side. A "row by row" list writes each row as runs
 ("cols 14-26 B x13") for building off a TV. 3D view is three.js 0.128 from
 jsDelivr with InstancedMesh.
+
+## Commands
+
+Brian plays creative with cheats available and didn't know commands could place
+blocks (he had been placing stone under his feet while running, which is what led
+to the plotter). With the starting block filled in, the builder's TV mode shows a
+ready `/fill` command (or `/setblock` for one block) for every run.
 
 ## Next
 
