@@ -69,6 +69,17 @@ solid and "Skip hidden blocks" turns it back into a shell. Max 400 per side /
 6 million cells. CAD x -> column, CAD y -> row, CAD z -> layer. PNG export also
 works, as flat pixel art. One block type per model for now (STL has no colours).
 
+## Built-in examples (20 Oct)
+
+- **Frozen Caldera** (Brian's idea): 128 x 128, up to 56 tall. A ring of icy peaks
+  (snow caps, packed-ice cliffs, bare stone on steep faces, deepslate base) around
+  a sunken crater with a blue-ice lake and a small snowy island. Generated from
+  seeded value noise (`genCaldera`), so it is the same every time.
+- **Caldera Watchtower** (Claude's pick): 17 x 17 x 44 round stone-brick tower,
+  plank floors every 8 layers, glass windows, battlement, glowstone beacon under
+  a spruce roof (`genTower`). Sized for the caldera island's center at layer 13.
+- New built-ins go in the `BUILTIN` table in the page: name, generator, notes.
+
 ## Commands
 
 Brian plays creative with cheats available and didn't know commands could place
