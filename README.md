@@ -31,7 +31,7 @@ Read this table, then only the file for the work at hand. Business work also nee
 |---|---|---|---|---|
 | Rhythm Shop (music practice) | `personal/rhythm-shop.md` | `Rhythm-Maker` | Railway, project *Rhythm Maker* | **Live** |
 | Couch build | `personal/couch-build.md` | -- (drawings in Draft Studio) | -- | Build notes |
-| Minecraft Tacoma build plan | `personal/minecraft-tacoma.md` | `virtual-board-games` (`client/public/minecraft/tacoma.html`) | claude.ai artifact *Lifted Tacoma Build* | Building it (1 block = 2 in) |
+| Minecraft tools (Tacoma build planner, track plotter, command guide) | `personal/minecraft-tacoma.md` | `vrlike` (`tools/mc-builder`, `tools/mc-track-plotter`, `tools/mc-commands`) | claude.ai artifacts *Lifted Tacoma Build*, *Bedrock Command Guide* | Building the Tacoma (1 block = 2 in) |
 
 ### Other repos (no notes written yet)
 
@@ -44,7 +44,7 @@ Business or personal is a guess from the name where marked; correct it here when
 | `Training-Business-Template` | *Business Training Template* | Business (guess) |
 | `Fashion-Design` | *Fashion Design Studio* | Personal (guess) |
 | `Mobile-Mechanic-app`, `PureMechanicsite` | *Mobile Mechanic App* | Not his trade; whose is unknown |
-| `vrlike`, `Gemini_Prototype`, `Short-story`, `virtual-board-games` (also holds the Minecraft Tacoma page), `Rubiks`, `Flipbook`, `musicinspiration` | none | Personal (guess), not deployed |
+| `vrlike` (Handspace; also the Minecraft tools), `Gemini_Prototype`, `Short-story`, `virtual-board-games`, `Rubiks`, `Flipbook`, `musicinspiration` | none | Personal (guess), not deployed |
 | `claude-code-business-starter-kit` (+ the `Beardsservices-` copy) | none | Claude Code starter kit (fork) |
 | Railway project *victorious-appreciation* | -- | Unnamed; repo not identified |
 
