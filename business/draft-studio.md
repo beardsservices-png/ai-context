@@ -153,6 +153,25 @@ What the drawing work taught about the app:
   `.example-card:has(.p-name:text-is("<name>")) button` (clicking the title does nothing
   reliable), then **Fit**, then **3D View**.
 
+## Firewood rack (20 Oct 2026)
+
+Brian asked for a firewood rack covered with single-slope metal, about 12 ft (maybe 16 ft) by
+~4 ft deep for two rows of logs, 4x4 posts up the middle. Saved straight into **Projects** with
+`POST /api/drawings` (ids `d_mvghsokg_fjoc7p` end view, `d_mvghsotb_st55qo` plan). Generator
+script was a one-off in the session (not in a repo); the numbers:
+
+- 12 ft long, 3 posts 6 ft on center down the centerline; 4x4 x 8 ft PT ground contact, 24 in in
+  a 10 in concrete hole. Doubled 2x6 crossarm (6 ft 0 in board, 70 in run) bolted across each
+  post top at **3/12**, high side front: roof top about 7 ft 1 in front, 5 ft 7 in back.
+- 45 deg 2x4 knee braces, both 2 ft 7 in point to point. Four 2x4 x 14 ft purlins on edge,
+  5 sheets of 6 ft metal (36 in coverage), 12 in overhang at each end, 16 in past the wood.
+- Wood: two rows of 16 in splits, ~4 ft 6 in high, on four 4x4 x 12 ft PT rails on solid blocks;
+  end ladders (2x4 uprights + ties) at the two end posts. Holds ~1.1 cord.
+- 16 ft version: 4 posts at 5 ft 4 in, 6 sheets, 16 ft rails, purlins 2x4 x 10 + 2x4 x 8
+  spliced over a crossarm.
+- App lesson: a label containing "post" (even "post hole") makes the Materials list suggest
+  "Post base + anchor"; for posts set in concrete, label them "upright" instead.
+
 ## Open threads
 
 - (Resolved 2026-10-12: a cloud session can POST a drawing into Projects, see above.)
