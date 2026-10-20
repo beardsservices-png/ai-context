@@ -153,42 +153,44 @@ What the drawing work taught about the app:
   `.example-card:has(.p-name:text-is("<name>")) button` (clicking the title does nothing
   reliable), then **Fit**, then **3D View**.
 
-## Firewood rack (20 Oct 2026)
+## Firewood rack and range backstop (20 Oct 2026)
 
-Brian asked for a firewood rack covered with single-slope metal, about 12 ft (maybe 16 ft) by
-~4 ft deep for two rows of logs, 4x4 posts up the middle. Saved straight into **Projects** with
-`POST /api/drawings` (ids `d_mvghsokg_fjoc7p` end view, `d_mvghsotb_st55qo` plan). Generator
-script was a one-off in the session (not in a repo); the numbers:
+Two builds drawn the same day, both saved straight into **Projects** (later fixes saved over the
+same ids with `PUT /api/drawings/<id>`). **Where each one sits (Brian corrected this):** the
+firewood rack goes **on the driveway slab**; the backstop is **in the woods, on the ground**.
 
-- 12 ft long, 3 posts 6 ft on center down the centerline; 4x4 x 8 ft PT ground contact, 24 in in
-  a 10 in concrete hole. Doubled 2x6 crossarm (6 ft 0 in board, 70 in run) bolted across each
-  post top at **3/12**, high side front: roof top about 7 ft 1 in front, 5 ft 7 in back.
-- 45 deg 2x4 knee braces, both 2 ft 7 in point to point. Four 2x4 x 14 ft purlins on edge,
-  5 sheets of 6 ft metal (36 in coverage), 12 in overhang at each end, 16 in past the wood.
-- Wood: two rows of 16 in splits, ~4 ft 6 in high, on four 4x4 x 12 ft PT rails on solid blocks;
-  end ladders (2x4 uprights + ties) at the two end posts. Holds ~1.1 cord.
-- 16 ft version: 4 posts at 5 ft 4 in, 6 sheets, 16 ft rails, purlins 2x4 x 10 + 2x4 x 8
-  spliced over a crossarm.
-- App lesson: a label containing "post" (even "post hole") makes the Materials list suggest
-  "Post base + anchor"; for posts set in concrete, label them "upright" instead.
+### Firewood rack, on the driveway slab
+Projects: `d_mvghsokg_fjoc7p` end view (builds the whole rack in 3D), `d_mvghsotb_st55qo` plan,
+`d_mvgi7pd8_bydyum` front view (bracing).
+- 12 ft long, 3 posts 6 ft on center down the centerline, two rows of 16 in splits (~1.1 cord).
+- 4x4 x 6 ft PT posts in post bases (Simpson ABU44Z or equal), one 1/2 x 4 in wedge anchor each.
+  Because nothing is buried, a 2x6 x 12 ft beam bolted to the front face of the posts under the
+  crossarms plus four 45 deg 2x4 knee braces along the length (28 in) stop it racking end to end.
+- Doubled 2x6 crossarm (6 ft 0 in board) through-bolted across each post top at 3/12, high side
+  front; roof top ~7 ft 1 in front, 5 ft 7 in back. 45 deg 2x4 knee braces across the depth, both
+  2 ft 7 in. Four 2x4 x 14 ft purlins on edge, 5 sheets of 6 ft metal (36 in coverage), 12 in
+  overhang each end, 16 in past the wood.
+- Four 4x4 x 12 ft PT rails laid on the slab; 2x4 end ladders at the end posts.
+- 16 ft version: 4 posts at 5 ft 4 in, 6 sheets, 16 ft rails and beam, spliced purlins.
 
-## Range backstop v2 (20 Oct 2026)
+### Range backstop v2, in the woods
+Projects: `d_mvghzmec_rdn67v` plan, `d_mvghzmm5_x33qnd` rear view, `d_mvghzmuy_1xenvs` side
+section. Supersedes the 8-course repo Examples `backstop-plan/-rear/-section`.
+- 13 courses of ~6.5 x 9 in x 8.5 ft ties = 7 ft (12 courses if the ties measure a full 7 in),
+  on a 4 in compacted, leveled gravel bed 2 ft wide.
+- Plan is Brian's **flattened M**: wings angle forward ~28 deg toward the shooter and the center
+  joint also points 6 in **forward** (the 8-course drawing had it kinked back).
+- Joints: corners lap and swap every course (one tie runs 6 in past the inside corner); the center
+  joint is 6 in right of center on odd courses, 6 in left on even, so joints are ~1 ft apart.
+  52 wall ties (26 cut to 7 ft 6 in / 8 ft), 5 kicker pieces.
+- 2 x 5/8 in x 10 ft rebar per section (8), through every course and 3 ft into the ground.
+  Kicker (tie cut 6 ft 7 in, 45 deg) behind each joint and near each wing end, reaching 56 in up,
+  foot pinned with two 5/8 in x 4 ft rebar stakes. Dirt in front at ~1.5:1 to 6 in below the
+  top: ~38 cu yd for the full berm.
 
-Railroad-tie shooting backstop on a customer's **driveway slab**. Supersedes the 8-course
-examples `backstop-plan/-rear/-section` (still in the repo's Examples; v2 is in **Projects** only:
-`d_mvghzmec_rdn67v` plan, `d_mvghzmm5_x33qnd` rear, `d_mvghzmuy_1xenvs` section).
-
-- **13 courses of ~6.5 x 9 in x 8.5 ft ties = 7 ft** (if the ties measure a full 7 in, 12 courses).
-  Four 8 ft sections; plan is Brian's **flattened M**: wings angle forward ~28 deg toward the shooter
-  and the center joint also points 6 in **forward** (the old drawing had it kinked back; Brian's M
-  puts the middle stroke toward the shooter).
-- **Joints:** corners lap and swap every course (one tie runs 6 in past the inside corner); the
-  center joint sits 6 in right of center on odd courses and 6 in left on even ones, so joints are
-  ~1 ft apart. Per course 2 full ties + 2 cuts (7 ft 6 in and 8 ft); 52 wall ties, 26 cut.
-- **On the slab, no ground pins:** 2 x 5/8 in rebar per section (8), drilled through every course,
-  epoxied 4 in into the slab. Kicker (a tie cut 6 ft 7 in, 45 deg) behind each joint and near each
-  wing end (5), reaching 56 in up; each foot stopped by a 4x4x1/4 steel angle with two 1/2 x 4 in
-  wedge anchors. Dirt banked in front at ~1.5:1 to 6 in below the top: ~38 cu yd for the full berm.
+App lesson: a label containing "post" makes the Materials list suggest "Post base + anchor"
+(right for the slab rack; wrong for posts set in concrete, which is why the first draft said
+"upright").
 
 ## Open threads
 
