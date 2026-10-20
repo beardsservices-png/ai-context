@@ -78,6 +78,17 @@ works, as flat pixel art. One block type per model for now (STL has no colours).
 - **Caldera Watchtower** (Claude's pick): 17 x 17 x 44 round stone-brick tower,
   plank floors every 8 layers, glass windows, battlement, glowstone beacon under
   a spruce roof (`genTower`). Sized for the caldera island's center at layer 13.
+- **Wicked Ice Dragon** (Brian's request, then made 3x): 120 wide x 126 deep x 198 tall
+  (designed in 40 x 42 x 66 units, sampled at 3 blocks each; about 75,000 blocks hollow,
+  ~9 s to generate). 3x added ringed eyes, brow spikes, ridged horns, rows of teeth on dark
+  gums, a frill, chin spikes, wing finger bones and scale rows. Perched
+  statue, no legs (fused into a deepslate/stone base Brian blends into his mountain),
+  wings folded, tail curled round the front. The head is drawn 1.5x so the face reads
+  from the ground: Shroomlight eyes with black slit pupils, Polished Deepslate brows,
+  horns, cheek spikes and spines, Quartz fangs, Sea Lantern throat, Packed/Blue Ice
+  scales, Snow Block belly plates. Faces row 1. For one of the two open sides of
+  Brian's caldera world (spire on one side, open palm with beams opposite); the
+  watchtower/caldera examples were not needed, he has his own.
 - New built-ins go in the `BUILTIN` table in the page: name, generator, notes.
 
 ## Commands
