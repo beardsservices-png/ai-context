@@ -59,6 +59,16 @@ row 1 = passenger side. A "row by row" list writes each row as runs
 ("cols 14-26 B x13") for building off a TV. 3D view is three.js 0.128 from
 jsDelivr with InstancedMesh.
 
+## Draft Studio -> Minecraft (20 Oct)
+
+The builder reads Draft Studio's **STL/OBJ** export (millimeters, z up; walls are
+open-bottomed boxes, which is fine). Pick a scale (1 block = 1, 2, 3, 4, 6 in,
+1 ft or 1 m) and one block type; it voxelizes the surface, then flood-fills the
+outside air from the sides and top (not below), so anything enclosed comes out
+solid and "Skip hidden blocks" turns it back into a shell. Max 400 per side /
+6 million cells. CAD x -> column, CAD y -> row, CAD z -> layer. PNG export also
+works, as flat pixel art. One block type per model for now (STL has no colours).
+
 ## Commands
 
 Brian plays creative with cheats available and didn't know commands could place
