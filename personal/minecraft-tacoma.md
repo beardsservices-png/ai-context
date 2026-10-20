@@ -28,6 +28,20 @@ would be via a PC/phone world uploaded to a Realm.
   flared fenders; lift.
 - Hollow by default ("Skip hidden blocks"): the body is a 1-2 block shell.
 
+## Added 20 Oct (Brian plays creative, so block counts are folded away)
+
+- **TV build mode:** one row at a time, full screen, big blocks and run list,
+  Done / Back / Skip; finished rows are remembered per build and size.
+- **Starting block:** col 1, row 1, layer 1 (truck: front, passenger-side
+  corner on the ground), shown as a red post in 3D and a red square on layer 1.
+  Enter its in-game X/Y/Z and which way columns and rows run; every row then
+  shows game coordinates.
+- **My builds:** the Tacoma plus pictures turned into builds ("From a
+  picture": upright wall or flat, width up to 256, 1-8 thick, palettes concrete
+  / concrete+wool / all color blocks). Pictures are saved in that browser only
+  (localStorage), not on GitHub. Brian wants more models later: new 3D models
+  are another `classify`-style function added as a built-in build.
+
 ## How the page works
 
 The truck is one function, `classify(x, y, z)`, in units of about 14 cm
