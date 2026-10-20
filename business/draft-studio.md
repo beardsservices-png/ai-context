@@ -172,6 +172,24 @@ script was a one-off in the session (not in a repo); the numbers:
 - App lesson: a label containing "post" (even "post hole") makes the Materials list suggest
   "Post base + anchor"; for posts set in concrete, label them "upright" instead.
 
+## Range backstop v2 (20 Oct 2026)
+
+Railroad-tie shooting backstop on a customer's **driveway slab**. Supersedes the 8-course
+examples `backstop-plan/-rear/-section` (still in the repo's Examples; v2 is in **Projects** only:
+`d_mvghzmec_rdn67v` plan, `d_mvghzmm5_x33qnd` rear, `d_mvghzmuy_1xenvs` section).
+
+- **13 courses of ~6.5 x 9 in x 8.5 ft ties = 7 ft** (if the ties measure a full 7 in, 12 courses).
+  Four 8 ft sections; plan is Brian's **flattened M**: wings angle forward ~28 deg toward the shooter
+  and the center joint also points 6 in **forward** (the old drawing had it kinked back; Brian's M
+  puts the middle stroke toward the shooter).
+- **Joints:** corners lap and swap every course (one tie runs 6 in past the inside corner); the
+  center joint sits 6 in right of center on odd courses and 6 in left on even ones, so joints are
+  ~1 ft apart. Per course 2 full ties + 2 cuts (7 ft 6 in and 8 ft); 52 wall ties, 26 cut.
+- **On the slab, no ground pins:** 2 x 5/8 in rebar per section (8), drilled through every course,
+  epoxied 4 in into the slab. Kicker (a tie cut 6 ft 7 in, 45 deg) behind each joint and near each
+  wing end (5), reaching 56 in up; each foot stopped by a 4x4x1/4 steel angle with two 1/2 x 4 in
+  wedge anchors. Dirt banked in front at ~1.5:1 to 6 in below the top: ~38 cu yd for the full berm.
+
 ## Open threads
 
 - (Resolved 2026-10-12: a cloud session can POST a drawing into Projects, see above.)
