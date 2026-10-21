@@ -59,6 +59,15 @@ row 1 = passenger side. A "row by row" list writes each row as runs
 ("cols 14-26 B x13") for building off a TV. 3D view is three.js 0.128 from
 jsDelivr with InstancedMesh.
 
+## Railway (21 Oct)
+
+Brian is deploying `vrlike` as a Railway service. `server.js` + `railway.json` (Railpack,
+`node server.js`, health `/api/health`); volume at `/data`, the only variable is
+`DATA_DIR=/data`. The build planner syncs everything it stores (library, progress, starting
+block, size) to `DATA_DIR/mc-kv.json` when served from there, so builds follow him between
+phone, PC and the PS5 browser. `/mc` redirects to the planner. No login. URL: (Brian to
+send; record it here).
+
 ## Draft Studio -> Minecraft (20 Oct)
 
 The builder reads Draft Studio's **STL/OBJ** export (millimeters, z up; walls are
