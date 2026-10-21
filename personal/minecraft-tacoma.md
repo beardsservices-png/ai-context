@@ -81,7 +81,12 @@ works, as flat pixel art. One block type per model for now (STL has no colours).
 - **Wicked Ice Dragon** (Brian's request, then made 3x): 120 wide x 126 deep x 198 tall
   (designed in 40 x 42 x 66 units, sampled at 3 blocks each; about 75,000 blocks hollow,
   ~9 s to generate). 3x added ringed eyes, brow spikes, ridged horns, rows of teeth on dark
-  gums, a frill, chin spikes, wing finger bones and scale rows. Perched
+  gums, a frill, chin spikes, wing finger bones and scale rows.
+  **21 Oct: head redone** because Brian said it looked like an owl (round front-facing
+  eyes, round head, short snout). Now a reptile head: long boxy wedge snout with ridge spikes,
+  narrow slanted slit eyes on the sides under a heavy brow, jaws hinged wide open with big upper
+  and lower fangs plus tooth rows, dark mouth with the glow deep in the throat, flatter skull.
+  Rule for next time: scary = long snout, side-set slit eyes, open jaw; round + front eyes = owl. Perched
   statue, no legs (fused into a deepslate/stone base Brian blends into his mountain),
   wings folded, tail curled round the front. The head is drawn 1.5x so the face reads
   from the ground: Shroomlight eyes with black slit pupils, Polished Deepslate brows,
