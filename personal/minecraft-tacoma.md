@@ -59,6 +59,20 @@ row 1 = passenger side. A "row by row" list writes each row as runs
 ("cols 14-26 B x13") for building off a TV. 3D view is three.js 0.128 from
 jsDelivr with InstancedMesh.
 
+## Truck update (21 Oct)
+
+- **Default is now 1 block = 1 inch (204 x 72 x 83)**; Size card has **Reset** (back to that)
+  and a 2-inch button. Brian called the 2-inch truck too small.
+- New full-block details: wiper arms, sliding rear window, third brake light, fuel door,
+  rear license plate, hitch receiver, exhaust tip.
+- **Detail blocks** toggle (on by default): Blackstone stairs/slabs bevel every top edge of
+  the body (black concrete has no stairs), Stone Button lug nuts, Polished Blackstone Button
+  door handles, Redstone Lamps behind the headlight glass and behind Red Stained Glass tail
+  and brake lights, each powered by a hidden Redstone Block (kept even with "Skip hidden"),
+  Iron Bars antenna on the driver-side cowl, Chain coil-overs. These are hand-placed: no
+  /fill command, and names say which way stairs face. Pistons were not used: no truck part
+  looks like one, they would only be hidden.
+
 ## Railway (21 Oct)
 
 Brian is deploying `vrlike` as a Railway service. `server.js` + `railway.json` (Railpack,
