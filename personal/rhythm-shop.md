@@ -52,6 +52,16 @@ Two surfaces:
   Blank / saved tracks), undo-redo, browser autosave incl. audio, drum accents +
   ghost notes + hi-hat rolls, swing, metronome with 1-bar count-in, key + chord
   helper in the piano roll, per-track sidechain pump.
+  **Windows** (round 6, Oct 2026): every panel (timeline, editor, mixer, reverb &
+  delay, keyboard, Ask Claude) is a window — tick it on/off in ▦ Windows, drag by
+  the title bar, drop beside another to share a row, resize from the edge/corner,
+  fold (−), close (×). Ready-made layouts (Make a beat / Lay out the song / Mix it /
+  Everything) plus his own saved ones; remembered per browser. Keyboard is pinned
+  to the bottom by default and can be unpinned. Also: "Hear only this" (solo what
+  you're editing), ⟲ loop one section, and top-bar chips naming anything muted /
+  soloed / looping with an undo button. **Brian's standing word on the Studio:
+  make it the best it can be — there is no "one-page HTML" or "not like Windows 95"
+  rule; pick whatever works best.**
   Old saved projects convert on open. Notes + research: `docs/studio-redesign.md`
   in the repo; browser tests: `tests/studio.test.js`.
 
@@ -59,6 +69,6 @@ Retired: **Freeplay** and **Round Robin** (the original 32-step pattern games),
 and the old Studio page (scenes, 4-slot looper, sample timeline). `audio-engine.js`
 is gone.
 
-Next: Brian to try the new sounds/tour on a real device and report. Then: verify/adjust flute fingerings against a real method book. A flute posture
+Next: Brian to try the windows layout and the new sounds/tour on a real device and report. Then: verify/adjust flute fingerings against a real method book. A flute posture
 helper (webcam) was scoped but not built. Studio ideas not built yet:
 time-stretching recorded loops on tempo change, a per-track filter sweep.
