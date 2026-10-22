@@ -116,3 +116,6 @@ balances: the endpoint **never queries the `payments` table**, so there is no ba
 because none is computed. Nothing financial is written into the memory server's `callers`
 record either. Brian's rule: *"the other homeowners won't like an AI knowing financial
 records."*
+
+## Memory server pages need the key (22 Oct 2026)
+`/callers`, `/callback/:phone`, `/dashboard` and `/test-notify` were open to anyone with the address and returned the whole caller list. They now require `WEBHOOK_SECRET` (`X-Webhook-Token` header or `?token=`); the BHS app's `callbacks.py` sends it. `/inbound` and `/lookup` stay open for Retell, but now log whether Retell's signature is present. Enforce the signature once the logs show it arrives (found during the Railway env-var breach, 21 Oct).
