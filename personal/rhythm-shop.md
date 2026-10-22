@@ -59,7 +59,10 @@ Two surfaces:
   Everything) plus his own saved ones; remembered per browser. Keyboard is pinned
   to the bottom by default and can be unpinned. Also: "Hear only this" (solo what
   you're editing), ⟲ loop one section, and top-bar chips naming anything muted /
-  soloed / looping with an undo button. **Brian's standing word on the Studio:
+  soloed / looping with an undo button. **Pads** window: Handspace's layout (big
+  glowing pads, one per drum) without the camera — pick the kit, pick each pad's
+  sound from any kit, M per pad, click/tap (multi-touch) to play, Write hits records
+  into the pattern. **Brian's standing word on the Studio:
   make it the best it can be — there is no "one-page HTML" or "not like Windows 95"
   rule; pick whatever works best.**
   Old saved projects convert on open. Notes + research: `docs/studio-redesign.md`
