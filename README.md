@@ -54,6 +54,7 @@ stopped copy), `medical` (archived).
 
 ### Other files
 
+- `APPS.md`: index of everything Brian has built (apps, sites, HTML tools, artifacts, skills), with a Kind and Status for each. Any Claude adds notes there.
 - `profile.md`: who Brian is, the stack, how he wants to work.
 - `WHATS-CURRENT.md`: what is live, what is built but not live, what each customer was last sent.
 - `areas/` and `topics/`: **old paths, now one-line pointers** to the files above. They stay
