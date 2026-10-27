@@ -119,14 +119,3 @@ records."*
 
 ## Memory server pages need the key (22 Oct 2026)
 `/callers`, `/callback/:phone`, `/dashboard` and `/test-notify` were open to anyone with the address and returned the whole caller list. They now require `WEBHOOK_SECRET` (`X-Webhook-Token` header or `?token=`); the BHS app's `callbacks.py` sends it. `/inbound` and `/lookup` stay open for Retell, but now log whether Retell's signature is present. Enforce the signature once the logs show it arrives (found during the Railway env-var breach, 21 Oct).
-
-### Cloned-voice TTS service (2026-10-26)
-
-`bhs-memory-server/voice/`: a Docker service (Chatterbox, MIT licence) that clones one reference
-recording at startup and streams speech for any text from `POST /tts` (Vapi custom-voice request
-shape or plain JSON; raw 16-bit PCM or WAV). Needs an NVIDIA GPU (RunPod etc.; Railway has none).
-**Retell has no "use my own voice server" setting** -- checked in Retell's docs 26 Oct 2026; its
-custom voices are clones uploaded into Retell. So to give Betty a cloned voice while staying on
-Retell, upload the recording in Retell (Add custom voice). The service is for an agent platform
-that takes a custom voice URL (Vapi, Pipecat, LiveKit). Verified end to end on CPU; latency on a
-GPU not yet measured.
