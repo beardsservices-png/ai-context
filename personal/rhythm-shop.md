@@ -73,6 +73,8 @@ Retired: **Freeplay** and **Round Robin** (the original 32-step pattern games),
 and the old Studio page (scenes, 4-slot looper, sample timeline). `audio-engine.js`
 is gone.
 
-Next: Brian to try the windows layout and the new sounds/tour on a real device and report. Then: verify/adjust flute fingerings against a real method book. A flute posture
+Brian tried the windows, Pads and home-row keys (27 Oct 2026): "it works great. I like it."
+
+Next: Then: verify/adjust flute fingerings against a real method book. A flute posture
 helper (webcam) was scoped but not built. Studio ideas not built yet:
 time-stretching recorded loops on tempo change, a per-track filter sweep.
