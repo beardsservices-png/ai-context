@@ -14,3 +14,11 @@
 - Sticky bottom action bar on phones (Call / Text / Quote), back-to-top button, lightbox swipe.
 - Quote form: labels + service dropdown + progressive-enhancement handler that builds a reliable `mailto`. Still `mailto`-based (no backend) — a form service could be wired up later if Brian wants submissions to land automatically.
 - Accessibility: skip links, `main` landmark, focus-visible styles, `prefers-reduced-motion` respected.
+
+## Blog + indexing (Oct 2026)
+
+- One blog post per month. Jul–Oct 2026 added 29 Oct (LVP vs laminate, tub surround vs remodel, fall gutters/drainage, deck winter prep). Blog index is newest-first. Posts are hand-built from the existing template: `BlogPosting` JSON-LD with image, extensionless canonical and `og:url`, one site photo on top. Never put customer names or addresses in a post.
+- When adding a post: add the card to `blog/index.html`, the URL to `sitemap.xml`, the line to `llms.txt`, then ping IndexNow (below). Google needs a Search Console sitemap resubmit / URL inspection by hand (Claude in Chrome).
+- `llms.txt` at the root lists services and every post for AI assistants. `robots.txt` explicitly allows GPTBot, ClaudeBot, PerplexityBot, Google-Extended etc.
+- IndexNow (Bing, Yandex): key file `/6a8017912acfc8b0a619e17fe0375be3.txt` at the site root. POST `https://api.indexnow.org/indexnow` with `{host, key, keyLocation, urlList}` — 202 = accepted.
+- Pushing `main` deploys the site via Cloudflare (live within ~1 minute).
