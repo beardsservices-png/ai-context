@@ -292,3 +292,8 @@ sites; a missed one produced a wrong number rather than an error.
 - **Your Day (`/timeline`) looks like Google Maps Timeline** (2026-10-28): a map with numbered stops and the roads driven, then stops and drives in order. Every drive is driving (no travel-mode question). Stops ask *Was this work?* Yes/No; stops named by an address get *Name this place* so places read like "24 hr fuel", "Lowes", "Chens", "Home".
 - **Gas stops always ask "Did you get fuel?"** (2026-10-28, Brian: even a 4-minute stop at 24 hr fuel or Shell). A place counts as a gas station by its saved kind or by its name; the question shows on Your Day and as a push unless a bank alert, an earlier answer or an expense he typed in already covers it. Yes saves a fuel expense dated the day of the stop; No is remembered. A parked 3-minute stop is now recorded even at a place the app has never saved.
 - Not built yet: one-tap apply of text-driven changes on jobs already underway.
+
+## Location record = Google Timeline (decided 29 Oct 2026)
+- Google Timeline (on the phone) is the record of stops, times and drives. The OwnTracks live tracker is OFF (server ignores pings).
+- Timeline cannot be pulled remotely (no API, not in Takeout). Weekly: phone Settings > Location > Location services > Timeline > Export Timeline data, then BHS app > Your Day > Import. A reminder push goes out Sunday 7 pm.
+- Import: one stop per stay on the best job; old tracker copies hidden; hours for the last 21 days only. Details in the BHSmobileapp CLAUDE.md.
