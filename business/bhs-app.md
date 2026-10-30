@@ -293,7 +293,11 @@ sites; a missed one produced a wrong number rather than an error.
 - **Gas stops always ask "Did you get fuel?"** (2026-10-28, Brian: even a 4-minute stop at 24 hr fuel or Shell). A place counts as a gas station by its saved kind or by its name; the question shows on Your Day and as a push unless a bank alert, an earlier answer or an expense he typed in already covers it. Yes saves a fuel expense dated the day of the stop; No is remembered. A parked 3-minute stop is now recorded even at a place the app has never saved.
 - Not built yet: one-tap apply of text-driven changes on jobs already underway.
 
-## Location record = Google Timeline (decided 29 Oct 2026)
-- Google Timeline (on the phone) is the record of stops, times and drives. The OwnTracks live tracker is OFF (server ignores pings).
-- Timeline cannot be pulled remotely (no API, not in Takeout). Weekly: phone Settings > Location > Location services > Timeline > Export Timeline data, then BHS app > Your Day > Import. A reminder push goes out Sunday 7 pm.
-- Import: one stop per stay on the best job; old tracker copies hidden; hours for the last 21 days only. Details in the BHSmobileapp CLAUDE.md.
+## Location record = OwnTracks, read like Google Timeline (decided 30 Oct 2026)
+- Reverses the 29 Oct decision: a weekly manual Google export is NOT acceptable. Everything must be automatic (no export, no confirming, no hand logging).
+- The phone's pings were fine; the logic was wrong. Fixed in the logic: one circle per driveway (several open jobs = one stop), a quiet phone at home is still home, a saved non-job place counts as a stop at 3 minutes, every stop gets a name.
+- Likelihood decides close calls: a job with no hours/texts/calls/payments in 45 days, stopped at after 4 pm or under 90 min, is a drive-by and is not billed. A long morning there still is.
+- Nightly, Claude reads the close calls with the whole day for context (only among stops it was shown; cannot invent stops or hours). No API key = rules alone.
+- Your Day looks like Google's Day view (totals line, glyph per place, "Left at 6:54 AM").
+- Past days were re-read once (old stops hidden, never deleted; hours only for the last 21 days).
+- A text months after a job closed becomes a new lead (old converted lead only absorbs texts while its job is open or within 14 days).
