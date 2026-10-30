@@ -73,6 +73,22 @@ jsDelivr with InstancedMesh.
   /fill command, and names say which way stairs face. Pistons were not used: no truck part
   looks like one, they would only be hidden.
 
+## Light switch and blueprint dimensions (30 Oct)
+
+- **Lever in the cab** (cab side of the firewall, center, floor level) replaces the always-on
+  redstone blocks. Redstone dust + repeaters (every <=15, only on flat stretches; climbs go up
+  9 steps then a 3-block landing) run forward through the hood to a cross line behind the
+  headlights, and back along the cab floor, through the rear bench and back wall, along and
+  then up inside the bed to a cross line inside the tailgate. Each light is a glowing plus of
+  4 Redstone Lamps around a powered center block (Iron Block reflector up front, Red Concrete
+  at the back) fed by a dust stub pointing into it. Verified with a dust-rule simulation:
+  269 dust, 22 repeaters, all reached, weakest light stub at strength 3. Third brake light is
+  plain red (not on the switch).
+- **Layer grid dimensions:** blueprint chains on the top/left edges (block runs in amber, gaps
+  dashed, counted in blocks), a "Measure" filter to dimension one block type (e.g. the glass
+  to get window spacing), a tap-two-squares tape ("73 counting both squares, 71 between"), and
+  the row lists/TV mode show "gap N" between runs. Asked for by Brian ("like a blueprint").
+
 ## Railway (21 Oct)
 
 Brian is deploying `vrlike` as a Railway service. `server.js` + `railway.json` (Railpack,
