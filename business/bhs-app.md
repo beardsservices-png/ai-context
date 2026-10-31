@@ -300,4 +300,6 @@ sites; a missed one produced a wrong number rather than an error.
 - Nightly, Claude reads the close calls with the whole day for context (only among stops it was shown; cannot invent stops or hours). No API key = rules alone.
 - Your Day looks like Google's Day view (totals line, glyph per place, "Left at 6:54 AM").
 - Past days were re-read once (old stops hidden, never deleted; hours only for the last 21 days).
+- Anything the app cannot settle (rules and Claude both stuck, no API key, a silent stretch) becomes a popup asking Brian; it is never left guessed.
+- OwnTracks is the primary source. Google Timeline is the backup truth Brian checks himself (phone only, no remote read); the app links to it for the day in question.
 - A text months after a job closed becomes a new lead (old converted lead only absorbs texts while its job is open or within 14 days).
