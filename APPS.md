@@ -56,7 +56,7 @@ One page for everything Brian has built: servers, Node/JS projects, static sites
   - 2026-10-25 · CC-web · `areas/retell-bill.md` was never in the repo; the Betty file is `business/betty.md`.
 
 ### Website — beardshomeservices.com
-- **Kind:** Static site (HTML/CSS/JS) · **Status:** Live · **Repo:** `beardsservices-png/beardsservices-site` · **Host:** Cloudflare Pages, mail on Zoho · **Detail:** `business/website.md`
+- **Kind:** Static site (HTML/CSS/JS) · **Status:** Live · **Repo:** `beardsservices-png/beardsservices-site` · **Host:** Cloudflare Pages, mail via Cloudflare Email Routing · **Detail:** `business/website.md`
 - **Features** `[repo]`: homepage, 6 service pages (concrete, roofing, decks, bathroom remodel, flooring, handyman), blog, sitemap in Search Console. Installable PWA, hamburger nav, sticky Call/Text/Quote bar, accessibility pass. Quote form is `mailto`-based.
 - **Notes**
   - 2026-10-06 · claude.ai · Domain moved from beardsservices.com (Aug 2026). Some older notes and memory still say the old name.

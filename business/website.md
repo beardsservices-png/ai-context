@@ -1,7 +1,7 @@
 # beardshomeservices.com
 
 - Domain migrated from **beardsservices.com → beardshomeservices.com** (Aug 2026). Contact email is now `brianb@beardshomeservices.com`.
-- Hosting: Cloudflare Pages (static assets, `wrangler.jsonc`), mail via Zoho Mail.
+- Hosting: Cloudflare Pages (static assets, `wrangler.jsonc`), mail is Cloudflare Email Routing (the domain's mail records point there, not Zoho; checked 31 Oct 2026).
 - Previously on SiteGround/Tucows (domain expired once — now resolved).
 - Repo: `beardsservices-png/beardsservices-site`. Plain static HTML/CSS/JS — no build step. Shared look comes from `shared-styles.css` + `site.js` (loaded on every page); per-page content is hand-authored HTML.
 - Multi-page SEO expansion: homepage + 6 service pages (concrete, roofing, decks, bathroom-remodel, flooring, handyman) + blog, sitemap submitted to Search Console. Canonical URLs are extensionless.
