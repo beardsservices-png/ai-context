@@ -152,6 +152,15 @@ vrlike before 31 Oct). Now:
 - **Cherry Bonsai** (`genBonsai`): chain-of-spheres dark oak trunk in an S, three branches,
   flat-bottomed Cherry Leaves pads with pink wool flecks, cyan terracotta pot with moss. 50x46x28.
 
+## Layer stepping (31 Oct)
+
+Floating ▼ layer ▲ buttons pinned bottom-right (hidden in TV mode); tap to step, hold to repeat
+(~8 layers/s), ↑/↓ keys too. Brian flips layers rapidly to compare a layer with the one below.
+setL now redraws only the grid immediately and defers legend, row list, layer chips and the 3D
+view by 230 ms (they made each step take most of a second at 1-inch scale). Also fixed: the
+page scrolled sideways on phones because the shelf's hidden file input was absolutely
+positioned with no positioned parent.
+
 ## Commands
 
 Brian plays creative with cheats available and didn't know commands could place
