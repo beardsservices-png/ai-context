@@ -108,7 +108,7 @@ solid and "Skip hidden blocks" turns it back into a shell. Max 400 per side /
 6 million cells. CAD x -> column, CAD y -> row, CAD z -> layer. PNG export also
 works, as flat pixel art. One block type per model for now (STL has no colours).
 
-## Built-in examples (20 Oct)
+## Built-in examples (20 Oct, replaced 31 Oct, see below)
 
 - **Frozen Caldera** (Brian's idea): 128 x 128, up to 56 tall. A ring of icy peaks
   (snow caps, packed-ice cliffs, bare stone on steep faces, deepslate base) around
@@ -134,6 +134,23 @@ works, as flat pixel art. One block type per model for now (STL has no colours).
   Brian's caldera world (spire on one side, open palm with beams opposite); the
   watchtower/caldera examples were not needed, he has his own.
 - New built-ins go in the `BUILTIN` table in the page: name, generator, notes.
+
+## Examples replaced (31 Oct)
+
+Brian asked to replace the three non-truck examples ("thoughtful yet creative ... minimalistically
+complicated"). The dragon, caldera and watchtower are gone (`genDragon` etc. are in git history,
+vrlike before 31 Oct). Now:
+- **Impossible Triangle** (`genPenrose`): three 5x5 quartz bars along X, Y, Z, 45 on a side,
+  ~1,900 blocks. From far away high in the +X/+Z corner the end of bar 3 lands on the start of
+  bar 1 (left off for that reason) and it reads as a Penrose triangle. Built-ins can set `fov`;
+  this one uses 8 so the 3D Front view is near-orthographic and the illusion shows.
+- **Sliced Nautilus** (`genNautilus`): log spiral widening 3x per turn (b = ln3/2pi) with tube
+  radius 0.5 r so each turn touches the one inside it, like a real shell (the golden-ratio
+  nautilus is a myth; the first try used it and the outer turn flared like a horn). Sliced
+  down the middle (cut face = row 1), quartz chamber walls every 0.5 rad, quartz lining,
+  orange/white terracotta stripes on the outer turn, stone plinth. Size fits itself (~67x67x16).
+- **Cherry Bonsai** (`genBonsai`): chain-of-spheres dark oak trunk in an S, three branches,
+  flat-bottomed Cherry Leaves pads with pink wool flecks, cyan terracotta pot with moss. 50x46x28.
 
 ## Commands
 
