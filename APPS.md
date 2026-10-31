@@ -34,11 +34,13 @@ One page for everything Brian has built: servers, Node/JS projects, static sites
   - Mic assistant: speech, whole-business reads, edits only after an exact read-back and a "yes". Audit log at `/api/assistant/audit`.
   - Login and staff accounts: built and deployed but dormant until `APP_PASSWORD` is set.
   - `GET /api/customer-brief`: what Betty knows at call start. Never includes payments or balances.
+  - Receipts item by item with *What did I use?* history; walkthrough recordings transcribed into the estimate (31 Oct 2026).
 - **Artifacts:** ReportLab estimate/invoice PDFs (`bhs_estimate_generator.py`); earlier "OPS CENTER" HTML dashboard; early Access-database and PWA attempts (2025, superseded).
 - **Open:** Login still off. Job-stage auto-update not built. Seeded catalog prices are starting figures, not Brian's real rates. 62 orphan time entries unreconciled. Unmerged branches are listed in `WHATS-CURRENT.md`.
 - **Notes**
   - 2026-10-06 · claude.ai · Section created from `areas/bhs-app.md` and `WHATS-CURRENT.md`.
   - 2026-10-25 · CC-web · `areas/` files are now one-line pointers; detail lives in `business/bhs-app.md` (+ `-history`, `-stops-threads`). Detail paths on this page updated to match.
+  - 2026-10-31 · CC-web · Receipts (`/receipts`) and walkthrough recordings (estimate step 2) shipped; the claude.ai Receipt Ledger artifact is superseded by the app.
 
 ### bhs-memory-server
 - **Kind:** Python server · **Status:** Live · **Repo:** `beardsservices-png/bhs-memory-server` (private) · **Host:** Railway, project *Memory Server for Retell Agent*, deploys on push to `main` · **Detail:** `business/betty.md`, `business/bhs-app.md`

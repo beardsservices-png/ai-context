@@ -303,3 +303,16 @@ sites; a missed one produced a wrong number rather than an error.
 - Anything the app cannot settle (rules and Claude both stuck, no API key, a silent stretch) becomes a popup asking Brian; it is never left guessed.
 - OwnTracks is the primary source. Google Timeline is the backup truth Brian checks himself (phone only, no remote read); the app links to it for the day in question.
 - A text months after a job closed becomes a new lead (old converted lead only absorbs texts while its job is open or within 14 days).
+
+## Receipts and walkthrough recordings (31 Oct 2026)
+- **Receipts** (`/receipts`, `api/receipts.py`): photo or PDF -> every line read -> each item Job (customer's materials) /
+  Mine (cost of business: brushes, blades, bits, tools) / Personal / Not sure -> saved. Expenses are derived from the receipt
+  (one per job + one overhead, tax shared), rewritten on edit. A Chime-alert expense for the same total within 2 days is
+  replaced; an alert after the receipt is linked, not logged again. Lines that do not add up are marked "check this", never fixed.
+- **What did I use?** (`GET /api/receipts/history?q=`): the work words find past real jobs (not unaccepted estimates) and list
+  receipt items, invoice materials lines and hand-typed expenses for each. The mic assistant can read it too.
+- The claude.ai Receipt Ledger artifact (Jul-Oct 2026) was imported once (`owner_fixes.receipt_ledger`); new receipts go in the app.
+- **Walkthrough recordings** (`api/walkthrough.py`): estimate step 2 *Add a walkthrough recording*, or Share -> BHS. faster-whisper
+  `small.en` on the server (own process, one at a time, model on the volume under `models/`); Claude extracts work + follow-ups
+  (no prices; small talk and personal matters left out); saving the estimate files the audio + transcript on the job.
+  `av` must stay at 16.0.1 with faster-whisper 1.2.1.
