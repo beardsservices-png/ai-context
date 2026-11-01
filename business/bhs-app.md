@@ -327,5 +327,6 @@ sites; a missed one produced a wrong number rather than an error.
 - **A day can be filled from screenshots of Google Timeline** (Your Day -> *Fill it from Google Timeline screenshots*). Claude reads
   stops, times and miles; the tracker's own stays win; a late home arrival is moved back to Google's; the hole becomes real drives.
   He supplied the pictures, so no per-stop question. The vision prompt is untested on a real screenshot: check the first one by eye.
-- **29 Oct finding:** the server log showed the phone sent nothing for 5 h 13 min (10:49 to 16:02) while Google had every stop. The
-  engine was right to call it a gap; the cause is the phone. Handset fix: OwnTracks Monitoring mode Move and unrestricted battery.
+- **29 Oct finding (corrected):** the phone was fine and posted every ~2 min all day. The server threw the pings away between
+  10:50 AM and 3:58 PM because a session had switched the location source to Google (then switched back). Those pings are not
+  recoverable; the day is repaired from Google screenshots. Rule: never discard the feed when changing the source.
