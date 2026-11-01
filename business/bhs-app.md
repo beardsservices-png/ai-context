@@ -316,3 +316,16 @@ sites; a missed one produced a wrong number rather than an error.
   `small.en` on the server (own process, one at a time, model on the volume under `models/`); Claude extracts work + follow-ups
   (no prices; small talk and personal matters left out); saving the estimate files the audio + transcript on the job.
   `av` must stay at 16.0.1 with faster-whisper 1.2.1.
+
+## Your Day editing, Google screenshots, assistant with no restrictions (1 Nov 2026)
+- **Decision (Brian): the app assistant has NO restrictions.** It can do anything the app's screens do, including deleting a
+  customer or job (read back with what goes with it, still waits for his yes) and any route the app has. Closed only: the login and
+  other people's access, restoring a backup, webhooks and the phone feed, alert subscriptions, its own queue. Reverses the old
+  "never delete by voice". It must never say "I can't" from memory.
+- **Your Day stops are editable** like Google's: name, address (pin follows), times, kind, fix the saved place too, remove, add a
+  stop the phone missed. A hand edit is kept when a later ping re-reads the stay.
+- **A day can be filled from screenshots of Google Timeline** (Your Day -> *Fill it from Google Timeline screenshots*). Claude reads
+  stops, times and miles; the tracker's own stays win; a late home arrival is moved back to Google's; the hole becomes real drives.
+  He supplied the pictures, so no per-stop question. The vision prompt is untested on a real screenshot: check the first one by eye.
+- **29 Oct finding:** the server log showed the phone sent nothing for 5 h 13 min (10:49 to 16:02) while Google had every stop. The
+  engine was right to call it a gap; the cause is the phone. Handset fix: OwnTracks Monitoring mode Move and unrestricted battery.
