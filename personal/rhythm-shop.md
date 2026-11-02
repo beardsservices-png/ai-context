@@ -65,7 +65,9 @@ Two surfaces:
   into the pattern. **Computer keys = home row** (A S D F / J K L ; play the 8 notes
   of the song's key, or 8 pads); old piano map is an option. **Editor (Nov 2026):** the grid
   keeps its scroll when you click; 🔒 Lock notes/rows/steps/lanes (nothing can change them);
-  808 Slide buttons sit under the volume lane; help paragraphs hidden behind ⓘ Tips. **Brian's standing word on the Studio:
+  808 Slide buttons sit under the volume lane; help paragraphs hidden behind ⓘ Tips. **More sounds (Nov 2026):** the full General MIDI
+  list (~110 more instruments, FluidR3 CC BY 3.0) and a sound library (Sonic Pi CC0: effects,
+  riffs, 9 tempo-fitting drum loops, tabla, extra drums) on drum lanes/pads. Samples ~51 MB. **Brian's standing word on the Studio:
   make it the best it can be — there is no "one-page HTML" or "not like Windows 95"
   rule; pick whatever works best.**
   Old saved projects convert on open. Notes + research: `docs/studio-redesign.md`
