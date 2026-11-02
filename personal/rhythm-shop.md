@@ -63,7 +63,9 @@ Two surfaces:
   glowing pads, one per drum) without the camera — pick the kit, pick each pad's
   sound from any kit, M per pad, click/tap (multi-touch) to play, Write hits records
   into the pattern. **Computer keys = home row** (A S D F / J K L ; play the 8 notes
-  of the song's key, or 8 pads); old piano map is an option. **Brian's standing word on the Studio:
+  of the song's key, or 8 pads); old piano map is an option. **Editor (Nov 2026):** the grid
+  keeps its scroll when you click; 🔒 Lock notes/rows/steps/lanes (nothing can change them);
+  808 Slide buttons sit under the volume lane; help paragraphs hidden behind ⓘ Tips. **Brian's standing word on the Studio:
   make it the best it can be — there is no "one-page HTML" or "not like Windows 95"
   rule; pick whatever works best.**
   Old saved projects convert on open. Notes + research: `docs/studio-redesign.md`
