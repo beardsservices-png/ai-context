@@ -83,3 +83,20 @@ then hides the repeats (never deletes, undoable), leaving hours, trips and anyth
 added to the person he picks (the one who just texted is preselected). Only the words are kept. A note on
 a lead whose estimate is not yet reviewed keeps that estimate current (a reviewed estimate is never
 rewritten, and a note alone never turns a lead into a job).
+
+## Your Day matches Google Timeline (2 Nov 2026)
+
+Brian compared Mon 26 Oct with Google Timeline: the job shown twice (hours counted twice), home "until 12:49"
+against Google's 1:41, miles far from Google's 61. What is now true, and why it is the rule:
+
+- **One stay is one row.** Two rows at the same place whose minutes overlap are one stay: shown once, counted
+  once, and the repeat is hidden in the record (never deleted). A stop with hours is never hidden.
+- **His Google screenshots are the truth for that day.** Importing them now *corrects* the tracker's rows to
+  Google's times and miles (it used to leave the tracker's wrong rows alone and add beside them). Hours the clock
+  wrote follow by up to 45 minutes; hours he typed never move. The pictures are kept so a later reading of the
+  phone's points cannot undo the day.
+- **A silent phone at home.** Home is left when the drive to the first report away must have begun, not at the last
+  ping. At a job site the departure is NOT guessed: hours on an invoice are only ever what the phone saw (or what a
+  screenshot of Google's day says).
+- Oct 26 was put through this from his screenshots and now reads exactly as Google: 8 visits, 61.1 miles, job 3.27 h
+  and 2.72 h. Check the next day he fills from screenshots by eye.
