@@ -58,6 +58,14 @@ Current examples:
   plexiglass** (not tempered glass — settled 09/28; single layer from 10/15) in three pieces,
   a 2×4 mullion over each window mullion,
   its mullion aligned with the window mullion below.
+- `seger-front-landing-plan` / `seger-front-landing-front` — **John Seger front entry** (3 Nov 2026,
+  also saved in Projects as `d_mw0v6gqv_otuq84` plan and `d_mw0v6gza_lgr5j3` front view). Brick steps
+  under a storm door replaced by a concrete landing 1 in below the threshold, 5'-0" wide x 5'-8" deep,
+  running 3 ft past the garage wall (garage sticks out ~32 in past the door wall); two 12 in steps,
+  3 ft wide, drop **sideways to the driveway in front of the garage brick** and stop 5 in short of the
+  garage door trim; handrail wall-mounted on the garage brick. Existing sizes were **estimated from
+  photos** (storm door + king-brick courses, 3 1/8 in) and are flagged on the drawing; private notes,
+  quantities and the open measurements are in Drive `Seger_FrontEntry_Landing_Design_Notes`.
 
 ## Drawing-file format notes (learned the hard way)
 
@@ -187,6 +195,17 @@ section. Supersedes the 8-course repo Examples `backstop-plan/-rear/-section`.
   Kicker (tie cut 6 ft 7 in, 45 deg) behind each joint and near each wing end, reaching 56 in up,
   foot pinned with two 5/8 in x 4 ft rebar stakes. Dirt in front at ~1.5:1 to 6 in below the
   top: ~38 cu yd for the full berm.
+
+App fix (3 Nov 2026): **3-point arcs drew the long way round** (the complement of the arc asked
+for: a door swing came out as three quarters of a circle and its length read 3x). `arcThrough`
+tested the wrong sweep direction; fixed in `src/geometry.js`, which the screen, SVG export and
+arc length all share. Arcs drawn before the fix now show the short way, as intended.
+
+Measuring from photos (Seger, 3 Nov 2026): the storm door and the brick course pitch give a good
+scale in the plane of the door (+/- 2 in). The course pitch on the garage face vs the door wall
+gives the *ratio* of their distances from the camera, not the depth: that needs the camera distance,
+which a zoomed phone photo does not carry. Count bricks across a face instead (king brick ~10 in a
+module) when the face is sharp enough; otherwise flag the depth for a tape.
 
 App lesson: a label containing "post" makes the Materials list suggest "Post base + anchor"
 (right for the slab rack; wrong for posts set in concrete, which is why the first draft said
