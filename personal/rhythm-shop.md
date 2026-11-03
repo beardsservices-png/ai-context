@@ -70,6 +70,11 @@ Two surfaces:
   riffs, 9 tempo-fitting drum loops, tabla, extra drums) on drum lanes/pads. Samples ~51 MB. **Brian's standing word on the Studio:
   make it the best it can be — there is no "one-page HTML" or "not like Windows 95"
   rule; pick whatever works best.**
+  **Bach templates (Nov 2026):** start screen has "Bach: Prelude in C" (BWV 846, grand piano,
+  34 bars split over Piano 1/2/3 since a track holds 16 bars) and "Bach: Passion Chorale"
+  (BWV 244.54, choir/organ/cello). Converted note-for-note from the free music21 corpus
+  (public domain) — that's the route for more classical pieces, no MuseScore needed.
+  Practice Mode takes typed note names only; there's no sheet-music/MIDI file import yet.
   Old saved projects convert on open. Notes + research: `docs/studio-redesign.md`
   in the repo; browser tests: `tests/studio.test.js`.
 
