@@ -196,6 +196,11 @@ section. Supersedes the 8-course repo Examples `backstop-plan/-rear/-section`.
   foot pinned with two 5/8 in x 4 ft rebar stakes. Dirt in front at ~1.5:1 to 6 in below the
   top: ~38 cu yd for the full berm.
 
+**The site-to-plans skill has two copies** (3 Nov 2026): the repo's `.claude/skills/site-to-plans`
+(cloud sessions in CAD- load it; current) and the one uploaded to claude.ai (Settings → Skills). The
+claude.ai copy was older and its `plansheet.py` still printed the dead `brianb@beardsservices.com` on
+customer plan sheets. Re-upload from the repo after any skill change.
+
 App fix (3 Nov 2026): **3-point arcs drew the long way round** (the complement of the arc asked
 for: a door swing came out as three quarters of a circle and its length read 3x). `arcThrough`
 tested the wrong sweep direction; fixed in `src/geometry.js`, which the screen, SVG export and

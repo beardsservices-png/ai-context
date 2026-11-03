@@ -10,6 +10,15 @@ the code is wrong.
 - **Labor only.** Materials are never bundled into a line item. All materials are
   purchased by the homeowner directly from the supplier. An estimate that quotes a
   material price is wrong even if the number is right.
+- **Exception: ready-mix concrete** (Brian, 3 Nov 2026; every past concrete job carried it). It goes
+  on the estimate as lines **the customer pays the supplier for directly** (`service_type =
+  'supplier'`, *They pay the supplier* on the app's line sheet): `N cu.yd.` at his estimated per-yard
+  price with fiber mesh and tax, a short load fee and a trip fee, each described *"Estimated price,
+  after tax. Paid to the ready-mix supplier on the day of delivery."* They print under the total in
+  their own section and are in **no total, balance due, income or report** (pinned in the app by
+  `test_supplier_lines.py`). Never as `materials`, which would count the concrete as his money. That
+  sentence is about the supplier, not Brian's payment terms, so the no-payment-language rule below
+  does not forbid it. Gravel, rebar and the like stay off the page as before.
 - **Never quantity 1 for anything that can be measured** (Brian, 2026-10-12). Feet, square
   feet, a count of items: the line carries that quantity and a per-unit price. A drain line
   billed as "1 @ a lump sum" tells you nothing next time; "25 lin.ft. @ a per-foot price" does.
