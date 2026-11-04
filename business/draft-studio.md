@@ -63,7 +63,10 @@ Current examples:
   under a storm door replaced by a concrete landing 1 in below the threshold, 5'-0" wide x 5'-8" deep,
   running 3 ft past the garage wall (garage sticks out ~32 in past the door wall); two 12 in steps,
   3 ft wide, drop **sideways to the driveway in front of the garage brick** and stop 5 in short of the
-  garage door trim; handrail wall-mounted on the garage brick. Existing sizes were **estimated from
+  garage door trim; handrail wall-mounted on the garage brick. **4 Nov 2026: he also wants steps off the
+  front**, so a second run of two 12 in steps, 3 ft wide, centered on the landing's front edge, drops
+  into the yard (same three ~6 3/8 in risers); both runs are in the drawings. All risers are plain poured
+  concrete, never brick-faced. Existing sizes were **estimated from
   photos** (storm door + king-brick courses, 3 1/8 in) and are flagged on the drawing; private notes,
   quantities and the open measurements are in Drive `Seger_FrontEntry_Landing_Design_Notes`.
 
