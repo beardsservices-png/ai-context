@@ -74,6 +74,10 @@ Two surfaces:
   34 bars split over Piano 1/2/3 since a track holds 16 bars) and "Bach: Passion Chorale"
   (BWV 244.54, choir/organ/cello). Converted note-for-note from the free music21 corpus
   (public domain) — that's the route for more classical pieces, no MuseScore needed.
+  **Any song into the Studio:** skill `skills/song-to-studio/` in this repo (Nov 2026). Public-domain
+  pieces = score route (music21, note-perfect; reproduces the Bach chorale template exactly). A song Brian
+  owns (e.g. an 80s MP3) = stem separation (Demucs) + audio-to-MIDI (Basic Pitch) -> template JSON + stems;
+  copyrighted results stay his own practice copy, never added to templates.js (the repo is public).
   Practice Mode takes typed note names only; there's no sheet-music/MIDI file import yet.
   Old saved projects convert on open. Notes + research: `docs/studio-redesign.md`
   in the repo; browser tests: `tests/studio.test.js`.
