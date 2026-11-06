@@ -78,7 +78,11 @@ Two surfaces:
   pieces = score route (music21, note-perfect; reproduces the Bach chorale template exactly). A song Brian
   owns (e.g. an 80s MP3) = stem separation (Demucs) + audio-to-MIDI (Basic Pitch) -> template JSON + stems;
   copyrighted results stay his own practice copy, never added to templates.js (the repo is public).
-  Practice Mode takes typed note names only; there's no sheet-music/MIDI file import yet.
+  **Open a song file + password (6 Nov 2026):** the Studio start screen opens MusicXML (.musicxml/.xml/.mxl)
+  or MIDI (.mid): one track per instrument, one per drum sound, saved to his library. The whole app is behind
+  a password (`APP_PASSWORD` on Railway; Brian has it) so copyrighted songs for his own practice can sit in
+  his library on every device; `/health` stays open. PDFs still go through the skill (OMR) first.
+  Practice Mode takes typed note names only.
   Old saved projects convert on open. Notes + research: `docs/studio-redesign.md`
   in the repo; browser tests: `tests/studio.test.js`.
 

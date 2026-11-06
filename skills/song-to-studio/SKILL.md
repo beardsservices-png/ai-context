@@ -73,9 +73,9 @@ Better than the recording route when it exists: exact notes, no guessing. But:
 
 ## Getting it into the Studio
 
-The Studio has no "open a file" button yet. Two ways in:
-- **Public-domain piece** -> paste the JSON into `LIST` in `public/js/engine/templates.js` (Rhythm-Maker repo) like the Bach entries, with a comment saying where it came from and that it is public domain. Test on the start screen, push.
-- **Copyrighted song** -> do NOT add it to templates.js. Use the stems as audio tracks; for the notes, hand Brian `template.json` and the per-instrument `.mid` files for his own use. (If he wants this often, the right build is an "Open a song file" button in the Studio that loads a template JSON from his own computer, stored only in his browser. Offer it; it is a Rhythm-Maker change.)
+The Studio's start screen has **Open sheet music or MIDI…** (MusicXML .musicxml/.xml/.mxl, or MIDI .mid). It makes one track per instrument and saves the song to Brian's library, which is behind the app's password. So:
+- **Any song, copyrighted or not** -> hand Brian a MusicXML or MIDI file and he opens it there. From the recording route, `transcribe.py` already writes per-instrument `.mid` files; to give him one file, merge them (pretty_midi) into `song.mid` with each stem as its own instrument. A PDF goes through OMR first.
+- **Public-domain piece he wants as a built-in template for everyone** -> paste the `to_studio.py` JSON into `LIST` in `public/js/engine/templates.js` (Rhythm-Maker repo), like the Bach entries. Never a copyrighted song there: the repo is public.
 
 ## Format facts the converter follows (from templates.js)
 
