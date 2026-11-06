@@ -15,6 +15,8 @@ Brian asks in plain words; this skill picks the route. Do not ask him which tool
 | **Transcription** / **audio-to-MIDI** | Turning a recording (or one stem) into *notes*. Tool: Basic Pitch (free, open source). Good, not perfect. |
 | **MIDI** | Notes as data (pitch, start, length) rather than sound. What the Studio's piano roll edits. |
 | **Score** / **MusicXML** | Sheet music as a file. Exact notes, no guessing. |
+| **OMR** (optical music recognition) | Reading printed / PDF sheet music into a MusicXML file. Tool: Audiveris (free). |
+| **Arrangement** | One version of a song written for certain instruments, e.g. "piano/vocal/guitar". Not the same as the band's parts. |
 | **Public domain** | Nobody owns it any more (composer dead 70+ years, e.g. Bach). Free to use and publish. |
 | **Multitrack** | The studio's own separate recordings of each instrument. Sometimes released officially; the cleanest stems there are. |
 
@@ -60,6 +62,14 @@ python scripts/to_studio.py --score "bach/bwv846" --label "Bach: Prelude in C" -
 python scripts/to_studio.py --score minuet.musicxml --label "Minuet in G" --out minuet.json
 ```
 `--score` takes a music21 corpus path, a MusicXML file or a MIDI file. Each part becomes a track (instrument picked from the part name; override with `--instrument "Part name=real-cello"`).
+
+## Sheet-music route (a printed or PDF score of a modern song)
+
+Better than the recording route when it exists: exact notes, no guessing. But:
+- **Copyright is the same.** The sheet music of a 1984 song is owned just like the recording. Use a copy Brian bought; the result is his practice copy only, never a built-in template.
+- **It is an arrangement, not the band.** Store-bought pop sheet music is usually "piano / vocal / guitar": a piano part, the vocal melody and chord symbols. It gives Piano + Vocal tracks, not the drummer or bass player. For a band's parts, look for a "full band transcription", "guitar tab" or "drum transcription" book.
+- **File types:** MusicXML (.mxl / .musicxml) or MIDI go straight in: `python scripts/to_studio.py --score song.mxl --label "..." --out song.json`. A **PDF or photo** needs **optical music recognition (OMR)** first, which reads the printed notes into MusicXML. Free tool: Audiveris (`audiveris -batch -export -output out/ song.pdf`), or open the PDF in MuseScore and export MusicXML. OMR makes mistakes on busy pages: check the bar count and the first few bars against the paper. (This step is untested in the skill so far.)
+- Chord symbols are not turned into notes yet; the piano part already plays them.
 
 ## Getting it into the Studio
 
