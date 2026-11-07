@@ -82,6 +82,10 @@ Two surfaces:
   or MIDI (.mid): one track per instrument, one per drum sound, saved to his library. The whole app is behind
   a password (`APP_PASSWORD` on Railway; Brian has it) so copyrighted songs for his own practice can sit in
   his library on every device; `/health` stays open. PDFs still go through the skill (OMR) first.
+  **Popular free pieces (7 Nov 2026):** Fur Elise and Greensleeves are built-in templates, read from
+  Mutopia Project (public-domain, engraved MIDI) via the Studio's own song reader. Source for more
+  public-domain pieces: mutopiaproject.org (MIDI, some MusicXML), IMSLP; music21 corpus has Bach, Beethoven
+  quartets, Mozart, Haydn, Joplin. Modern songs are copyrighted: they go in his library via the file button.
   Practice Mode takes typed note names only.
   Old saved projects convert on open. Notes + research: `docs/studio-redesign.md`
   in the repo; browser tests: `tests/studio.test.js`.
